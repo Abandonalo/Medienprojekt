@@ -88,7 +88,7 @@
     align-self: flex-start;
 }
 
-#game{
+#game-input{
     height: calc(100% - 48px);
     z-index: 1000;
     background-color: white;
@@ -96,12 +96,27 @@
     transition: 1s;
 }
 
-#game-input{
-    transition: 500ms;
-    overflow: hidden;
+#game-option{
+    height: calc(100% - 48px);
+    z-index: 1000;
+    background-color: white;
+    color: #0092B1;
+    transition: 1s;
+}
+
+#game-input-size{
+    height: calc(100% - 48px);
+    z-index: 1000;
+    background-color: white;
+    color: #0092B1;
+    transition: 1s;
 }
 
 #game-output{
+    height: calc(100% - 48px);
+    z-index: 1000;
+    background-color: white;
+    color: #0092B1;
     transition: 500ms;
     overflow: hidden;
 }

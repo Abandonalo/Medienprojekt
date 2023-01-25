@@ -24,7 +24,6 @@ $(document).ready(function (){
         if ($('#introduction').hasClass('disappear') == false){ // intro -> input
                 $('#introduction').addClass('disappear'); 
                 $('#game-input').removeClass('hide');
-                //$('#game').addClass('down');
 
                 setTimeout(function(){
                     $('#introduction').addClass('hide');

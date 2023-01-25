@@ -22,64 +22,53 @@ $(document).ready(function (){
 // Navigation  
     $('#button-weiter').click(function (){
         if ($('#introduction').hasClass('disappear') == false){ // intro -> input
-                $('#introduction').addClass('disappear'); 
-                $('#game-input').removeClass('hide');
-                //$('#game').addClass('down');
+            $('#introduction').addClass('disappear'); 
+            $('#game-input').addClass('down');
+            setTimeout(function(){
+                $('#game-input').removeClass('disappear');
+                $('#introduction').addClass('disappear');
+            }, 500);
+            setTimeout(function(){
+                $('#gamebar').removeClass('disappear');
+                $('#button-intro').removeClass('disappear');
+                $('#button-refresh').removeClass('disappear');
+            }, 1000);
+        }
 
-                setTimeout(function(){
-                    $('#introduction').addClass('hide');
-                    $('#game-input').removeClass('disappear');
-                }, 500);
-                setTimeout(function(){
-                    $('#gamebar').removeClass('disappear');
-                    $('#button-intro').removeClass('disappear');
-                    $('#button-download').removeClass('disappear');
-                    $('#button-stamp').removeClass('disappear');
-                    $('#button-refresh').removeClass('disappear');
-                }, 1000);
-            }
+        else if ($('#game-input').hasClass('disappear') == false){ //input -> output
+            $('#game-input').addClass('disappear');
+            $('#game-output').addClass('down');
+            $('#game-input').css('pointer-events','none');
+            setTimeout(function(){      
+                $('#game-output').removeClass('disappear');
+            }, 1000);
+        }
 
+        else if ($('#game-output').hasClass('disappear') == false){  //output -> info
+            $('#game-output').addClass('disappear');
+            $('#information').removeClass('disappear');
+            $('#button-intro').addClass('disappear');
+            $('#button-download').addClass('disappear');
+            $('#button-refresh').addClass('disappear');
+            $('#button-gamebar').addClass('disappear');
+            $('#information').css('pointer-events','');
+            $('#game-output').css('pointer-events','none');
+            setTimeout(function(){      
+                $('#gamebar').addClass('hide');
+            }, 1000);
+        }
 
-            else if ($('#game-input').hasClass('disappear') == false){ //input -> output
-                $('#game-input').addClass('disappear');
-                $('#game-output').removeClass('hide'); 
-                $('#button-intro').addClass('disappear');
-                $('#button-download').addClass('disappear');
-                $('#button-gamebar').addClass('disappear');
-                $('#button-refresh').addClass('disappear');
-                $('#game-output').css('pointer-events','');
-                $('#game-input').css('pointer-events','none');
-
-                setTimeout(function(){      
-                    $('#game-output').removeClass('disappear');
-                    $('#gamebar').addClass('hide');
-                }, 1000);
-            }
-
-
-            else if ($('#game-output').hasClass('disappear') == false){  //output -> info
-                $('#game-output').addClass('disappear');
-                $('#information').removeClass('disappear');
-                $('#button-intro').addClass('disappear');
-                $('#button-download').addClass('disappear');
-                $('#button-gamebar').addClass('disappear');
-                $('#information').css('pointer-events','');
-                $('#game-output').css('pointer-events','none');
-
-                setTimeout(function(){      
-                    $('#information').removeClass('disappear');
-                    $('#gamebar').addClass('hide');
-                }, 1000);
-            }
-
-            else if ($('#information').hasClass('disappear') == false){  //info -> menu
-                $('#information').addClass('disappear');
-                $('svg').addClass('disappear');
-                setTimeout(function(){
-                    window.location.href = 'menu.html';
-                }, 2000);
-            }
-        });    
+        else if ($('#information').hasClass('disappear') == false){  //info -> menu
+            $('#information').addClass('disappear');
+            $('svg').addClass('disappear');
+            setTimeout(function(){
+                $('#gameinput').removeClass('down');
+            }, 1000);
+            setTimeout(function(){
+                window.location.href = 'menu.html';
+            }, 2000);
+        }
+    });    
     
 
 
@@ -96,11 +85,14 @@ $(document).ready(function (){
                 }, 2000);
         }
         else if ($('#game-input').hasClass('disappear') == false){ //input -> intro
-            $('#game').removeClass('down');
-            $('#introduction').removeClass('hide');
+            $('#game-input').addClass('disappear');
+            //$('#game-input').removeClass('down');
+            $('#introduction').removeClass('disappear');
+
             $('#button-intro').addClass('disappear');
             $('#button-refresh').addClass('disappear');
             $('#gamebar').addClass('disappear');
+            $('#button-gamebar').addClass('disappear');
             setTimeout(function(){
                 $('#introduction').removeClass('disappear');
             }, 1000);
@@ -118,17 +110,18 @@ $(document).ready(function (){
         
         else if ($('#information').hasClass('disappear') == false){  //info -> output
             $('#information').addClass('disappear');
-            $('#gamebar').removeClass('hide');
+            $('#gamebar').removeClass('disappear');
             $('#information').css('pointer-events','none');
             $('#game').css('pointer-events','');
             setTimeout(function(){
-                $('#information').addClass('hide');
+                $('#information').addClass('disappear');
                 $('#gamebar').removeClass('disappear');
             }, 500);
             setTimeout(function(){
                 $('#game-output').removeClass('disappear');
                 $('#button-intro').removeClass('disappear');
                 $('#button-download').removeClass('disappear');
+                $('#button-refresh').removeClass('disappear');
             }, 1000);
         }
     });
