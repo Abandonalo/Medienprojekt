@@ -75,19 +75,6 @@
     transition: 0.75s ease-in !important;
 }
 
-
-#question{
-    color: #0092B1;
-    z-index: 1000;
-    height: calc(100% - 48px);
-}
-
-#quote{
-    color: #0092B1;
-    z-index: 1000; 
-    height: calc(100% - 48px);
-}
-
 #introduction{
     width: 100vw;
     height: calc(100% - 48px);
@@ -102,7 +89,6 @@
 }
 
 #game{
-
     height: calc(100% - 48px);
     z-index: 1000;
     background-color: white;
