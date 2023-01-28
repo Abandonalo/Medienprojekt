@@ -109,6 +109,11 @@ section, .alertbox-wrapper{
     height: 40px;
 }
 
+#introoption > .alertbox-button-wrapper > .svg-wrapper{
+    width: 40px;
+    height: 40px;
+}
+
 .alertbox-button-wrapper{
     width: 100;
     display: flex;

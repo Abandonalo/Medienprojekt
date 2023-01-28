@@ -1,7 +1,13 @@
 let sel_1, sel_2, sel_3;
+var clientWidth;
+var clientHeight;
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  clientWidth = window.innerWidth - 60;
+  clientHeight = window.innerHeight - 60;
+  gameCanvasWidth = clientWidth;
+  canvas = createCanvas(clientWidth, clientHeight);
+  canvas.parent("game-option");
   background(255)
   noLoop()
 }

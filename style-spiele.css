@@ -18,14 +18,14 @@
     position: absolute;
     display: flex;
     justify-content: space-between;
-    color: #0092B1;
+    color: #ffffff;
     bottom: 0;
     height: 32px;
     width: calc(100vw - 16px);
     padding: 8px !important;
     z-index: 10000;
     transition: 1s;
-    background-color: rgba(0,0,0,0);
+    background-color:  #0092B1;
 }
 
 #gamebar{
@@ -33,6 +33,8 @@
     z-index: 10000;
     width: calc(100vw - 8px);
     height: 56px;
+    background-color:  #0092B1;
+    color: rgb(255, 255, 255);
 }
 
 #gamebar > .svg-wrapper{
@@ -55,7 +57,7 @@
 #gamebar > div > svg > circle, 
 #gamebar > div > svg > rect {
     fill:none;
-    stroke:#0092B1 !important;
+    stroke:#ffffff !important;
     stroke-miterlimit:10;
     stroke-width:2px;
     fill-rule:evenodd; 
@@ -65,7 +67,7 @@
 #navbar > div > svg > line, 
 #navbar > div > svg > circle {
     fill:none;
-    stroke:#0092B1;
+    stroke:#ffffff;
     stroke-miterlimit:10;
     stroke-width:2px;
     fill-rule:evenodd; 
@@ -80,10 +82,23 @@
     height: calc(100% - 48px);
     color: white;
     z-index: 1000;
-    background-color: rgba(0,0,0,0) !important;
+    background-color:#0092B1;
+}
+
+#introduction2{
+    width: 100vw;
+    height: calc(100% - 48px);
+    color: white;
+    z-index: 1000;
+    background-color:#0092B1;
 }
 
 #introduction > content-wrapper{
+    height: auto;
+    align-self: flex-start;
+}
+
+#introduction2 > content-wrapper{
     height: auto;
     align-self: flex-start;
 }
@@ -97,14 +112,6 @@
 }
 
 #game-option{
-    height: calc(100% - 48px);
-    z-index: 1000;
-    background-color: white;
-    color: #0092B1;
-    transition: 1s;
-}
-
-#game-input-size{
     height: calc(100% - 48px);
     z-index: 1000;
     background-color: white;
@@ -161,30 +168,6 @@ button{
     padding:0.3em 0.7em;
     border:solid white 1px;
     border-radius:1.3em;
-}
-
-#audio-player{
-    height: 50px;
-    width: 50vw;
-    text-align: left !important;   
-    display: block;
-}
-
-
-
-#button-play, #button-pause{
-    position: relative;
-    top: 0;
-    left: 0;
-    fill: #0092B1;
-    height: 50px;
-    width: 50px;
-    transition: 250ms ease-in-out;
-}
-
-.disappear-audio{
-    transform: scale(0.9);
-    opacity: 0;
 }
 
 .dont-show{

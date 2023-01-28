@@ -10,12 +10,19 @@ var layer;
 var farb;
 var off = 0;
 
+var clientWidth;
+var clientHeight;
+
 var h;
 var s = 64;
 var b;
 
 function setup() {
-  canvas = createCanvas(windowWidth, windowHeight)
+  clientWidth = window.innerWidth - 60;
+  clientHeight = window.innerHeight - 60;
+  gameCanvasWidth = clientWidth;
+  canvas = createCanvas(clientWidth, clientHeight);
+  canvas.parent("game-output");
   buffer = createGraphics(width, height);
   form = getItem("form")
   layer = getItem("layer")
