@@ -9,7 +9,7 @@ function setup() {
   clientWidth = window.innerWidth - 60;
   clientHeight = window.innerHeight - 60;
   gameCanvasWidth = clientWidth;
-  canvas = createCanvas(clientWidth, clientHeight, WEBGL);
+  canvas = createCanvas(clientWidth, clientHeight, WEBGL, {willReadFrequently: true});
   canvas.parent("game-input");
 
 	size = min(height, width) * 0.3;

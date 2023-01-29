@@ -24,16 +24,18 @@ $(document).ready(function (){
 
     //click event weiter
     $('#button-weiter').click(function (){
-        if (!$('#introduction').hasClass('disappear')){ // intro -> input
-            $('#introduction').addClass('disappear'); 
-            $('#game-input').removeClass('disappear');
-            $('#button-refresh, #button-intro').removeClass('disappear')
+        if (!$('#introduction').hasClass('disappear')){   //intro -> input
+            $('#gameinput').addClass('down');
+            $('#introduction').addClass('disappear');
             setTimeout(function(){
                 $('#game-input').removeClass('disappear');
-                $('#introduction').addClass('disappear');
+                $('#introduction').addClass('hide');
+            }, 500);
+            setTimeout(function(){
+                $('#gamebar').removeClass('disappear');
                 $('#button-refresh, #button-intro').removeClass('disappear');
             }, 1000);
-        }
+    }
 
         else if (!$('#game-input').hasClass('disappear')){ //input -> output
             $('#game-input').addClass('disappear');
@@ -51,7 +53,8 @@ $(document).ready(function (){
             $('#button-intro, #button-refresh, #gamebar').addClass('disappear');
             $('#information').css('pointer-events','');
             $('#game-output').css('pointer-events','none');
-            setTimeout(function(){      
+            setTimeout(function(){     
+                $('#gameinput').removeClass('down'); 
                 $('#gamebar').addClass('hide');
                 $('#button-intro').addClass('disappear');
                 $('#button-refresh').addClass('disappear');
@@ -84,9 +87,12 @@ $(document).ready(function (){
                 }, 2000);
         }
         else if (!$('#game-input').hasClass('disappear')){ //input -> intro
-            $('#game-input').addClass('disappear');
+            $('#gameinput').removeClass('down');
             $('#introduction').removeClass('disappear');
+            $('#introduction').removeClass('hide');
+            $('#game-input').addClass('disappear');
             $('#button-intro, #button-refresh').addClass('disappear');
+            $('#gamebar').addClass('disappear');
             setTimeout(function(){
                 $('#introduction').removeClass('disappear');
             }, 1000);
