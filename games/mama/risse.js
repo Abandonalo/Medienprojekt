@@ -121,6 +121,8 @@
     background(255);
     push();
 
+    console.log("canvas(" + clientWidth + " ," + clientHeight + ")");
+
     for (var i = 0; i < forms.length; i++) {
       forms[i].display();
     }
