@@ -29,7 +29,7 @@ $(document).ready(function (){
         $('#game').addClass('disappear');
         $('svg').addClass('disappear');
         setTimeout(function(){  
-            window.location.href = 'mamaoutput.html';
+            window.location.href = 'mamaoutputinfo.html';
         }, 1000); 
     });    
 
