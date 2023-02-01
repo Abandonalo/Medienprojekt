@@ -10,7 +10,7 @@ function setup() {
   //clientHeight = window.innerHeight - 60;
   //gameCanvasWidth = clientWidth;
   canvas = createCanvas(width, height);
-  //canvas.parent("game-input");
+  canvas.parent("game-input");
 
   background(255);
   strokeWeight(5);

@@ -250,16 +250,6 @@ body{
         text-decoration: underline !important;
     }
 
-    #question-content{
-        width: calc(100vw - 4em);
-        font-family: ABCGalapagosA;
-        font-size: 2.3em;
-        color: #0092B1;
-        margin: 1em;
-        line-height: 1.5em;
-        transition: 1s;
-    }
-
     a:link, a:visited {
         text-decoration: none;
         color: inherit !important;

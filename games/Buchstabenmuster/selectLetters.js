@@ -22,11 +22,12 @@ var lettersXPositions;
 var lettersYPositions;
 
 var lettersPerRow, letterSize;
+let lo = {"clicked" : false};
 
 //TODO: in app remove button (just for test purposes and call choice to array from -->)
 
 function preload() {
-  var img_name1 = 'SVGs/selected/';
+  var img_name1 = 'games/SVGs/selected/';
   var img_name3 = '.svg';
   var lettersInTotal = lettersToUse.length;
   isSelected = new Array(lettersInTotal);
@@ -52,9 +53,10 @@ function preload() {
 }
 
 function setup() {
-  clientWidth = windowWidth;
-  clientHeight = windowHeight;
-  createCanvas(clientWidth, clientHeight);
+  clientWidth =  window.innerWidth - 60;
+  clientHeight = window.innerHeight - 60;
+  canvas = createCanvas(clientWidth, clientHeight);
+  canvas.parent("game-input");
   
   var nextButton = createButton('-->');
   nextButton.position(300,700);
@@ -71,8 +73,8 @@ function setup() {
 
 //updates canvas size and positions of the letters on the canvas when the window gets resized
 windowResized = function () {
-    clientWidth = windowWidth;
-    clientHeight = windowHeight;
+    clientWidth =  window.innerWidth - 60;
+    clientHeight = window.innerHeight - 60;
     resizeCanvas(clientWidth, clientHeight);
     getOptimalLayout();
     fillPositions();
@@ -104,10 +106,10 @@ function choiceToArray() {
 
 //fills the array with the (default) value -->false at every position
 function fillIsSelected() {
-   for (var i = 0; i <= lettersToUse.length; i++) {
-     isSelected[i] = false;
-   }
- }
+  for (var i = 0; i <= lettersToUse.length; i++) {
+    isSelected[i] = false;
+  }
+}
 
 //updates the value for the L and the M in selection to true --> default selection
 function setDefault() {
@@ -181,9 +183,14 @@ function drawLetters() {
 //checks if a letter is clicked
 function touchStarted(){
   for(var i = 0; i < lettersToUse.length; i++) {
-    if (dist(mouseX, mouseY, lettersXPositions[i], lettersYPositions[i]) <= letterSize * 0.45) {
+    if (dist(mouseX, mouseY, lettersXPositions[i], lettersYPositions[i]) <= letterSize * 0.45 
+          && !lo.clicked) {
       updateSelection(i);
+      lo.clicked = true;
     }
+    setTimeout(() => {
+      lo.clicked = false
+    }, 500)
   }
 }
 
@@ -200,41 +207,42 @@ function updateSelection(index) {
   } else {
     choiceCount--;
   }
+  console.log("updated, choice count " + choiceCount);
 }
 
 function loadSVGs() {
-  selectedLetters[0] = loadImage('SVGs/C.svg');
-  selectedLetters[1] = loadImage('SVGs/E.svg');
-  selectedLetters[2] = loadImage('SVGs/F.svg');
-  selectedLetters[3] = loadImage('SVGs/H.svg');
-  selectedLetters[4] = loadImage('SVGs/I.svg');
-  selectedLetters[5] = loadImage('SVGs/K.svg');
-  selectedLetters[6] = loadImage('SVGs/L.svg');
-  selectedLetters[7] = loadImage('SVGs/M.svg');
-  selectedLetters[8] = loadImage('SVGs/N.svg');
-  selectedLetters[9] = loadImage('SVGs/O.svg');
-  selectedLetters[10] = loadImage('SVGs/S.svg');
-  selectedLetters[11] = loadImage('SVGs/T.svg');
-  selectedLetters[12] = loadImage('SVGs/U.svg');
-  selectedLetters[13] = loadImage('SVGs/V.svg');
-  selectedLetters[14] = loadImage('SVGs/Y.svg');
-  selectedLetters[15] = loadImage('SVGs/Z.svg');
+  selectedLetters[0] = loadImage('games/Buchstabenmuster/SVGs/C.svg');
+  selectedLetters[1] = loadImage('games/Buchstabenmuster/SVGs/E.svg');
+  selectedLetters[2] = loadImage('games/Buchstabenmuster/SVGs/F.svg');
+  selectedLetters[3] = loadImage('games/Buchstabenmuster/SVGs/H.svg');
+  selectedLetters[4] = loadImage('games/Buchstabenmuster/SVGs/I.svg');
+  selectedLetters[5] = loadImage('games/Buchstabenmuster/SVGs/K.svg');
+  selectedLetters[6] = loadImage('games/Buchstabenmuster/SVGs/L.svg');
+  selectedLetters[7] = loadImage('games/Buchstabenmuster/SVGs/M.svg');
+  selectedLetters[8] = loadImage('games/Buchstabenmuster/SVGs/N.svg');
+  selectedLetters[9] = loadImage('games/Buchstabenmuster/SVGs/O.svg');
+  selectedLetters[10] = loadImage('games/Buchstabenmuster/SVGs/S.svg');
+  selectedLetters[11] = loadImage('games/Buchstabenmuster/SVGs/T.svg');
+  selectedLetters[12] = loadImage('games/Buchstabenmuster/SVGs/U.svg');
+  selectedLetters[13] = loadImage('games/Buchstabenmuster/SVGs/V.svg');
+  selectedLetters[14] = loadImage('games/Buchstabenmuster/SVGs/Y.svg');
+  selectedLetters[15] = loadImage('games/Buchstabenmuster/SVGs/Z.svg');
   
-  unselectedLetters[0] = loadImage('SVGs/unselected/C.svg');
-  unselectedLetters[1] = loadImage('SVGs/unselected/E.svg');
-  unselectedLetters[2] = loadImage('SVGs/unselected/F.svg');
-  unselectedLetters[3] = loadImage('SVGs/unselected/H.svg');
-  unselectedLetters[4] = loadImage('SVGs/unselected/I.svg');
-  unselectedLetters[5] = loadImage('SVGs/unselected/K.svg');
-  unselectedLetters[6] = loadImage('SVGs/unselected/L.svg');
-  unselectedLetters[7] = loadImage('SVGs/unselected/M.svg');
-  unselectedLetters[8] = loadImage('SVGs/unselected/N.svg');
-  unselectedLetters[9] = loadImage('SVGs/unselected/O.svg');
-  unselectedLetters[10] = loadImage('SVGs/unselected/S.svg');
-  unselectedLetters[11] = loadImage('SVGs/unselected/T.svg');
-  unselectedLetters[12] = loadImage('SVGs/unselected/U.svg');
-  unselectedLetters[13] = loadImage('SVGs/unselected/V.svg');
-  unselectedLetters[14] = loadImage('SVGs/unselected/Y.svg');
-  unselectedLetters[15] = loadImage('SVGs/unselected/Z.svg');
+  unselectedLetters[0] = loadImage('games/Buchstabenmuster/SVGs/unselected/C.svg');
+  unselectedLetters[1] = loadImage('games/Buchstabenmuster/SVGs/unselected/E.svg');
+  unselectedLetters[2] = loadImage('games/Buchstabenmuster/SVGs/unselected/F.svg');
+  unselectedLetters[3] = loadImage('games/Buchstabenmuster/SVGs/unselected/H.svg');
+  unselectedLetters[4] = loadImage('games/Buchstabenmuster/SVGs/unselected/I.svg');
+  unselectedLetters[5] = loadImage('games/Buchstabenmuster/SVGs/unselected/K.svg');
+  unselectedLetters[6] = loadImage('games/Buchstabenmuster/SVGs/unselected/L.svg');
+  unselectedLetters[7] = loadImage('games/Buchstabenmuster/SVGs/unselected/M.svg');
+  unselectedLetters[8] = loadImage('games/Buchstabenmuster/SVGs/unselected/N.svg');
+  unselectedLetters[9] = loadImage('games/Buchstabenmuster/SVGs/unselected/O.svg');
+  unselectedLetters[10] = loadImage('games/Buchstabenmuster/SVGs/unselected/S.svg');
+  unselectedLetters[11] = loadImage('games/Buchstabenmuster/SVGs/unselected/T.svg');
+  unselectedLetters[12] = loadImage('games/Buchstabenmuster/SVGs/unselected/U.svg');
+  unselectedLetters[13] = loadImage('games/Buchstabenmuster/SVGs/unselected/V.svg');
+  unselectedLetters[14] = loadImage('games/Buchstabenmuster/SVGs/unselected/Y.svg');
+  unselectedLetters[15] = loadImage('games/Buchstabenmuster/SVGs/unselected/Z.svg');
 }
     
