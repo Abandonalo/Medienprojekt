@@ -30,6 +30,7 @@ $(document).ready(function (){
             setTimeout(function(){
                 $('#game-input').removeClass('disappear');
                 $('#introduction').addClass('hide');
+                $('#gameinput').addClass('down');
             }, 500);
             setTimeout(function(){
                 $('#gamebar').removeClass('disappear');
@@ -40,7 +41,7 @@ $(document).ready(function (){
             $('#game-input').addClass('disappear');
             $('#game-option').removeClass('disappear');
             $('#game-input').css('pointer-events','none');
-            setTimeout(function(){  
+            setTimeout(function(){ 
                 $('#game-input').addClass('disappear');    
                 $('#game-option').removeClass('disappear');
             }, 1000); 

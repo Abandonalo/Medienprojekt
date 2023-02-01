@@ -1,16 +1,16 @@
 let drawallowed;
 var points = new Array(11);
-var clientWidth;
-var clientHeight;
+//var clientWidth;
+//var clientHeight;
 let width = 250;
 let height = 300;
 
 function setup() {
-  clientWidth = window.innerWidth - 60;
-  clientHeight = window.innerHeight - 60;
-  gameCanvasWidth = clientWidth;
-  canvas = createCanvas(clientWidth, clientHeight);
-  canvas.parent("game-input");
+  //clientWidth = window.innerWidth - 60;
+  //clientHeight = window.innerHeight - 60;
+  //gameCanvasWidth = clientWidth;
+  canvas = createCanvas(width, height);
+  //canvas.parent("game-input");
 
   background(255);
   strokeWeight(5);

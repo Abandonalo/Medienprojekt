@@ -15,10 +15,10 @@ $(document).ready(function (){
         adaptiveHeight: true
     });
 
-    $('#introduction').removeClass('disappear');
-    $('#introduction').removeClass('hide');
+    $('#game-input').removeClass('disappear');
+    //$('#introduction').removeClass('hide');
 
-    $('#game-input, #information').addClass('disappear');
+    $('#information').addClass('disappear');
     $('#button-zurueck, #button-weiter').removeClass('disappear');
     $('#button-intro, #button-refresh').addClass('disapper');
 
@@ -37,7 +37,7 @@ $(document).ready(function (){
             }, 1000);
     }
 
-        /*else if (!$('#game-input').hasClass('disappear')){ //input -> output
+        else if (!$('#game-input').hasClass('disappear')){ //input -> output
             $('#game-input').addClass('disappear');
             $('#game-output').removeClass('disappear');
             $('#game-input').css('pointer-events','none');
@@ -45,7 +45,7 @@ $(document).ready(function (){
                 $('#game-input').addClass('disappear');    
                 $('#game-output').removeClass('disappear');
             }, 1000); 
-        }*/
+        }
 
         else if (!$('#game-input').hasClass('disappear')){  //output -> info
             $('#game-input').addClass('disappear');
