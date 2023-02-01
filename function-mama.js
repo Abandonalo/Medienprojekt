@@ -15,10 +15,10 @@ $(document).ready(function (){
         adaptiveHeight: true
     });
 
-    $('#game-input').removeClass('disappear');
-    //$('#introduction').removeClass('hide');
+    $('#introduction').removeClass('disappear');
+    $('#introduction').removeClass('hide');
 
-    $('#information').addClass('disappear');
+    $('#game-input, #information').addClass('disappear');
     $('#button-zurueck, #button-weiter').removeClass('disappear');
     $('#button-intro, #button-refresh').addClass('disapper');
 
@@ -27,6 +27,7 @@ $(document).ready(function (){
         if (!$('#introduction').hasClass('disappear')){   //intro -> input
             $('#gameinput').addClass('down');
             $('#introduction').addClass('disappear');
+            $('#game-input').css('pointer-events','none');
             setTimeout(function(){
                 $('#game-input').removeClass('disappear');
                 $('#introduction').addClass('hide');
