@@ -121,17 +121,7 @@ canvas {
     transition: 1s;
 }
 
-#game-input{
-    transition: 500ms;
-    overflow: hidden;
-}
-
-#game-option{
-    transition: 500ms;
-    overflow: hidden;
-}
-
-#game-output{
+#game{
     transition: 500ms;
     overflow: hidden;
 }

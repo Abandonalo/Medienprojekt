@@ -8,7 +8,7 @@ function setup() {
   width = window.innerWidth - 60;
   height = window.innerHeight - 60;
   canvas = createCanvas(width, height);
-  canvas.parent("game-input");
+  canvas.parent("game");
 
   background(255);
   strokeWeight(5);
@@ -17,7 +17,7 @@ function setup() {
     console.log("time out");
     drawallowed=true;
     timer = null;
-  }, 5000);
+  }, 500);
 
   forusepoint();
 }

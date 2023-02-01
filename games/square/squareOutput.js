@@ -22,7 +22,7 @@ function setup() {
   clientHeight = window.innerHeight - 60;
   gameCanvasWidth = clientWidth;
   canvas = createCanvas(clientWidth, clientHeight);
-  canvas.parent("game-output");
+  canvas.parent("game");
   buffer = createGraphics(width, height);
   form = getItem("form")
   layer = getItem("layer")

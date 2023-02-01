@@ -8,8 +8,8 @@ function setup() {
   clientWidth = window.innerWidth - 60;
   clientHeight = window.innerHeight - 60;
   gameCanvasWidth = clientWidth;
-  canvas = createCanvas(clientWidth, clientHeight);
-  canvas.parent("game-output");
+  canava = createCanvas(clientWidth, clientHeight);
+  canava.parent("game");
   points=getItem('pointsarray');
   print (points);
 
@@ -92,6 +92,6 @@ function changecre() {
   slider3.show(); 
 }
 
-  function download() {
+  /*function download() {
       saveCanvas('myoutput.png');
-  }
+  }*/

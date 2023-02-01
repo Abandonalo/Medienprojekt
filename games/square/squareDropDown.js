@@ -7,7 +7,7 @@ function setup() {
   clientHeight = window.innerHeight - 60;
   gameCanvasWidth = clientWidth;
   canvas = createCanvas(clientWidth, clientHeight);
-  canvas.parent("game-option");
+  canvas.parent("game");
   background(255)
   noLoop()
 }

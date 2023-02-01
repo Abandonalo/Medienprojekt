@@ -57,8 +57,7 @@ $(document).ready(function (){
             setTimeout(function(){     
                 $('#gameinput').removeClass('down'); 
                 $('#gamebar').addClass('hide');
-                $('#button-intro').addClass('disappear');
-                $('#button-refresh').addClass('disappear');
+                $('#button-intro, #button-refresh').addClass('disappear');
             }, 1000);
         }
 

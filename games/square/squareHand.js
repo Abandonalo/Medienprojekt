@@ -10,7 +10,7 @@ function setup() {
   clientHeight = window.innerHeight - 60;
   gameCanvasWidth = clientWidth;
   canvas = createCanvas(clientWidth, clientHeight, WEBGL, {willReadFrequently: true});
-  canvas.parent("game-input");
+  canvas.parent("game");
 
 	size = min(height, width) * 0.3;
 	vecTL = createPoint(-size, -size);//TOP LEFT
