@@ -97,8 +97,8 @@ function touchEnded() {
 }
 
 //TODO call in final implementation from --> button
-function storeChoice() {
-  print("size: " + selectedSize);
+function storeAbcSizeChoice() {
+  console.log("size: " + selectedSize);
   storeItem('abc_matrixSize', selectedSize);
 }
 

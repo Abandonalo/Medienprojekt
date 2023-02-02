@@ -33,16 +33,18 @@ var somethingWasTouched = false;
 var letterImages;
 
 function preload() {
+  console.log("preloading");
   letterImages = new Array(16);
-  //TODO comment in getItems
-  //cardsChoice = getItem('abc_letterChoice');
   loadSVGs();
   choiceIndeces = getItem('abc_letterChoiceIndeces');
   matrixSize = getItem('abc_matrixSize');
+  console.log(choiceIndeces);
+  console.log(abc_matrixSize);
 }
 
 //retrieves locally stored variable values and fills all card-arrays and the matrix
 function setup() {
+  console.log("setting up");
   clientWidth = window.innerWidth - 60;
   clientHeight = window.innerHeight - 60;
   canvas = createCanvas(clientWidth, clientHeight);

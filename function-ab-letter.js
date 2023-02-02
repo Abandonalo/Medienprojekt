@@ -25,6 +25,7 @@ $(document).ready(function (){
 
     // click event weiter
     $('#button-weiter').click(function (){
+        choiceToArray();
         $('#game').addClass('disappear');
         $('svg').addClass('disappear');
         setTimeout(function(){  

@@ -24,7 +24,6 @@ var lettersYPositions;
 var lettersPerRow, letterSize;
 let lo = {"clicked" : false};
 
-//TODO: in app remove button (just for test purposes and call choice to array from -->)
 
 function preload() {
   var img_name1 = 'games/SVGs/selected/';
@@ -58,10 +57,6 @@ function setup() {
   canvas = createCanvas(clientWidth, clientHeight);
   canvas.parent("game");
   
-  var nextButton = createButton('-->');
-  nextButton.position(300,700);
-  nextButton.mousePressed(choiceToArray);
-  
   fillIsSelected();
   if (useDefaultSelection) {
     setDefault();
@@ -85,8 +80,7 @@ function draw() {
   drawLetters();
 }
 
-//returns the current choice of letters as an array by using the isSelected array to determine said letters. Checks for empty choice. Stores choice locally in 'abc_letterChoice'
-//!!! if choice is empty, no choice is stored --> needs to be checked before moving on !!!!
+//returns the current choice of letters as an array by using the isSelected array to determine said letters. Stores choice locally in 'abc_letterChoice'
 function choiceToArray() {
   if(choiceCount <= 0) {
     console.log("ERROR: choice should not be empty"); //TODO remove when finished, only for testing
@@ -100,11 +94,12 @@ function choiceToArray() {
       alreadyFound++;
     }
   }
-  print("choice: " + choice);
+  //print("choice: " + choice);
+  console.log("choice: " + choice);
   storeItem('abc_letterChoiceIndeces', choice);
 }
 
-//fills the array with the (default) value -->false at every position
+//fills the array with the (default) value --> false at every position
 function fillIsSelected() {
   for (var i = 0; i <= lettersToUse.length; i++) {
     isSelected[i] = false;
