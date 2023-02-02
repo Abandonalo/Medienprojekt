@@ -1,4 +1,3 @@
-//TODO: font, call saveArtWork function from --> button in final app
 //TODO JETZT: einen Buchstaben weglassen aus Menükarten bzw. wenn nur einer kein Menu!!!
 
 let myFont = 'Montserrat';
@@ -31,6 +30,14 @@ var selectedIsLetterCard;
 var somethingWasTouched = false;
 
 var letterImages;
+
+function abcOutput_restart() {
+  for (letterCard of letterCards) {
+    letterCard.setLetter(choiceIndeces[0]);
+    letterCard.setRotation(0);
+  }
+  
+}
 
 function preload() {
   console.log("preloading");

@@ -25,6 +25,15 @@ var lettersPerRow, letterSize;
 let lo = {"clicked" : false};
 
 
+function abcLetters_restart() {
+  fillIsSelected();
+  if (useDefaultSelection) {
+    setDefault();
+  }
+}
+
+
+
 function preload() {
   var img_name1 = 'games/SVGs/selected/';
   var img_name3 = '.svg';

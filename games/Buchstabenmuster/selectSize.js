@@ -18,6 +18,13 @@ var clientHeight;
 
 var touchStartX;
 
+
+function abcSize_restart() {
+  selectedSize[0] = 2;
+  selectedSize[1] = 2;
+  repositionMatrices();
+}
+
 function preload() {
   placeHolderLetter = loadImage('games/Buchstabenmuster/SVGs/M.svg');
 }
@@ -73,6 +80,14 @@ function repositionMatrices() {
     matrices[i / 2].tempX = xPositions[i / 2];
     matrices[i / 2].yCenter = clientHeight / 2;
     matrices[i / 2].tempY = clientHeight / 2;
+    //to restore last selection
+    if(! (selectedSize[0] == 2 && selectedSize[1] == 2)) {
+      if(selectedSize[0] == 2 && selectedSize[0] == 1) {
+        snapRightAll();
+      } else {
+        snapLeftAll();
+      }
+    }
   }
 }
 
@@ -91,9 +106,6 @@ function touchEnded() {
   }
   snLeft = false;
   snRight = false;
-
-  //only use here for debugging!!!
-  //storeItem('abc_matrixSize', selectedSize);
 }
 
 //TODO call in final implementation from --> button
