@@ -7,9 +7,9 @@ var canava;
 function setup() {
   clientWidth = window.innerWidth - 60;
   clientHeight = window.innerHeight - 60;
-  gameCanvasWidth = clientWidth;
   canava = createCanvas(clientWidth, clientHeight);
   canava.parent("game");
+  
   points=getItem('pointsarray');
   print (points);
 

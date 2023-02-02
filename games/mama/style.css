@@ -12,21 +12,6 @@ canvas {
   transform: translate(-50%,-70%);
 }
 
-/*#frame{
-  border-radius: 25px;
-    border: 8px solid #0092B1;
-    width: 250px;
-    height: 400px;
-
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-70%);
-  
-    background: #0092B123;
-    z-index:-1;
-}*/
-
 .slider {
   width: 330px;
   height: 5px;
@@ -158,22 +143,4 @@ canvas {
 #buttons_4:hover {
   background: #0092b1;
   text-decoration: none;
-}
-
-#download{
-  -webkit-border-radius: 14;
-  -moz-border-radius: 14;
-  border-radius: 14px;
- 
-  padding: 11px 13px;
-
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(170%,100%);
-}
-
-
-.svg2 path {
-    fill: #0092b1;
 }

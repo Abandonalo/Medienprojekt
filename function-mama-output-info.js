@@ -21,7 +21,7 @@ $(document).ready(function (){
     }, 500);
     setTimeout(function(){
         $('#gamebar').removeClass('disappear');
-        $('#button-zurueck, #button-weiter, #button-refresh, #button-intro').removeClass('disappear');
+        $('#button-zurueck, #button-weiter, #button-refresh, #button-intro, #button-download').removeClass('disappear');
     }, 1000);
 
     //click event weiter
