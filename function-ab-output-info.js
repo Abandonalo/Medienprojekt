@@ -14,7 +14,7 @@ $(document).ready(function (){
         slidesToShow: 1,
         adaptiveHeight: true
     });
-
+    
     $('#game').css('pointer-events','none');
     setTimeout(function(){
         $('#game').removeClass('disappear');
@@ -24,7 +24,7 @@ $(document).ready(function (){
         $('#button-zurueck, #button-weiter, #button-refresh, #button-intro, #button-download').removeClass('disappear');
     }, 1000);
 
-    //click event weiter
+
     $('#button-weiter').click(function (){
         if (!$('#game').hasClass('disappear')){ 
             $('#game').addClass('disappear');
@@ -51,12 +51,11 @@ $(document).ready(function (){
         }
     });    
 
-    //click event zurueck
     $('#button-zurueck').click(function (){
         if (!$('#game').hasClass('disappear')){   //output -> input
             $('#game').addClass('disappear');
             setTimeout(function(){
-            window.location.href = 'mamainput.html';
+            window.location.href = ' buchstabenintro3.html';
             }, 1000);
         }
 
@@ -75,7 +74,7 @@ $(document).ready(function (){
         }
     });        
 
-
+    /* Intro Overlay einblenden */ 
     $('#button-intro').click(function (){
         $('#intro-wrapper').removeClass('hide');
         $('#intro').addClass('turn-animation');
@@ -90,7 +89,6 @@ $(document).ready(function (){
         }, 1000);     
     });
 
- 
     $('#button-okay').click(function (){
         $('#intro').addClass('turnBack-animation');
         $('#intro-wrapper').css('background-color','rgba(0, 0, 0, 0)');
@@ -103,6 +101,7 @@ $(document).ready(function (){
         }, 1000);     
     });    
 
+    // Text ausklappen
     $('#button-mehr').click(function (){
         $('#button-mehr').css('display','none');
         $('.dont-show').css('display','block');

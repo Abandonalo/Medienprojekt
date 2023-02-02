@@ -21,7 +21,7 @@ $(document).ready(function (){
             $(this).addClass('li-activated');
             setTimeout(function() {
                 $(this).removeClass('li-activated');
-                window.location.href = "buchstaben.html";
+                window.location.href = "buchstabenintro1.html";
             }, 2000);
           });
         

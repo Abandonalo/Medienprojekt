@@ -43,9 +43,10 @@ function preload() {
 
 //retrieves locally stored variable values and fills all card-arrays and the matrix
 function setup() {
-  clientWidth = windowWidth;
-  clientHeight = windowHeight;
-  createCanvas(clientWidth, clientHeight);
+  clientWidth = window.innerWidth - 60;
+  clientHeight = window.innerHeight - 60;
+  canvas = createCanvas(clientWidth, clientHeight);
+  canvas.parent("game");
   
   createLetterCards();
   createMatrix();
@@ -55,8 +56,8 @@ function setup() {
 
 //resizes canvas and every element on it
 windowResized = function () {
-  clientWidth = windowWidth;
-  clientHeight = windowHeight;
+  clientWidth = window.innerWidth - 60;
+  clientHeight = window.innerHeight - 60;
   resizeCanvas(clientWidth, clientHeight);
   
   computeMenuCardsXPositions();
@@ -143,22 +144,22 @@ function createMatrix() {
 
 
 function loadSVGs() {
-  letterImages[0] = loadImage('SVGs/C.svg');
-  letterImages[1] = loadImage('SVGs/E.svg');
-  letterImages[2] = loadImage('SVGs/F.svg');
-  letterImages[3] = loadImage('SVGs/H.svg');
-  letterImages[4] = loadImage('SVGs/I.svg');
-  letterImages[5] = loadImage('SVGs/K.svg');
-  letterImages[6] = loadImage('SVGs/L.svg');
-  letterImages[7] = loadImage('SVGs/M.svg');
-  letterImages[8] = loadImage('SVGs/N.svg');
-  letterImages[9] = loadImage('SVGs/O.svg');
-  letterImages[10] = loadImage('SVGs/S.svg');
-  letterImages[11] = loadImage('SVGs/T.svg');
-  letterImages[12] = loadImage('SVGs/U.svg');
-  letterImages[13] = loadImage('SVGs/V.svg');
-  letterImages[14] = loadImage('SVGs/Y.svg');
-  letterImages[15] = loadImage('SVGs/Z.svg');
+  letterImages[0] = loadImage('games/Buchstabenmuster/SVGs/C.svg');
+  letterImages[1] = loadImage('games/Buchstabenmuster/SVGs/E.svg');
+  letterImages[2] = loadImage('games/Buchstabenmuster/SVGs/F.svg');
+  letterImages[3] = loadImage('games/Buchstabenmuster/SVGs/H.svg');
+  letterImages[4] = loadImage('games/Buchstabenmuster/SVGs/I.svg');
+  letterImages[5] = loadImage('games/Buchstabenmuster/SVGs/K.svg');
+  letterImages[6] = loadImage('games/Buchstabenmuster/SVGs/L.svg');
+  letterImages[7] = loadImage('games/Buchstabenmuster/SVGs/M.svg');
+  letterImages[8] = loadImage('games/Buchstabenmuster/SVGs/N.svg');
+  letterImages[9] = loadImage('games/Buchstabenmuster/SVGs/O.svg');
+  letterImages[10] = loadImage('games/Buchstabenmuster/SVGs/S.svg');
+  letterImages[11] = loadImage('games/Buchstabenmuster/SVGs/T.svg');
+  letterImages[12] = loadImage('games/Buchstabenmuster/SVGs/U.svg');
+  letterImages[13] = loadImage('games/Buchstabenmuster/SVGs/V.svg');
+  letterImages[14] = loadImage('games/Buchstabenmuster/SVGs/Y.svg');
+  letterImages[15] = loadImage('games/Buchstabenmuster/SVGs/Z.svg');
 }
 
 

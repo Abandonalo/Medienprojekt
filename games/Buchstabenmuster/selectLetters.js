@@ -56,7 +56,7 @@ function setup() {
   clientWidth =  window.innerWidth - 60;
   clientHeight = window.innerHeight - 60;
   canvas = createCanvas(clientWidth, clientHeight);
-  canvas.parent("game-input");
+  canvas.parent("game");
   
   var nextButton = createButton('-->');
   nextButton.position(300,700);
@@ -100,7 +100,7 @@ function choiceToArray() {
       alreadyFound++;
     }
   }
-  //print(choice);
+  print("choice: " + choice);
   storeItem('abc_letterChoiceIndeces', choice);
 }
 
@@ -207,7 +207,6 @@ function updateSelection(index) {
   } else {
     choiceCount--;
   }
-  console.log("updated, choice count " + choiceCount);
 }
 
 function loadSVGs() {

@@ -19,14 +19,16 @@ var clientHeight;
 var touchStartX;
 
 function preload() {
-   placeHolderLetter = loadImage('SVGs/M.svg');
+  placeHolderLetter = loadImage('games/Buchstabenmuster/SVGs/M.svg');
 }
 
 //sets up width, height of canvas and canvas, fills positions array and creates all matrices
 function setup() {
-  clientWidth = windowWidth;
-  clientHeight = windowHeight;
-  createCanvas(clientWidth, clientHeight);
+  clientWidth =  window.innerWidth - 60;
+  clientHeight = window.innerHeight - 60;
+  canvas = createCanvas(clientWidth, clientHeight);
+  canvas.parent("game");
+
   fillXPositions();
   createMatrices();
 }
@@ -43,8 +45,8 @@ function draw() {
 //updates width and height and resizes canvas accordingly, also updates the positions of the matrices
 //snaps them (back) into default position!!
 windowResized = function () {
-    clientWidth = windowWidth;
-    clientHeight = windowHeight;
+    clientWidth =  window.innerWidth - 60;
+    clientHeight = window.innerHeight - 60;
     resizeCanvas(clientWidth, clientHeight);
     fillXPositions();
     repositionMatrices();
@@ -96,6 +98,7 @@ function touchEnded() {
 
 //TODO call in final implementation from --> button
 function storeChoice() {
+  print("size: " + selectedSize);
   storeItem('abc_matrixSize', selectedSize);
 }
 
