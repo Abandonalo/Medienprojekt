@@ -15,7 +15,7 @@ $(document).ready(function () {
   });
 
   $("#game").removeClass("disappear");
-  $("#game").css("pointer-events", "none");
+  //$("#game").css("pointer-events", "none");
   setTimeout(function () {
     $("#game").removeClass("disappear");
     $("#gamebar").removeClass("disappear");
