@@ -8,21 +8,21 @@ var clientHeight;
 function setup() {
   clientWidth = window.innerWidth - 60;
   clientHeight = window.innerHeight - 60;
-  gameCanvasWidth = clientWidth;
-  canvas = createCanvas(clientWidth, clientHeight, WEBGL, {willReadFrequently: true});
+
+  canvas = createCanvas(clientWidth, clientHeight, WEBGL);
   canvas.parent("game");
 
-	size = min(height, width) * 0.3;
-	vecTL = createPoint(-size, -size);//TOP LEFT
-	vecTR = createPoint(size, -size);//TOP RIGHT
-	vecBR = createPoint(size, size);//BOTTOM LEFT
-	vecBL = createPoint(-size, size);//BOTTOM RIGHT
+  size = min(height, width) * 0.3;
+  vecTL = createPoint(-size, -size);//TOP LEFT
+  vecTR = createPoint(size, -size);//TOP RIGHT
+  vecBR = createPoint(size, size);//BOTTOM LEFT
+  vecBL = createPoint(-size, size);//BOTTOM RIGHT
 }
 
-function createPoint(x, y){
-	let vec = createVector(x, y);
-	addDrag(vec);
-	return vec;
+function createPoint(x, y) {
+  let vec = createVector(x, y);
+  addDrag(vec);
+  return vec;
 }
 
 function draw() {

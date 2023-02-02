@@ -73,4 +73,19 @@ $(document).ready(function (){
             $('#intro-wrapper').addClass('hide');
         }, 1000);   
     });    
+
+    $('#form').change(function (){
+        console.log("form changed: " + this.value);
+        window.localStorage.setItem("form", this.value);
+    }); 
+
+    $('#shape').change(function (){
+        console.log("form changed: " + this.value);
+        window.localStorage.setItem("shape", this.value);
+    }); 
+
+    $('#color').change(function (){
+        console.log("form changed: " + this.value);
+        window.localStorage.setItem("color", this.value);
+    }); 
 });    

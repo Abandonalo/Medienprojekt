@@ -26,8 +26,22 @@ function dragTouchMoved() {
   if (selectedIndex == -1) return;
   dragabble[selectedIndex].add(getMouseX() - getPmouseX(), getMouseY() - getPmouseY(), 0);
   console.log("Vertex %d changed to (%d, %d)",selectedIndex, dragabble[selectedIndex].x, dragabble[selectedIndex].y)
-
-  storeItem("%d", (dragabble[selectedIndex].x,     dragabble[selectedIndex].y))
+  if (selectedIndex == 0) {
+    storeItem("1x", dragabble[selectedIndex].x)
+    storeItem("1y", dragabble[selectedIndex].y)
+  }
+  if (selectedIndex == 1) {
+    storeItem("2x", dragabble[selectedIndex].x)
+    storeItem("2y", dragabble[selectedIndex].y)
+  }
+  if (selectedIndex == 2) {
+    storeItem("4x", dragabble[selectedIndex].x)
+    storeItem("4y", dragabble[selectedIndex].y)
+  }
+  if (selectedIndex == 3) {
+    storeItem("3x", dragabble[selectedIndex].x)
+    storeItem("3y", dragabble[selectedIndex].y)
+  }
 }
 
 

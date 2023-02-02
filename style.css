@@ -36,6 +36,14 @@
     font-weight: 500;
 }
 
+@font-face {
+    font-family: NeueHaasUnica-Bold;
+    src: url("fonts/NeueHaasUnica-Bold.woff");
+    font-weight: bold;
+}
+
+
+
 
 body{
     height: calc(var(--vh, 1vh) * 100);
@@ -105,11 +113,6 @@ body{
     }
 
     #intro > .alertbox-button-wrapper > .svg-wrapper{
-        width: 40px;
-        height: 40px;
-    }
-
-    #introoption > .alertbox-button-wrapper > .svg-wrapper{
         width: 40px;
         height: 40px;
     }
@@ -191,6 +194,28 @@ body{
     h4{
         font-size: 1em;
         color: #0092B1;
+    }
+
+    .text-option-title{
+        font-size: 2.3em;
+        font-family: NeueHaasUnica-Bold;
+        padding: 20px;
+        color: inherit;
+    }
+
+    .text-optionpage{
+        font-size: 1.3em;
+        font-family: NeueHaasUnica-Bold;
+        padding: 20px;
+        color: inherit;
+        line-height: 2;
+    }
+
+    .text-option{
+        font-size: 0.8em;
+        font-family: NeueHaasUnica-Regular;
+        padding: 20px;
+        color: inherit;
     }
 
     .text-app-big{
@@ -478,5 +503,15 @@ body{
         width: 100%;
         height: 90px;
         background-color: #0092B1;  
+    }
+
+    select{
+        outline-style: solid;
+        outline-color: #0092B1;
+        padding: 2px 5px;
+        border-radius:5px;
+    }
+    select:focus{
+        outline:none;
     }
 }
