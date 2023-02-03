@@ -16,7 +16,7 @@ let matrixSize;
 var touchStartX;
 var touchStartY;
 
-var menuCards = [];
+var menuCards;
 var letterCards;
 var letterMatrix;
 
@@ -61,6 +61,8 @@ function setup() {
   createMatrix();
   computeMenuCardsXPositions();
   createMenuCards(squareSize);
+  console.log("menuCards: " + menuCards);
+  console.log(menuCards);
 }
 
 //resizes canvas and every element on it
@@ -82,7 +84,7 @@ function saveArtWork() {
 
 //calls draw function of every element
 function draw() {
-  console.log("drawing");
+  //console.log("drawing");
   background(255);
   drawLetterCards(squareSize);
   drawLetterMatrix();
@@ -91,7 +93,7 @@ function draw() {
 
 //draws the lettermatrix
 function drawLetterMatrix() {
-  console.log("drawing matrix");
+  //console.log("drawing matrix");
   letterMatrix.draw();
 }
 
@@ -149,7 +151,7 @@ function touchMoved(){
 
 //creates the matrix
 function createMatrix() {
-  console.log("clientWidth / 2: " + clientWidth / 2);
+  //console.log("clientWidth / 2: " + clientWidth / 2);
   letterMatrix = new LetterMatrix(clientWidth / 2, (clientHeight / 2) * matrixHeightRelative, matrixSize[0], matrixSize[1]);
 }
 
@@ -172,14 +174,14 @@ function loadSVGs() {
   letterImages[13] = loadImage('games/Buchstabenmuster/SVGs/V.svg');
   letterImages[14] = loadImage('games/Buchstabenmuster/SVGs/Y.svg');
   letterImages[15] = loadImage('games/Buchstabenmuster/SVGs/Z.svg');
-  console.log(letterImages);
+  //console.log(letterImages);
 }
 
 
 
 class LetterMatrix {
   constructor(xCenter, yCenter, squaresX, squaresY) {
-    console.log("new letterMatrix: xCenter " + xCenter + ", yCenter: " + yCenter + ", squaresX: " + squaresX + ", squaresY: " + squaresY);
+    //console.log("new letterMatrix: xCenter " + xCenter + ", yCenter: " + yCenter + ", squaresX: " + squaresX + ", squaresY: " + squaresY);
     this.squaresX = squaresX;
     this.squaresY = squaresY;
 
@@ -192,26 +194,26 @@ class LetterMatrix {
   
   draw () {
     var matrixSpace = min(clientWidth - 60, (clientHeight - 120) * matrixHeightRelative);
-    console.log(typeof(matrixSpace));
+    //console.log(typeof(matrixSpace));
     var x = this.xCenter - 0.5 * matrixSpace + 0.5 * squareSize;
     //console.log("x should be: " + this.xCenter - 0.5 * matrixSpace + 0.5 * squareSize);
     var y = this.yCenter - 0.5 * matrixSpace + 0.5 * squareSize;
-    console.log("xCenter: " + this.xCenter);
-    console.log("matrixSpace: " + matrixSpace);
-    console.log("squareSize: " + squareSize);
-    console.log("x: " + x + "    y: " + y);
+    //console.log("xCenter: " + this.xCenter);
+    //console.log("matrixSpace: " + matrixSpace);
+    //console.log("squareSize: " + squareSize);
+    //console.log("x: " + x + "    y: " + y);
     
     for (var i = 0; i < this.squaresY; i++) {
       x = this.xCenter - 0.5 * matrixSpace + 0.5 * squareSize;
       for (var j = 0; j < this.squaresX; j++) {
         strokeWeight(squareSize / 60);
         stroke(150);
-        console.log("really drawing matrix");
+        //console.log("really drawing matrix");
         noFill();
         rect(x, y, squareSize, squareSize);
         x += squareSize;
-        console.log(x);
-        console.log(rect(x, y, squareSize, squareSize));
+        //console.log(x);
+        //console.log(rect(x, y, squareSize, squareSize));
       }
       y += squareSize;
     }

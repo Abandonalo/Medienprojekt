@@ -8,7 +8,6 @@ function createMenuCards() {
   menuCards = new Array(menuCardsXPositions.length);
   var x;
   menuCardsY = clientHeight - (clientHeight * menuHeightRelative) / 2;
-  console.log("menuCardsY: " + menuCardsY);
   for(var i = 0; i < menuCardsXPositions.length; i++) {
     x = menuCardsXPositions[i];
     menuCards[i] = new MenuCard(letterImages[choiceIndeces[i]], i);
@@ -31,7 +30,7 @@ function drawMenuCards() {
 }
 
 //computes the x positions of the menucards and stores them in menuCardsXPositions[]
-function computeMenuCardsXPositions(squareSize) {
+function computeMenuCardsXPositions() {
   var numCards = choiceIndeces.length;
   menuCardsXPositions = new Array(numCards);
   var maxHeight = min(clientHeight * menuHeightRelative, squareSize);

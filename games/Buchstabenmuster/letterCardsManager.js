@@ -34,7 +34,7 @@ class LetterCard {
   }
   
   draw() {
-    console.log("drawing letterCard: "+ this.xCenter + this.yCenter + squareSize + squareSize);
+    //console.log("drawing letterCard: "+ this.xCenter + this.yCenter + squareSize + squareSize);
     fill(252, 252, 247);
     rectMode(CENTER);
     rect(this.xCenter, this.yCenter, squareSize, squareSize);
