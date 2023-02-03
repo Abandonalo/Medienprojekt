@@ -25,6 +25,7 @@ canvas {
   top: 50%;
   left: 50%;
   transform: translate(-50%,3420%);
+  z-index: 9999;
 }
 
 .slider:hover {
@@ -67,12 +68,14 @@ canvas {
      left: 50%;
      top: 50%;
   transform: translate(146%,320%);
+  z-index: 9999;
 }
 
 
 #buttons_1:hover {
   background: #0092b1;
   text-decoration: none;
+  z-index: 9999;
 }
 
 .svg path {
@@ -93,12 +96,14 @@ canvas {
   left: 50%;
   top: 50%;
   transform: translate(-226%,320%);
+  z-index: 9999;
 }
 
 
 #buttons_2:hover {
   background: #0092b1;
   text-decoration: none;
+  z-index: 9999;
 }
 
 
@@ -116,12 +121,14 @@ canvas {
   left: 50%;
   top: 50%;
   transform: translate(-102%,320%);
+  z-index: 9999;
 }
 
 
 #buttons_3:hover {
   background: #0092b1;
   text-decoration: none;
+  z-index: 9999;
 }
 
 #buttons_4{
@@ -138,9 +145,11 @@ canvas {
   left: 50%;
   top: 50%;
   transform: translate(22%,320%);
+  z-index: 9999;
 }
 
 #buttons_4:hover {
   background: #0092b1;
   text-decoration: none;
+  z-index: 9999;
 }
