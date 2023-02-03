@@ -32,10 +32,12 @@ var somethingWasTouched = false;
 var letterImages;
 
 function abcOutput_restart() {
+  //TODO
+  /*
   for (letterCard of letterCards) {
     letterCard.setLetter(choiceIndeces[0]);
     letterCard.setRotation(0);
-  }
+  }*/
   
 }
 
