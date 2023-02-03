@@ -26,6 +26,7 @@ let lo = {"clicked" : false};
 
 
 function abcLetters_restart() {
+  choiceCount = 0;
   fillIsSelected();
   if (useDefaultSelection) {
     setDefault();

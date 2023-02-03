@@ -1,8 +1,14 @@
 //creates the menucards
 function createMenuCards() {
+  if (menuCardsXPositions.length <= 1) {
+    menuCards = [];
+    console.log("no menuCards!!!");
+    return;
+  }
   menuCards = new Array(menuCardsXPositions.length);
   var x;
   menuCardsY = clientHeight - (clientHeight * menuHeightRelative) / 2;
+  console.log("menuCardsY: " + menuCardsY);
   for(var i = 0; i < menuCardsXPositions.length; i++) {
     x = menuCardsXPositions[i];
     menuCards[i] = new MenuCard(letterImages[choiceIndeces[i]], i);
@@ -18,13 +24,14 @@ function resizeMenuCards() {
 
 //draws menucards
 function drawMenuCards() {
+  console.log("drawing menuCard");
   for(var menuCard of menuCards) {
     menuCard.draw();
   }
 }
 
 //computes the x positions of the menucards and stores them in menuCardsXPositions[]
-function computeMenuCardsXPositions() {
+function computeMenuCardsXPositions(squareSize) {
   var numCards = choiceIndeces.length;
   menuCardsXPositions = new Array(numCards);
   var maxHeight = min(clientHeight * menuHeightRelative, squareSize);
