@@ -25,33 +25,17 @@ $(document).ready(function () {
     }, 1000);
 
     //click event weiter
-    $('#button-weiter').click(function () {
-        if (!$('#game').hasClass('disappear')) {
+    $('#button-weiter').click(function (){
+        $('#buttons_1,#buttons_2,#buttons_3,#buttons_4').addClass('disappear');
+        if (!$('#game').hasClass('disappear')) {   //output -> input
             $('#game').addClass('disappear');
-            $('#information').removeClass('disappear');
-            $('#button-intro, #button-refresh, #gamebar').addClass('disappear');
-            $('#buttons_4, #buttons_3, #buttons_2, #buttons_1').addClass('disappear');
-            $('#slider').addClass('disappear');
-            $('#information').css('pointer-events', '');
-            $('#game').css('pointer-events', 'none');
-            setTimeout(function () {
-                $('#gameinput').removeClass('down');
-                $('#gamebar').addClass('hide');
-                $('#button-intro, #button-refresh, #button-download').addClass('disappear');
-            }, 1000);
+    
+            setTimeout(function(){
+                window.location.href = 'mamaintro2.html';
+            }, 400);
         }
+    });  
 
-        else if (!$('#information').hasClass('disappear')) {  //info -> menu
-            $('#information').addClass('disappear');
-            $('svg').addClass('disappear');
-            setTimeout(function () {
-                $('#gameinput').removeClass('down');
-            }, 1000);
-            setTimeout(function () {
-                window.location.href = 'menu.html';
-            }, 2000);
-        }
-    });
 
     //click event zurueck
     $('#button-zurueck').click(function () {
