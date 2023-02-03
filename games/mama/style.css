@@ -13,7 +13,7 @@ canvas {
 }
 
 .slider {
-  width: 330px;
+  width: 75%;
   height: 5px;
   border-radius: 5px;
   background: #0092b1;
@@ -24,7 +24,7 @@ canvas {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,3420%);
+  transform: translate(-50%,2820%);
   z-index: 9999;
 }
 
@@ -62,12 +62,12 @@ canvas {
   -moz-box-shadow: 0px 0px 1px #666666;
   box-shadow: 0px 0px 1px #666666;
   background: #7ebcc9;
-  padding: 16px 18px;
+  padding: 14px 18px;
 
     position: absolute;
      left: 50%;
      top: 50%;
-  transform: translate(146%,320%);
+  transform: translate(146%,308%);
   z-index: 9999;
 }
 
@@ -90,12 +90,12 @@ canvas {
   -moz-box-shadow: 0px 0px 1px #666666;
   box-shadow: 0px 0px 1px #666666;
   background: #7ebcc9;
-  padding: 16px 18px;
+  padding: 14px 18px;
 
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-226%,320%);
+  transform: translate(-226%,308%);
   z-index: 9999;
 }
 
@@ -115,12 +115,12 @@ canvas {
   -moz-box-shadow: 0px 0px 1px #666666;
   box-shadow: 0px 0px 1px #666666;
   background: #7ebcc9;
-  padding: 16px 18px;
+  padding: 14px 18px;
 
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-102%,320%);
+  transform: translate(-102%,308%);
   z-index: 9999;
 }
 
@@ -139,12 +139,12 @@ canvas {
   -moz-box-shadow: 0px 0px 1px #666666;
   box-shadow: 0px 0px 1px #666666;
   background: #7ebcc9;
-  padding: 16px 18px;
+  padding: 14px 18px;
 
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(22%,320%);
+  transform: translate(22%,308%);
   z-index: 9999;
 }
 

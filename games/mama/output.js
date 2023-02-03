@@ -6,8 +6,8 @@ var canava;
 
 
 function setup() {
-  clientWidth = window.innerWidth - 135;
-  clientHeight = window.innerHeight - 460;
+  clientWidth = window.innerWidth - 95;
+  clientHeight = window.innerHeight -290;
   canava = createCanvas(clientWidth, clientHeight);
   canava.parent("game");
 
@@ -95,6 +95,6 @@ function saveArtwork() {
   saveCanvas(canvas, "howTo-meineQuadrat", "jpg");
 }
 
-function sliderrestart(){
+/*function sliderrestart(){
   setup();
-  }
+  }*/

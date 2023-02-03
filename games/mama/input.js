@@ -79,8 +79,8 @@ function printpoint() {
   }
 }
 
-function inputreset(){
+/*function inputreset(){
   background(255);
   setup();
-  
 }
+ */

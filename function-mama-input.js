@@ -70,4 +70,13 @@ $(document).ready(function (){
             $('#intro-wrapper').addClass('hide');
         }, 1000);     
     });    
+
+    $('#button-refresh').click(function (){
+        if (!$('#game').hasClass('disappear')){   //output -> input
+            $('#game').addClass('disappear');
+            setTimeout(function(){
+            window.location.href = 'mamainput.html';
+            }, 1000);
+        }
+    });
 });
