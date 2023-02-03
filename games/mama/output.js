@@ -3,9 +3,11 @@ var outputframe;
 let slider;
 var canava;
 
+
+
 function setup() {
-  clientWidth = window.innerWidth - 60;
-  clientHeight = window.innerHeight - 60;
+  clientWidth = window.innerWidth - 135;
+  clientHeight = window.innerHeight - 460;
   canava = createCanvas(clientWidth, clientHeight);
   canava.parent("game");
 
@@ -13,17 +15,17 @@ function setup() {
   print(points);
 
   //slider 1 to adjust the line distance
-  slider = createSlider(0, 100, 0, 5);
+  slider = createSlider(-200, 200, 0, 5);
   slider.addClass("slider");
   slider.hide();
 
   //slider 2 to adjust the character distance
-  slider2 = createSlider(0, 100, 0, 1);
+  slider2 = createSlider(-200, 200, 0, 1);
   slider2.addClass("slider");
   slider2.hide();
 
   //slider 3 to adjust the crescendos
-  slider3 = createSlider(0, 40, 0, 1);
+  slider3 = createSlider(-30, 30, 0, 1);
   slider3.addClass("slider");
   slider3.hide();
 
@@ -92,3 +94,7 @@ function changecre() {
 function saveArtwork() {
   saveCanvas(canvas, "howTo-meineQuadrat", "jpg");
 }
+
+function sliderrestart(){
+  setup();
+  }

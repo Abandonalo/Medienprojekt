@@ -78,3 +78,9 @@ function printpoint() {
     }
   }
 }
+
+function inputreset(){
+  background(255);
+  setup();
+  
+}
