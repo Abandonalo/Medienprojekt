@@ -140,7 +140,5 @@ function drawGrid(off, h, s, b) {
 }
 
 function saveArtwork() {
-  var to_save = get(0, clientHeight, clientWidth, clientWidth);
   saveCanvas(canvas, "howTo-meineQuadrat", "jpg");
-  print("saving image");
 }
