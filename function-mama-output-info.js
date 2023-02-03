@@ -30,6 +30,8 @@ $(document).ready(function (){
             $('#game').addClass('disappear');
             $('#information').removeClass('disappear');
             $('#button-intro, #button-refresh, #gamebar').addClass('disappear');
+            $('#buttons_4, #buttons_3, #buttons_2,#buttons_1').addClass('disappear');
+            $('#slider').addClass('disappear');
             $('#information').css('pointer-events','');
             $('#game').css('pointer-events','none');
             setTimeout(function(){     
@@ -107,4 +109,15 @@ $(document).ready(function (){
         $('#button-mehr').css('display','none');
         $('.dont-show').css('display','block');
     });
+
+    $('#button-refresh').click(function (){
+        if (!$('#game').hasClass('disappear')){   //output -> input
+            $('#game').addClass('disappear');
+            setTimeout(function(){
+            window.location.href = 'mamaoutputinfo.html';
+            }, 1000);
+        }
+    });
+
+    
 });
