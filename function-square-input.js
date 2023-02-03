@@ -53,6 +53,11 @@ $(document).ready(function () {
         }
     });
 
+    $("#button-refresh").click(function () {
+        window.location.reload();
+    });
+
+
     //click event zurueck
     $("#button-zurueck").click(function () {
         //input -> intro
