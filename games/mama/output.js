@@ -1,11 +1,12 @@
 let a = 30;
+let b=100;
 var outputframe;
 let slider;
 var canava;
 
 function setup() {
   clientWidth = window.innerWidth - 95;
-  clientHeight = window.innerHeight - 290;
+  clientHeight = window.innerHeight - 300;
   canava = createCanvas(clientWidth, clientHeight);
   canava.parent("game");
 
@@ -49,12 +50,12 @@ function draw() {
   stroke(val4, 200, 130);
 
   //output
-  for (n = points[0].x - height; n < height; n += 50 + val3) {
+  for (n = points[0].x - height; n < height-b; n += b + val3) {
     beginShape();
 
     for (i = 0; i < points.length; i++) {
       if (points[i].usepoint) {
-        curveVertex(points[i].x + val2, points[i].y + n + val);
+        curveVertex(points[i].x + val2, points[i].y+ n + val);
       }
     }
     endShape();
