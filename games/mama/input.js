@@ -1,10 +1,13 @@
 let drawallowed;
-var points = new Array(200);
+var points;
 var width;
 var height;
 
 function setup() {
   canvas = createCanvas(window.innerWidth - 60, window.innerHeight - 60);
+  points = new Array(
+    parseInt(((window.innerWidth - 60) * (window.innerHeight - 60)) / 50)
+  );
   canvas.parent("game");
 
   background(255);
@@ -29,21 +32,21 @@ function mouseReleased() {
 function readout() {
   loadPixels();
 
-  var num = width / 5;
-  print("num: " + num);
-  var max = -1;
+  var numx = width / 5;
+  //print("num: " + num);
+  var numy = height / 10;
+  var numpoint = 0;
 
-  for (var i = 0; i <= num; i++) {
-    points[i].x = i * 5;
-
-    for (var j = 0; j <= height; j++) {
+  for (var i = 0; i <= numx; i++) {
+    for (var j = 0; j <= numy; j++) {
       let d = pixelDensity();
-      var index = (i * 5 + j * width * d) * 4 * d;
+      var index = (i * 5 + j * 10 * width * d) * 4 * d;
       if (pixels[index] < 255) {
-        print("point[" + i + "] used, x =" + i * 5 + ", y =" + j);
-        points[i].y = j;
-        points[i].usepoint = true;
-        break;
+        //print("point[" + numpoint + "] used, x =" + i * 5 + ", y =" + j * 10);
+        points[numpoint].x = i * 5;
+        points[numpoint].y = j * 10;
+        points[numpoint].usepoint = true;
+        numpoint++;
       }
     }
   }

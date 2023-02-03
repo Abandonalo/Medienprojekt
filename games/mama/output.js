@@ -3,11 +3,9 @@ var outputframe;
 let slider;
 var canava;
 
-
-
 function setup() {
   clientWidth = window.innerWidth - 95;
-  clientHeight = window.innerHeight -290;
+  clientHeight = window.innerHeight - 290;
   canava = createCanvas(clientWidth, clientHeight);
   canava.parent("game");
 
@@ -51,7 +49,7 @@ function draw() {
   stroke(val4, 200, 130);
 
   //output
-  for (n = points[5].x - height; n < height; n += 50 + val3) {
+  for (n = points[0].x - height; n < height; n += 50 + val3) {
     beginShape();
 
     for (i = 0; i < points.length; i++) {
@@ -92,7 +90,7 @@ function changecre() {
 }
 
 function saveArtwork() {
-  saveCanvas(canvas, "howTo-meineQuadrat", "jpg");
+  saveCanvas(canvas, "howTo-meinSchriftbild", "jpg");
 }
 
 /*function sliderrestart(){
