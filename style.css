@@ -155,6 +155,14 @@ body{
         margin-bottom: 0;
     }
 
+
+    .intro-svg-wrapper{
+        fill:#00758f;
+        stroke:none;
+    }
+
+
+
     .disappear{
         transform: scale(0.9);
         opacity: 0;
