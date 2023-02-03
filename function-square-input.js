@@ -27,8 +27,8 @@ $(document).ready(function () {
 
     //click event weiter
     $("#button-weiter").click(function () {
-        if (
-            window.localStorage.getItem("1x") == null ||
+        /*if (
+            //window.localStorage.getItem("1x") == null ||
             window.localStorage.getItem("2x") == null ||
             window.localStorage.getItem("3x") == null ||
             window.localStorage.getItem("4x") == null
@@ -44,13 +44,12 @@ $(document).ready(function () {
             setTimeout(function () {
                 $("#alert").removeClass("turn-animation");
             }, 1000);
-        } else {
+        } else {*/
             $("#game").addClass("disappear");
             $("svg").addClass("disappear");
             setTimeout(function () {
                 window.location.href = "squareoption.html";
             }, 1000);
-        }
     });
 
     $("#button-refresh").click(function () {

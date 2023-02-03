@@ -40,12 +40,12 @@ function dragTouchMoved() {
     storeItem("2y", dragabble[selectedIndex].y);
   }
   if (selectedIndex == 2) {
-    storeItem("4x", dragabble[selectedIndex].x);
-    storeItem("4y", dragabble[selectedIndex].y);
-  }
-  if (selectedIndex == 3) {
     storeItem("3x", dragabble[selectedIndex].x);
     storeItem("3y", dragabble[selectedIndex].y);
+  }
+  if (selectedIndex == 3) {
+    storeItem("4x", dragabble[selectedIndex].x);
+    storeItem("4y", dragabble[selectedIndex].y);
   }
 }
 

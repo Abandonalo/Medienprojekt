@@ -88,23 +88,91 @@ function drawGrid(off, h, s, b) {
           ypos + gridSpacey / 1.5 + random(-off, off)
         );
       } else {
-        var x1 = getItem("1x");
-        var y1 = getItem("1y");
-        var x2 = getItem("2x");
-        var y2 = getItem("2y");
-        var x3 = getItem("3x");
-        var y3 = getItem("3y");
-        var x4 = getItem("4x");
-        var y4 = getItem("4y");
+        var x1 = getItem("1x") == null ? xpos : getItem("1x");
+        var y1 = getItem("1y") == null ? ypos : getItem("1y");
+        var x2 =
+          getItem("2x") == null
+            ? xpos + (gridSpacex / 1.2) * 3.5
+            : getItem("2x");
+        var y2 = getItem("2y") == null ? y1 : getItem("2y");
+        var x3 = getItem("3x") == null ? x2 : getItem("3x");
+        var y3 =
+          getItem("3y") == null
+            ? ypos + (gridSpacey / 1.5) * 3.5
+            : getItem("3y");
+        var x4 = getItem("4x") == null ? x1 : getItem("4x");
+        var y4 = getItem("4y") == null ? y3 : getItem("4y");
+
+        /*console.log(
+          "from storage: (x1, y1: " +
+            x1 +
+            ", " +
+            y1 +
+            "), (x2, y2: " +
+            x2 +
+            ", " +
+            y2 +
+            "), (x3, y3:" +
+            x3 +
+            ", " +
+            y3 +
+            "), (x4, y4:" +
+            x4 +
+            ", " +
+            y4 +
+            ")"
+        );*/
 
         var upperx = (x2 - x1) / 3.5;
         var uppery = (y2 - y1) / 3.5;
-        var leftx = (x3 - x1) / 3.5;
-        var lefty = (y3 - y1) / 3.5;
-        var rightx = (x4 - x2) / 3.5;
-        var righty = (y4 - y2) / 3.5;
-        var lowerx = (x4 - x3) / 3.5;
-        var lowery = (y4 - y3) / 3.5;
+        var leftx = (x4 - x1) / 3.5;
+        var lefty = (y4 - y1) / 3.5;
+        var rightx = (x3 - x2) / 3.5;
+        var righty = (y3 - y2) / 3.5;
+        
+        
+        /*console.log(
+          "upperx: " +
+          upperx +
+          ", uppery: " +
+          uppery +
+          ", leftx: " +
+          leftx +
+          ", lefty: " +
+          lefty +
+          ", rightx: " +
+          rightx +
+          ", righty: " +
+          righty
+        );
+
+        console.log(
+          "(x1, y1: " +
+            xpos +
+            ", " +
+            ypos +
+            "), (x2, y2: " +
+            xpos +
+            upperx +
+            ", " +
+            ypos +
+            uppery +
+            "), (x3, y3:" +
+            xpos +
+            upperx +
+            rightx +
+            ", " +
+            ypos +
+            uppery +
+            righty +
+            "), (x4, y4:" +
+            xpos +
+            leftx +
+            ", " +
+            ypos +
+            lefty +
+            ")"
+        );*/
 
         quad(
           //x1, y1
