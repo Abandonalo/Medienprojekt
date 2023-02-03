@@ -34,19 +34,14 @@ class LetterCard {
   }
   
   draw() {
+    console.log("drawing letterCard: "+ this.xCenter + this.yCenter + squareSize + squareSize);
     fill(252, 252, 247);
     rectMode(CENTER);
     rect(this.xCenter, this.yCenter, squareSize, squareSize);
-    /*textAlign(CENTER);
-    textFont(myFont);
-    textStyle(BOLD);
-    textSize(squareSize * 1.4275);
-    fill(0);*/
     push();
     translate(this.xCenter, this.yCenter);
     angleMode(DEGREES);
     rotate(this.angle);
-    //text(this.letter, 0, (squareSize / 2));
     imageMode(CENTER);
     image(this.letter, 0, 0, squareSize, squareSize);
     pop();
@@ -91,7 +86,7 @@ class LetterCard {
   }
   
   //when dragging of this card stopped:
-  //sets itsself empty
+  //resets itsself
   //then calls function in letterMatrix that computes if it is in an OK position
   //(then the lettercard there is changed to hold the new letter)
   snapTo() {

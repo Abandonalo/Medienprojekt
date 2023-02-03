@@ -1,11 +1,10 @@
 $(document).ready(function (){
-    
-/* Get innerHeight für vh  */   
+    /* Get innerHeight für vh  */   
   
     let vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
     
-// Slider    
+    // Slider    
     
     $('.slider').slick({
         dots: true,
@@ -14,17 +13,17 @@ $(document).ready(function (){
         slidesToShow: 1,
         adaptiveHeight: true
     });
-    
-    $('#game').css('pointer-events','none');
+
+    $('#game').removeClass('disappear');
+    //$('#game').css('pointer-events','none');
     setTimeout(function(){
         $('#game').removeClass('disappear');
+        $('#gamebar').removeClass('disappear');
     }, 500);
     setTimeout(function(){
-        $('#gamebar').removeClass('disappear');
         $('#button-zurueck, #button-weiter, #button-refresh, #button-intro, #button-download').removeClass('disappear');
     }, 1000);
-
-
+    // click event weiter
     $('#button-weiter').click(function (){
         if (!$('#game').hasClass('disappear')){ 
             $('#game').addClass('disappear');

@@ -16,7 +16,7 @@ let matrixSize;
 var touchStartX;
 var touchStartY;
 
-var menuCards;
+var menuCards = [];
 var letterCards;
 var letterMatrix;
 
@@ -46,7 +46,7 @@ function preload() {
   choiceIndeces = getItem('abc_letterChoiceIndeces');
   matrixSize = getItem('abc_matrixSize');
   console.log(choiceIndeces);
-  console.log(abc_matrixSize);
+  console.log(matrixSize);
 }
 
 //retrieves locally stored variable values and fills all card-arrays and the matrix
@@ -60,7 +60,7 @@ function setup() {
   createLetterCards();
   createMatrix();
   computeMenuCardsXPositions();
-  createMenuCards();
+  createMenuCards(squareSize);
 }
 
 //resizes canvas and every element on it
@@ -82,14 +82,16 @@ function saveArtWork() {
 
 //calls draw function of every element
 function draw() {
+  console.log("drawing");
   background(255);
-  drawLetterCards();
+  drawLetterCards(squareSize);
   drawLetterMatrix();
   drawMenuCards();
 }
 
 //draws the lettermatrix
 function drawLetterMatrix() {
+  console.log("drawing matrix");
   letterMatrix.draw();
 }
 
@@ -147,6 +149,7 @@ function touchMoved(){
 
 //creates the matrix
 function createMatrix() {
+  console.log("clientWidth / 2: " + clientWidth / 2);
   letterMatrix = new LetterMatrix(clientWidth / 2, (clientHeight / 2) * matrixHeightRelative, matrixSize[0], matrixSize[1]);
 }
 
@@ -169,31 +172,46 @@ function loadSVGs() {
   letterImages[13] = loadImage('games/Buchstabenmuster/SVGs/V.svg');
   letterImages[14] = loadImage('games/Buchstabenmuster/SVGs/Y.svg');
   letterImages[15] = loadImage('games/Buchstabenmuster/SVGs/Z.svg');
+  console.log(letterImages);
 }
 
 
 
 class LetterMatrix {
   constructor(xCenter, yCenter, squaresX, squaresY) {
+    console.log("new letterMatrix: xCenter " + xCenter + ", yCenter: " + yCenter + ", squaresX: " + squaresX + ", squaresY: " + squaresY);
     this.squaresX = squaresX;
     this.squaresY = squaresY;
+
+    this.xCenter = xCenter;
+    this.yCenter = yCenter;
     
     this.squareSize = 0;
     this.resize(xCenter, yCenter);
   }
   
   draw () {
-    var x = this.xCenter - 0.5 * matrixSize + 0.5 * squareSize;
-    var y = this.yCenter - 0.5 * matrixSize + 0.5 * squareSize;
+    var matrixSpace = min(clientWidth - 60, (clientHeight - 120) * matrixHeightRelative);
+    console.log(typeof(matrixSpace));
+    var x = this.xCenter - 0.5 * matrixSpace + 0.5 * squareSize;
+    //console.log("x should be: " + this.xCenter - 0.5 * matrixSpace + 0.5 * squareSize);
+    var y = this.yCenter - 0.5 * matrixSpace + 0.5 * squareSize;
+    console.log("xCenter: " + this.xCenter);
+    console.log("matrixSpace: " + matrixSpace);
+    console.log("squareSize: " + squareSize);
+    console.log("x: " + x + "    y: " + y);
     
     for (var i = 0; i < this.squaresY; i++) {
-      x = this.xCenter - 0.5 * matrixSize + 0.5 * squareSize;
+      x = this.xCenter - 0.5 * matrixSpace + 0.5 * squareSize;
       for (var j = 0; j < this.squaresX; j++) {
         strokeWeight(squareSize / 60);
         stroke(150);
+        console.log("really drawing matrix");
         noFill();
         rect(x, y, squareSize, squareSize);
         x += squareSize;
+        console.log(x);
+        console.log(rect(x, y, squareSize, squareSize));
       }
       y += squareSize;
     }
@@ -204,14 +222,14 @@ class LetterMatrix {
   resize(newX, newY) {
     this.xCenter = newX;
     this.yCenter = newY;
-    var matrixSize = min(clientWidth - 60, (clientHeight - 120) * matrixHeightRelative);
+    var matrixSpace = min(clientWidth - 60, (clientHeight - 120) * matrixHeightRelative);
     var maxSquares = max(this.squaresX, this.squaresY);
-    squareSize = matrixSize / maxSquares;
+    squareSize = matrixSpace / maxSquares;
     
-    var x = this.xCenter - 0.5 * matrixSize + 0.5 * squareSize;
-    var y = this.yCenter - 0.5 * matrixSize + 0.5 * squareSize;
+    var x = this.xCenter - 0.5 * matrixSpace + 0.5 * squareSize;
+    var y = this.yCenter - 0.5 * matrixSpace + 0.5 * squareSize;
     for (var i = 0; i < this.squaresY; i++) {
-      x = this.xCenter - 0.5 * matrixSize + 0.5 * squareSize;
+      x = this.xCenter - 0.5 * matrixSpace + 0.5 * squareSize;
       for (var j = 0; j < this.squaresX; j++) {
         var index = i * this.squaresX + j;
         letterCards[index].xCenter = x;

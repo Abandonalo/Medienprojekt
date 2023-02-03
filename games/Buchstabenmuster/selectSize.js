@@ -1,5 +1,3 @@
-//TODO: font, currently everytime touch ended, choice gets stored --> needs to be changed in final app! (take out and use storeChoice function instead!)
-
 var myFont = 'Montserrat';
 
 var placeHolderLetter;
@@ -26,6 +24,7 @@ function abcSize_restart() {
 }
 
 function preload() {
+  console.log("preloading");
   placeHolderLetter = loadImage('games/Buchstabenmuster/SVGs/M.svg');
 }
 
@@ -61,16 +60,20 @@ windowResized = function () {
 
 //computes centerpoints of the matrices and stores them in xPositions[]
 function fillXPositions() {
+  console.log("filling xPositions");
   for (i = 0; i < xPositions.length; i++) {
     xPositions[i] = clientWidth / 2 + ((i - 1) * clientWidth);
+    console.log(xPositions[i]);
   }
 }
 
 //creates matrices and stores them in matrices[]
 function createMatrices() {
+  console.log("creating matrices")
   for(i = 0; i < xPositions.length * 2; i += 2) {
     matrices[i / 2] = new PlaceHolderMatrix(xPositions[i / 2], clientHeight / 2, squares[i], squares[i + 1]);
   }
+  console.log(matrices);
 }
 
 //repositions matrices by updating their x position stored in xCenter
@@ -81,6 +84,7 @@ function repositionMatrices() {
     matrices[i / 2].yCenter = clientHeight / 2;
     matrices[i / 2].tempY = clientHeight / 2;
     //to restore last selection
+    /*
     if(! (selectedSize[0] == 2 && selectedSize[1] == 2)) {
       if(selectedSize[0] == 2 && selectedSize[0] == 1) {
         snapRightAll();
@@ -88,6 +92,7 @@ function repositionMatrices() {
         snapLeftAll();
       }
     }
+    */
   }
 }
 
@@ -162,6 +167,7 @@ class PlaceHolderMatrix {
   //draws the matrix on the canvas centered around tempX and tempY
   draw() {
     var matrixSize = min(clientWidth - 120, clientHeight - 120);
+    matrixSize = min(clientWidth - 50, clientHeight - 50);
     var maxSquares = max(this.squaresX, this.squaresY);
     var squareSize = matrixSize / maxSquares;
     var x = this.tempX - (this.squaresX * squareSize / 2);
