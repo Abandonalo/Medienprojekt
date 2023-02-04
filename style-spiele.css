@@ -56,6 +56,11 @@ canvas {
     height: 32px;
 }
 
+#navbar > .svg-wrapper-plus{
+    width: 32px;
+    height: 32px;
+}
+
 #navbar > div > svg, 
 #gamebar > div > svg{
     transition: 500ms;
@@ -72,9 +77,10 @@ canvas {
     fill-rule:evenodd; 
 }
 
-#navbar > div > svg > path, 
-#navbar > div > svg > line, 
-#navbar > div > svg > circle {
+/*Zoi: changed from div to .svg-wrapper-*/
+#navbar > .svg-wrapper > svg > path, 
+#navbar > .svg-wrapper > svg > line, 
+#navbar > .svg-wrapper > svg > circle {
     fill:none;
     stroke:#ffffff;
     stroke-miterlimit:10;
