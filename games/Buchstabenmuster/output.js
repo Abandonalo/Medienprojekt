@@ -7,10 +7,7 @@ var clientHeight;
 let matrixHeightRelative = 0.7;
 let menuHeightRelative = 0.25;
 
-//default, overwritten in setup, with locally stored values from screen 1
-//var cardsChoice = ['SVGs/M.svg', 'SVGs/L.svg', 'SVGs/E.svg'];
 let choiceIndeces;
-//default, overwritten in setup, with locally stored values from screen 2
 let matrixSize;
 
 var touchStartX;
@@ -31,6 +28,9 @@ var somethingWasTouched = false;
 
 var letterImages;
 
+let defaultChoice = [7, 6];
+let defaultSize = [2, 2];
+
 function abcOutput_restart() {
   for (letterCard of letterCards) {
     letterCard.setLetter(letterImages[choiceIndeces[0]]);
@@ -39,6 +39,7 @@ function abcOutput_restart() {
   
 }
 
+//retrieves locally stored variable values
 function preload() {
   console.log("preloading");
   letterImages = new Array(16);
@@ -49,11 +50,17 @@ function preload() {
   console.log(matrixSize);
 }
 
-//retrieves locally stored variable values and fills all card-arrays and the matrix
+//fills all card-arrays and the matrix, if locally stored values not availailable uses default values
 function setup() {
+  if(choiceIndeces == null || choiceIndeces.length == 0) {
+    choiceIndeces = defaultChoice;
+  }
+  if (matrixSize == null || matrixSize.length == 0) {
+    matrixSize = defaultSize;
+  }
   console.log("setting up");
   clientWidth = window.innerWidth - 60;
-  clientHeight = window.innerHeight - 60;
+  clientHeight = window.innerHeight - 100;
   canvas = createCanvas(clientWidth, clientHeight);
   canvas.parent("game");
   
@@ -68,7 +75,7 @@ function setup() {
 //resizes canvas and every element on it
 windowResized = function () {
   clientWidth = window.innerWidth - 60;
-  clientHeight = window.innerHeight - 60;
+  clientHeight = window.innerHeight - 100;
   resizeCanvas(clientWidth, clientHeight);
   
   computeMenuCardsXPositions();
@@ -151,7 +158,6 @@ function touchMoved(){
 
 //creates the matrix
 function createMatrix() {
-  //console.log("clientWidth / 2: " + clientWidth / 2);
   letterMatrix = new LetterMatrix(clientWidth / 2, (clientHeight / 2) * matrixHeightRelative, matrixSize[0], matrixSize[1]);
 }
 
