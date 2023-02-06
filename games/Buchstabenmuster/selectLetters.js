@@ -1,4 +1,3 @@
-//TODOS: font
 var myFont = 'Montserrat';
 
 //let letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
@@ -11,7 +10,7 @@ var unselectedLetters;
 let defaultSelection = ['L', 'M'];
 let useDefaultSelection = true;
 //maximum choice: 4 letters
-let maxLetterChoice = 4; //!!! TODO !!! ?
+let maxLetterChoice = 4;
 
 var choiceCount = 0;
 var isSelected;
@@ -36,8 +35,6 @@ function abcLetters_restart() {
 
 
 function preload() {
-  var img_name1 = 'games/SVGs/selected/';
-  var img_name3 = '.svg';
   var lettersInTotal = lettersToUse.length;
   isSelected = new Array(lettersInTotal);
   lettersXPositions = new Array(lettersInTotal);
@@ -47,7 +44,9 @@ function preload() {
   
   loadSVGs();
   
-  /* //geht leide nicht :/
+  /* //geht leider nicht :/
+  var img_name1 = 'games/Buchstabenmuster/SVGs/selected/';
+  var img_name3 = '.svg';
   for (var i = 0; i < lettersInTotal; i++) {
     var imgName = img_name1 + lettersToUse[i] + img_name3;
     print(imgName);
@@ -93,7 +92,7 @@ function draw() {
 //returns the current choice of letters as an array by using the isSelected array to determine said letters. Stores choice locally in 'abc_letterChoice'
 function choiceToArray() {
   if(choiceCount <= 0) {
-    console.log("ERROR: choice should not be empty"); //TODO remove when finished, only for testing
+    console.log("ERROR: impossible case - choice should not be empty");
     return;
   }
   var choice = new Array(choiceCount);
@@ -104,7 +103,6 @@ function choiceToArray() {
       alreadyFound++;
     }
   }
-  //print("choice: " + choice);
   console.log("choice: " + choice);
   storeItem('abc_letterChoiceIndeces', choice);
 }
@@ -118,9 +116,6 @@ function fillIsSelected() {
 
 //updates the value for the L and the M in selection to true --> default selection
 function setDefault() {
-  /*isSelected[11] = true;
-  isSelected[12] = true;
-  choiceCount = 2;*/
   if(defaultSelection == null || defaultSelection.length <= 0) {
     return;
   }

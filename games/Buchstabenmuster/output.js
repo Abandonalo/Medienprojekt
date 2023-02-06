@@ -31,6 +31,8 @@ var letterImages;
 let defaultChoice = [7, 6];
 let defaultSize = [2, 2];
 
+let lo = {"clicked" : false};
+
 function abcOutput_restart() {
   for (letterCard of letterCards) {
     letterCard.setLetter(letterImages[choiceIndeces[0]]);
@@ -129,9 +131,15 @@ function objectTouched(x, y) {
 
 //stores coordinates of touch start position and checks if something was touched
 function touchStarted(){
-  touchStartX = mouseX;
-  touchStartY = mouseY;
-  somethingWasTouched = objectTouched(touchStartX, touchStartY);
+  if (!lo.clicked) {
+    touchStartX = mouseX;
+    touchStartY = mouseY;
+    somethingWasTouched = objectTouched(touchStartX, touchStartY);
+    lo.clicked = true;
+  }
+    setTimeout(() => {
+      lo.clicked = false;
+    }, 500);
 }
 
 //calls touchEnded of selected card and deselects it
