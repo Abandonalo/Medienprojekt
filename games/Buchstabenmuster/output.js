@@ -89,6 +89,7 @@ windowResized = function () {
 function saveArtWork() {
   resizeCanvas(clientWidth, clientHeight * matrixHeightRelative);
   saveCanvas('how to: Vera Molnar - ABC', 'jpg');
+  resizeCanvas(clientWidth, clientHeight);
 }
 
 //calls draw function of every element
