@@ -35,6 +35,7 @@ function abcLetters_restart() {
 
 
 function preload() {
+  console.log("preloading");
   var lettersInTotal = lettersToUse.length;
   isSelected = new Array(lettersInTotal);
   lettersXPositions = new Array(lettersInTotal);
