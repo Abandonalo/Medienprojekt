@@ -51,7 +51,7 @@ function readout() {
     }
   }
   print(points);
-  printpoint();
+  //printpoint();
 }
 
 function forusepoint() {
