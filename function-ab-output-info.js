@@ -28,13 +28,13 @@ $(document).ready(function (){
         if (!$('#game').hasClass('disappear')){ 
             $('#game').addClass('disappear');
             $('#information').removeClass('disappear');
-            $('#button-intro, #button-refresh, #gamebar').addClass('disappear');
+            $('#button-intro, #button-refresh, #button-download, #gamebar').addClass('disappear');
             $('#information').css('pointer-events','');
             $('#game').css('pointer-events','none');
             setTimeout(function(){     
                 $('#gameinput').removeClass('down'); 
                 $('#gamebar').addClass('hide');
-                $('#button-intro, #button-refresh, #button-download').addClass('disappear');
+                $('#button-intro, #button-refresh, #button-download, #gamebar').addClass('disappear');
             }, 1000);
         } 
 
@@ -68,7 +68,7 @@ $(document).ready(function (){
             }, 500);
             setTimeout(function(){
                 $('#game').removeClass('disappear');
-                $('#button-intro, #button-refresh').removeClass('disappear');
+                $('#button-intro, #button-refresh, #button-download, #gamebar').removeClass('disappear');
             }, 1000);
         }
     });        

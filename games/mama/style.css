@@ -24,7 +24,7 @@ canvas {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,2820%);
+  transform: translate(-50%,4020%);
   z-index: 9999;
 }
 
@@ -67,7 +67,7 @@ canvas {
     position: absolute;
      left: 50%;
      top: 50%;
-  transform: translate(146%,308%);
+  transform: translate(146%,438%);
   z-index: 9999;
 }
 
@@ -95,7 +95,7 @@ canvas {
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-226%,308%);
+  transform: translate(-226%,438%);
   z-index: 9999;
 }
 
@@ -120,7 +120,7 @@ canvas {
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-102%,308%);
+  transform: translate(-102%,438%);
   z-index: 9999;
 }
 
@@ -144,7 +144,7 @@ canvas {
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(22%,308%);
+  transform: translate(22%,438%);
   z-index: 9999;
 }
 
