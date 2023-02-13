@@ -1,4 +1,4 @@
-var myFont = 'Montserrat';
+let myFont = 'Montserrat';
 
 var placeHolderLetter;
 
@@ -35,8 +35,8 @@ function setup() {
   canvas = createCanvas(clientWidth, clientHeight);
   canvas.parent("game");
 
-  fillXPositions();
-  createMatrices();
+  fillXPositions(clientWidth);
+  createMatrices(xPositions, clientHeight / 2, squares);
 }
 
 
@@ -54,35 +54,37 @@ windowResized = function () {
     clientWidth =  window.innerWidth - 60;
     clientHeight = window.innerHeight - 60;
     resizeCanvas(clientWidth, clientHeight);
-    fillXPositions();
-    repositionMatrices();
+    fillXPositions(clientWidth);
+    repositionMatrices(xPositions, clientHeight / 2);
 }
 
 //computes centerpoints of the matrices and stores them in xPositions[]
-function fillXPositions() {
+function fillXPositions(widthPerMatrix) {
   console.log("filling xPositions");
   for (i = 0; i < xPositions.length; i++) {
-    xPositions[i] = clientWidth / 2 + ((i - 1) * clientWidth);
+    xPositions[i] = widthPerMatrix / 2 + ((i - 1) * widthPerMatrix);
     console.log(xPositions[i]);
   }
+  return xPositions;
 }
 
 //creates matrices and stores them in matrices[]
-function createMatrices() {
-  console.log("creating matrices")
+function createMatrices(positions, yPosition, numSquares) {
+  console.log("creating matrices");
   for(i = 0; i < xPositions.length * 2; i += 2) {
-    matrices[i / 2] = new PlaceHolderMatrix(xPositions[i / 2], clientHeight / 2, squares[i], squares[i + 1]);
+    matrices[i / 2] = new PlaceHolderMatrix(positions[i / 2], yPosition, numSquares[i], numSquares[i + 1]);
   }
   console.log(matrices);
+  return matrices;
 }
 
 //repositions matrices by updating their x position stored in xCenter
-function repositionMatrices() {
+function repositionMatrices(positions, yPosition) {
   for(i = 0; i < xPositions.length * 2; i += 2) {
-    matrices[i / 2].xCenter = xPositions[i / 2];
-    matrices[i / 2].tempX = xPositions[i / 2];
-    matrices[i / 2].yCenter = clientHeight / 2;
-    matrices[i / 2].tempY = clientHeight / 2;
+    matrices[i / 2].xCenter = positions[i / 2];
+    matrices[i / 2].tempX = positions[i / 2];
+    matrices[i / 2].yCenter = yPosition;
+    matrices[i / 2].tempY = yPosition;
     //to restore last selection
     /*
     if(! (selectedSize[0] == 2 && selectedSize[1] == 2)) {
@@ -94,6 +96,7 @@ function repositionMatrices() {
     }
     */
   }
+  return matrices;
 }
 
 //saves x value of touch Start point to touchStartX
@@ -117,6 +120,7 @@ function touchEnded() {
 function storeAbcSizeChoice() {
   console.log("size: " + selectedSize);
   storeItem('abc_matrixSize', selectedSize);
+  return selectedSize;
 }
 
 //calls drag method of class matrix for every matrix when a drag in x direction is detected
@@ -134,22 +138,31 @@ function touchMoved() {
 function snapToSelection() {
   //print("snapToSelection");
   for(var matrix of matrices) {
-      matrix.snapToSelection();
+      matrix.snapToSelection(clientWidth);
     }
+    checkSelection();
 }
 
 //calls snapLeft method for every matrix
 function snapLeftAll() {
   for(var matrix of matrices) {
-      matrix.snapLeft();
+      matrix.snapLeft(clientWidth);
     }
+    checkSelection();
 }
 
 //calls snapRight method for every matrix
 function snapRightAll() {
   for(var matrix of matrices) {
-      matrix.snapRight();
+      matrix.snapRight(clientWidth);
     }
+    checkSelection();
+}
+
+function checkSelection() {
+  for(var matrix of matrices) {
+    matrix.checkSelected(xPositions[1]);
+  }
 }
 
 
@@ -194,45 +207,47 @@ class PlaceHolderMatrix {
   
   //snaps to the selected screen by computing the distance to the screen centerpoints
   //also sets snapLeft or right if snapping results at an empty screen baaing visible
-  snapToSelection() {
-    if (this.tempX <= this.xCenter - 0.35 * clientWidth) {
-      this.xCenter = this.xCenter - clientWidth;
-    } else if(this.tempX > this.xCenter + 0.35 * clientWidth){
-      this.xCenter = this.xCenter + clientWidth;
+  snapToSelection(widthPerMatrix) {
+    if (this.tempX <= this.xCenter - 0.35 * widthPerMatrix) {
+      this.xCenter = this.xCenter - widthPerMatrix;
+    } else if(this.tempX > this.xCenter + 0.35 * widthPerMatrix){
+      this.xCenter = this.xCenter + widthPerMatrix;
     } else {
     }
     this.tempX = this.xCenter;
-    this.checkSelected();
+    //this.checkSelected();
     
-    var buffer = clientWidth / 100;
+    var buffer = widthPerMatrix / 100;
     
-    if(this.xCenter > clientWidth / 2 + clientWidth * 2 + buffer) {
+    if(this.xCenter > widthPerMatrix / 2 + widthPerMatrix * 2 + buffer) {
       snLeft = true;
     }
-    if(this.xCenter < clientWidth / 2 - clientWidth * 2 - buffer) {
+    if(this.xCenter < widthPerMatrix / 2 - widthPerMatrix * 2 - buffer) {
       snRight = true;
     }
   }
   
   //moves matrix one screen to the right
-  snapRight() {
-    this.xCenter = this.xCenter + clientWidth;
+  snapRight(widthPerMatrix) {
+    this.xCenter = this.xCenter + widthPerMatrix;
     this.tempX = this.xCenter;
-    this.checkSelected();
+    //this.checkSelected();
   }
   
   //moves matrix one screen to the left
-  snapLeft() {
-    this.xCenter = this.xCenter - clientWidth;
+  snapLeft(widthPerMatrix) {
+    this.xCenter = this.xCenter - widthPerMatrix;
     this.tempX = this.xCenter;
-    this.checkSelected();
+    //this.checkSelected();
   }
   
   //if this matrix is the one beeing displayed selectedSize gets updated to the x and y squares of this matrix
-  checkSelected() {
-    if(this.xCenter == xPositions[1]) {
+  checkSelected(xSelection) {
+    if(this.xCenter == xSelection) {
       selectedSize[0] = this.squaresX;
       selectedSize[1] = this.squaresY;
+      return true;
     }
+    return false;
   }
 }

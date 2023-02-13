@@ -9,8 +9,8 @@ var unselectedLetters;
 //default selection: M, L
 let defaultSelection = ['L', 'M'];
 let useDefaultSelection = true;
-//maximum choice: 4 letters
-let maxLetterChoice = 4;
+//maximum choice: 2 letters
+let maxLetterChoice = 2;
 
 var choiceCount = 0;
 var isSelected;
@@ -94,7 +94,7 @@ function draw() {
 function choiceToArray() {
   if(choiceCount <= 0) {
     console.log("ERROR: impossible case - choice should not be empty");
-    return;
+    //throw Error("impossible case - choice should not be empty");
   }
   var choice = new Array(choiceCount);
   var alreadyFound = 0;
@@ -123,7 +123,7 @@ function setDefault() {
   for (var i = 0; i < defaultSelection.length; i++) {
     setDefaultLetter(defaultSelection[i]);
   }
-  
+  return isSelected;
 }
 
 function setDefaultLetter(letter) {

@@ -23,7 +23,7 @@ function resizeMenuCards() {
 
 //draws menucards
 function drawMenuCards() {
-  console.log("drawing menuCard");
+  //console.log("drawing menuCard");
   for(var menuCard of menuCards) {
     menuCard.draw();
   }
