@@ -1,5 +1,3 @@
-//TODO JETZT: einen Buchstaben weglassen aus Menükarten bzw. wenn nur einer kein Menu!!!
-
 let myFont = 'Montserrat';
 var canvas;
 var clientWidth;
@@ -42,11 +40,11 @@ function abcOutput_restart() {
 }
 
 function storeMatrix() {
-
+  storeItem('abc_matrix-result', letterMatrix);
 }
 
 function restoreMatrix() {
-
+  getItem('abc_matrix-result', letterMatrix);
 }
 
 //retrieves locally stored variable values
