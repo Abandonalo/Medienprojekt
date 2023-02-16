@@ -6,11 +6,9 @@ let lettersToUse = ['C', 'E', 'F', 'H', 'I', 'K', 'L', 'M', 'N', 'O', 'S', 'T', 
 var selectedLetters;
 var unselectedLetters;
 
-//default selection: M, L
 let defaultSelection = ['L', 'M'];
 let useDefaultSelection = false;
-//maximum choice: 2 letters
-let maxLetterChoice = 2;
+let maxLetterChoice = 4;
 
 //var choiceCount = 0;
 //var isSelected;
