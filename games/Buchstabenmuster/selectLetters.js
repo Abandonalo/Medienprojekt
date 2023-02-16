@@ -8,12 +8,13 @@ var unselectedLetters;
 
 //default selection: M, L
 let defaultSelection = ['L', 'M'];
-let useDefaultSelection = true;
+let useDefaultSelection = false;
 //maximum choice: 2 letters
 let maxLetterChoice = 2;
 
-var choiceCount = 0;
-var isSelected;
+//var choiceCount = 0;
+//var isSelected;
+let abc_choiceManager;
 
 var clientWidth, clientHeight;
 
@@ -26,16 +27,13 @@ let lo = {"clicked" : false};
 
 function abcLetters_restart() {
   choiceCount = 0;
-  fillIsSelected();
+  //fillIsSelected();
   if (useDefaultSelection) {
     setDefault();
   }
 }
 
-
-
 function preload() {
-  console.log("preloading");
   var lettersInTotal = lettersToUse.length;
   isSelected = new Array(lettersInTotal);
   lettersXPositions = new Array(lettersInTotal);
@@ -44,8 +42,7 @@ function preload() {
   unselectedLetters = new Array(lettersInTotal);
   
   loadSVGs();
-  
-  /* //geht leider nicht :/
+  /* //geht leider nicht :(
   var img_name1 = 'games/Buchstabenmuster/SVGs/selected/';
   var img_name3 = '.svg';
   for (var i = 0; i < lettersInTotal; i++) {
@@ -57,8 +54,7 @@ function preload() {
     //selectedLetters[i] = loadImage("SVGs/selected/" + lettersToUse[i].toString() + ".svg");
     
     unselectedLetters[i] = loadImage('SVGs/selected/C.svg');
-  }*/
-    
+  }*/  
 }
 
 function setup() {
@@ -67,10 +63,12 @@ function setup() {
   canvas = createCanvas(clientWidth, clientHeight);
   canvas.parent("game");
   
-  fillIsSelected();
+  /*fillIsSelected();
   if (useDefaultSelection) {
     setDefault();
-  }
+  }*/
+
+  abc_choiceManager = new choiceManager(maxLetterChoice);
   
   getOptimalLayout();
   fillPositions();
@@ -91,10 +89,14 @@ function draw() {
 }
 
 //returns the current choice of letters as an array by using the isSelected array to determine said letters. Stores choice locally in 'abc_letterChoice'
-function choiceToArray() {
-  if(choiceCount <= 0) {
+function storeChoice() {
+  /*if(choiceCount <= 0) {
     console.log("ERROR: impossible case - choice should not be empty");
     //throw Error("impossible case - choice should not be empty");
+  }*/
+  /*if (choiceCount <= 0) {
+    console.log("choice is empty !!!");
+    return;
   }
   var choice = new Array(choiceCount);
   var alreadyFound = 0;
@@ -105,28 +107,30 @@ function choiceToArray() {
     }
   }
   console.log("choice: " + choice);
-  storeItem('abc_letterChoiceIndeces', choice);
+  storeItem('abc_letterChoiceIndeces', choice);*/
+  abc_choiceManager.storeSelection(true);
 }
 
 //fills the array with the (default) value --> false at every position
-function fillIsSelected() {
+/*function fillIsSelected() {
   for (var i = 0; i <= lettersToUse.length; i++) {
     isSelected[i] = false;
   }
-}
+}*/
 
 //updates the value for the L and the M in selection to true --> default selection
 function setDefault() {
   if(defaultSelection == null || defaultSelection.length <= 0) {
     return;
   }
-  for (var i = 0; i < defaultSelection.length; i++) {
+  /*for (var i = 0; i < defaultSelection.length; i++) {
     setDefaultLetter(defaultSelection[i]);
-  }
-  return isSelected;
+  }*/
+  //return isSelected;
+  abc_choiceManager.setDefaultSelection(defaultSelection);
 }
 
-function setDefaultLetter(letter) {
+/*function setDefaultLetter(letter) {
   for (var i = 0; i < lettersToUse.length; i++) {
     if(letter == lettersToUse[i]) {
       isSelected[i] = true;
@@ -134,7 +138,7 @@ function setDefaultLetter(letter) {
     }
   }
   
-}
+}*/
 
 //computes optimal layout and stores size, number of rows and letters per row
 function getOptimalLayout() {
@@ -171,12 +175,18 @@ function fillPositions() {
 //draws the letters
 function drawLetters() {
   imageMode(CENTER);
-  for (var i = 0; i < lettersToUse.length; i++) {
-    fill('grey');
-    image(unselectedLetters[i], lettersXPositions[i], lettersYPositions[i], letterSize / 1.5, letterSize / 1.5);
+  /*for (var i = 0; i < lettersToUse.length; i++) {
     if(isSelected[i]) {
       image(selectedLetters[i], lettersXPositions[i], lettersYPositions[i], letterSize / 1.5, letterSize / 1.5);
-      fill('black');
+    } else {
+      image(unselectedLetters[i], lettersXPositions[i], lettersYPositions[i], letterSize / 1.5, letterSize / 1.5);
+    }
+  }*/
+  for (var i = 0; i < lettersToUse.length; i++) {
+    if(abc_choiceManager.isSelected(i)) {
+      image(selectedLetters[i], lettersXPositions[i], lettersYPositions[i], letterSize / 1.5, letterSize / 1.5);
+    } else {
+      image(unselectedLetters[i], lettersXPositions[i], lettersYPositions[i], letterSize / 1.5, letterSize / 1.5);
     }
   }
 }
@@ -199,7 +209,7 @@ function touchStarted(){
 //only selects letter when selection is not already full
 //    index: position (index) of the letter that should be updated in the letter- and isSelected-array
 function updateSelection(index) {
-  if(choiceCount >= maxLetterChoice && !isSelected[index] || choiceCount <= 1 && isSelected[index]) {
+  /*if(choiceCount >= maxLetterChoice && !isSelected[index]) { // || choiceCount <= 1 && isSelected[index] //TODO decide whether it is ok to deselect everything or not!!!
     return;
   }
   isSelected[index] = !isSelected[index];
@@ -207,7 +217,8 @@ function updateSelection(index) {
     choiceCount++;
   } else {
     choiceCount--;
-  }
+  }*/
+  abc_choiceManager.updateSelection(index);
 }
 
 function loadSVGs() {
@@ -244,5 +255,99 @@ function loadSVGs() {
   unselectedLetters[13] = loadImage('games/Buchstabenmuster/SVGs/unselected/V.svg');
   unselectedLetters[14] = loadImage('games/Buchstabenmuster/SVGs/unselected/Y.svg');
   unselectedLetters[15] = loadImage('games/Buchstabenmuster/SVGs/unselected/Z.svg');
+}
+
+
+
+class ChoiceQueue {
+  constructor (maxElements) {
+    this.items = [];
+    this.maxElements = maxElements;
+  }
+
+  enqueue(element) {
+    if(this.items.length >= this.maxElements) {
+      this.items.shift();
+    }
+    this.items.push(element);
+  }
+
+  /*dequeue() {
+    return this.items.shift();
+  }*/
+
+  isEmpty() {
+    if (this.items.length > 0) {
+      return false;
+    }
+    console.log("choice is empty!!!");
+    return true;
+  }
+
+  //we are only working with integers here !!!
+  includes(element) {
+    return this.items.includes(element);
+  }
+
+  remove(element) {
+    if(this.includes(element)){
+      this.items.splice(this.items.indexOf(element), 1);
+      return true;
+    }
+    return false;
+  }
+
+  size() {
+    return this.items.length;
+  }
+
+  toArray() {
+    return this.items;
+  }
+}
+
+class choiceManager{
+  constructor(maxElements) {
+    this.choice = new ChoiceQueue(maxElements);
+  }
+
+  updateSelection(index) {
+    if(this.choice.includes(index)) {
+      this.choice.remove(index);
+    } else {
+      this.choice.enqueue(index);
+    }
+  }
+
+  //please note that if defaultSelection.length is larger than maxChoiceCount the first default-elements will not be selected!!!
+  createDefaultSelection(defaultSelection) {
+    for (defaultIndex of defaultSelection) {
+      updateSelection(defaultSelection);
+    }
+  }
+
+  storeSelection(checkForEmpty) {
+    
+    if(checkForEmpty && this.choice.isEmpty()) {
+      console.log("choice should not be stored!!!");
+      if(getItem('abc_letterChoiceIndeces') != null) {
+        removeItem('abc_letterChoiceIndeces')
+      }
+      return;
+    }
+    storeItem('abc_letterChoiceIndeces', this.choice.toArray());
+  }
+
+  getSelection() {
+    return this.choice.toArray();
+  }
+
+  emptySelection() {
+    this.choice = new ChoiceQueue(maxElements);
+  }
+
+  isSelected(index) {
+    return this.choice.includes(index);
+  }
 }
     

@@ -25,12 +25,28 @@ $(document).ready(function (){
 
     // click event weiter
     $('#button-weiter').click(function (){
-        choiceToArray();
-        $('#game').addClass('disappear');
-        $('svg').addClass('disappear');
-        setTimeout(function(){  
-            window.location.href = 'buchstabenintro2.html';
-        }, 1000); 
+        storeChoice();
+        if (
+            window.localStorage.getItem("abc_letterChoiceIndeces") == null
+        ) {
+            $("#alert-wrapper-abc").removeClass("hide");
+            $("#alert-abc").addClass("turn-animation");
+            setTimeout(function () {
+                $("#alert-wrapper-abc").css("background-color", "rgba(0, 0, 0, 0.35)");
+            }, 5);
+            setTimeout(function () {
+                $("#alert-abc").removeClass("turn");
+            }, 500);
+            setTimeout(function () {
+                $("#alert-abc").removeClass("turn-animation");
+            }, 1000);
+        }else {
+            $('#game').addClass('disappear');
+            $('svg').addClass('disappear');
+            setTimeout(function(){  
+                window.location.href = 'buchstabenintro2.html';
+            }, 1000); 
+        }
     });    
 
     //click event zurueck
@@ -68,5 +84,16 @@ $(document).ready(function (){
             $('#intro').removeClass('turnBack-animation');
             $('#intro-wrapper').addClass('hide');
         }, 1000);     
-    });    
+    }); 
+    
+    $("#button-okay-abc").click(function () {
+        $("#alert-abc").addClass("turnBack-animation");
+        $("#alert-wrapper").css("background-color", "rgba(0, 0, 0, 0)");
+        setTimeout(function () { }, 500);
+        setTimeout(function () {
+            $("#alert-abc").addClass("turn");
+            $("#alert-abc").removeClass("turnBack-animation");
+            $("#alert-wrapper-abc").addClass("hide");
+        }, 1000);
+    });
 });
