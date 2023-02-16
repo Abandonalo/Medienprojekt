@@ -6,7 +6,8 @@ let lettersToUse = ['C', 'E', 'F', 'H', 'I', 'K', 'L', 'M', 'N', 'O', 'S', 'T', 
 var selectedLetters;
 var unselectedLetters;
 
-let defaultSelection = ['L', 'M'];
+//L and M
+let defaultSelection = [7, 6];
 let useDefaultSelection = false;
 let maxLetterChoice = 4;
 
@@ -32,6 +33,8 @@ function abcLetters_restart() {
 }
 
 function preload() {
+  abc_choiceManager = new choiceManager(maxLetterChoice);
+
   var lettersInTotal = lettersToUse.length;
   isSelected = new Array(lettersInTotal);
   lettersXPositions = new Array(lettersInTotal);
@@ -61,12 +64,10 @@ function setup() {
   canvas = createCanvas(clientWidth, clientHeight);
   canvas.parent("game");
   
-  /*fillIsSelected();
+  /*fillIsSelected();*/
   if (useDefaultSelection) {
     setDefault();
-  }*/
-
-  abc_choiceManager = new choiceManager(maxLetterChoice);
+  }
   
   getOptimalLayout();
   fillPositions();
@@ -318,9 +319,9 @@ class choiceManager{
   }
 
   //please note that if defaultSelection.length is larger than maxChoiceCount the first default-elements will not be selected!!!
-  createDefaultSelection(defaultSelection) {
-    for (defaultIndex of defaultSelection) {
-      updateSelection(defaultSelection);
+  setDefaultSelection(defaultSelection) {
+    for (var defaultIndex of defaultSelection) {
+      updateSelection(defaultIndex);
     }
   }
 

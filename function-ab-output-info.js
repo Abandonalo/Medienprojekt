@@ -39,6 +39,7 @@ $(document).ready(function (){
         } 
 
         else if (!$('#information').hasClass('disappear')){  //info -> menu
+            window.localStorage.clear();
             $('#information').addClass('disappear');
             $('svg').addClass('disappear');
             setTimeout(function(){

@@ -34,11 +34,19 @@ let defaultSize = [2, 2];
 let lo = {"clicked" : false};
 
 function abcOutput_restart() {
-  for (letterCard of letterCards) {
+  for (var letterCard of letterCards) {
     letterCard.setLetter(letterImages[choiceIndeces[0]]);
     letterCard.setRotation(0);
   }
   
+}
+
+function storeMatrix() {
+
+}
+
+function restoreMatrix() {
+
 }
 
 //retrieves locally stored variable values
