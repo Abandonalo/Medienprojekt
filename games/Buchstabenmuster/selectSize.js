@@ -2,9 +2,9 @@ let myFont = 'Montserrat';
 
 var placeHolderLetter;
 
-var xPositions = [0, 0, 0];
+var xPositions;
 let squares = [2, 1, 2, 2, 4, 4];
-var matrices = new Array(3);
+var matrices;
 
 var selectedSize = [2, 2];
 
@@ -24,8 +24,12 @@ function abcSize_restart() {
 }
 
 function preload() {
-  console.log("preloading");
   placeHolderLetter = loadImage('games/Buchstabenmuster/SVGs/M.svg');
+  matrices = new Array(squares.length / 2);
+  xPositions = new Array(squares.length / 2);
+  for(var position of xPositions) {
+    position = 0;
+  }
 }
 
 //sets up width, height of canvas and canvas, fills positions array and creates all matrices
@@ -60,22 +64,17 @@ windowResized = function () {
 
 //computes centerpoints of the matrices and stores them in xPositions[]
 function fillXPositions(widthPerMatrix) {
-  console.log("filling xPositions");
   for (i = 0; i < xPositions.length; i++) {
     xPositions[i] = widthPerMatrix / 2 + ((i - 1) * widthPerMatrix);
-    console.log(xPositions[i]);
   }
-  return xPositions;
+  //return xPositions;
 }
 
 //creates matrices and stores them in matrices[]
 function createMatrices(positions, yPosition, numSquares) {
-  console.log("creating matrices");
   for(i = 0; i < xPositions.length * 2; i += 2) {
     matrices[i / 2] = new PlaceHolderMatrix(positions[i / 2], yPosition, numSquares[i], numSquares[i + 1]);
   }
-  console.log(matrices);
-  return matrices;
 }
 
 //repositions matrices by updating their x position stored in xCenter
@@ -96,7 +95,6 @@ function repositionMatrices(positions, yPosition) {
     }
     */
   }
-  return matrices;
 }
 
 //saves x value of touch Start point to touchStartX
@@ -116,11 +114,8 @@ function touchEnded() {
   snRight = false;
 }
 
-//TODO call in final implementation from --> button
 function storeAbcSizeChoice() {
-  console.log("size: " + selectedSize);
   storeItem('abc_matrixSize', selectedSize);
-  return selectedSize;
 }
 
 //calls drag method of class matrix for every matrix when a drag in x direction is detected
@@ -175,12 +170,13 @@ class PlaceHolderMatrix {
     
     this.tempX = xCenter;
     this.tempY = yCenter;
+    this.label = this.createLabel(squaresX, squaresY);
+    console.log("new matrix: " + squaresX + " by " + squaresY);
   }
   
   //draws the matrix on the canvas centered around tempX and tempY
   draw() {
-    var matrixSize = min(clientWidth - 120, clientHeight - 120);
-    matrixSize = min(clientWidth - 50, clientHeight - 50);
+    var matrixSize = min(clientWidth - 50, clientHeight - 225);
     var maxSquares = max(this.squaresX, this.squaresY);
     var squareSize = matrixSize / maxSquares;
     var x = this.tempX - (this.squaresX * squareSize / 2);
@@ -198,6 +194,12 @@ class PlaceHolderMatrix {
       }
       y += squareSize;
     }
+    textAlign(CENTER, CENTER);
+    textSize(matrixSize / 8);
+    fill(235);
+    noStroke();
+    var textY = this.tempY + 0.5 * matrixSize + matrixSize / 8;
+    text(this.label, this.tempX, textY);
   }
   
   //drags the matrix by updating the centerpoint --> update shows with next draw
@@ -215,14 +217,13 @@ class PlaceHolderMatrix {
     } else {
     }
     this.tempX = this.xCenter;
-    //this.checkSelected();
     
     var buffer = widthPerMatrix / 100;
     
-    if(this.xCenter > widthPerMatrix / 2 + widthPerMatrix * 2 + buffer) {
+    if(this.xCenter > widthPerMatrix / 2 + widthPerMatrix * (squares.length / 2 - 1) + buffer) {
       snLeft = true;
     }
-    if(this.xCenter < widthPerMatrix / 2 - widthPerMatrix * 2 - buffer) {
+    if(this.xCenter < widthPerMatrix / 2 - widthPerMatrix * (squares.length / 2 - 1) - buffer) {
       snRight = true;
     }
   }
@@ -231,14 +232,12 @@ class PlaceHolderMatrix {
   snapRight(widthPerMatrix) {
     this.xCenter = this.xCenter + widthPerMatrix;
     this.tempX = this.xCenter;
-    //this.checkSelected();
   }
   
   //moves matrix one screen to the left
   snapLeft(widthPerMatrix) {
     this.xCenter = this.xCenter - widthPerMatrix;
     this.tempX = this.xCenter;
-    //this.checkSelected();
   }
   
   //if this matrix is the one beeing displayed selectedSize gets updated to the x and y squares of this matrix
@@ -249,5 +248,15 @@ class PlaceHolderMatrix {
       return true;
     }
     return false;
+  }
+
+  createLabel(x, y) {
+    if(this.xCenter == xPositions[xPositions.length - 1]) {
+      return "<   " + x + " x " + y;
+    } else if(this.xCenter == xPositions[0]){
+      return x + " x " + y + "   >";
+    } else {
+      return "<   " + x + " x " + y + "   >";
+    }
   }
 }
