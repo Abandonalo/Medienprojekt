@@ -15,7 +15,6 @@ $(document).ready(function () {
   });
 
   $("#game").removeClass("disappear");
-  //$("#game").css("pointer-events", "none");
   setTimeout(function () {
     $("#game").removeClass("disappear");
     $("#gamebar").removeClass("disappear");
@@ -63,7 +62,7 @@ $(document).ready(function () {
       $("svg").addClass("disappear");
       setTimeout(function () {
         $("#game").addClass("disappear");
-        window.location.href = "squareoption.html";
+        window.location.href = "squareintro3.html";
       }, 1000);
     } else if (!$("#information").hasClass("disappear")) {
       //info -> output

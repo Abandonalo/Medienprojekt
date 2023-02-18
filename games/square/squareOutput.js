@@ -18,7 +18,7 @@ var b;
 
 function setup() {
   clientWidth = window.innerWidth - 60;
-  clientHeight = window.innerHeight - 60;
+  clientHeight = window.innerHeight - 100;
   gameCanvasWidth = clientWidth;
   canvas = createCanvas(clientWidth, clientHeight);
   setAttributes("willReadFrequently", true);
@@ -78,27 +78,27 @@ function drawGrid(off, h, s, b) {
           xpos + random(-off, off),
           ypos + random(-off, off),
           //x2, y2
-          xpos + gridSpacex / 1.2 + random(-off, off),
+          xpos + gridSpacex / 1.3 + random(-off, off),
           ypos + random(-off, off),
           //x3, y3
-          xpos + gridSpacex / 1.2 + random(-off, off),
-          ypos + gridSpacey / 1.5 + random(-off, off),
+          xpos + gridSpacex / 1.3 + random(-off, off),
+          ypos + gridSpacey / 1.3 + random(-off, off),
           //x4, y4
           xpos + random(-off, off),
-          ypos + gridSpacey / 1.5 + random(-off, off)
+          ypos + gridSpacey / 1.3 + random(-off, off)
         );
       } else {
         var x1 = getItem("1x") == null ? xpos : getItem("1x");
         var y1 = getItem("1y") == null ? ypos : getItem("1y");
         var x2 =
           getItem("2x") == null
-            ? xpos + (gridSpacex / 1.2) * 3.5
+            ? xpos + (gridSpacex / 1.3) * 3.5
             : getItem("2x");
         var y2 = getItem("2y") == null ? y1 : getItem("2y");
         var x3 = getItem("3x") == null ? x2 : getItem("3x");
         var y3 =
           getItem("3y") == null
-            ? ypos + (gridSpacey / 1.5) * 3.5
+            ? ypos + (gridSpacey / 1.3) * 3.5
             : getItem("3y");
         var x4 = getItem("4x") == null ? x1 : getItem("4x");
         var y4 = getItem("4y") == null ? y3 : getItem("4y");

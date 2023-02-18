@@ -27,28 +27,11 @@ $(document).ready(function () {
 
     //click event weiter
     $("#button-weiter").click(function () {
-        /*if (
-            //window.localStorage.getItem("1x") == null ||
-            window.localStorage.getItem("2x") == null ||
-            window.localStorage.getItem("3x") == null ||
-            window.localStorage.getItem("4x") == null
-        ) {
-            $("#alert-wrapper").removeClass("hide");
-            $("#alert").addClass("turn-animation");
-            setTimeout(function () {
-                $("#alert-wrapper").css("background-color", "rgba(0, 0, 0, 0.35)");
-            }, 5);
-            setTimeout(function () {
-                $("#alert").removeClass("turn");
-            }, 500);
-            setTimeout(function () {
-                $("#alert").removeClass("turn-animation");
-            }, 1000);
-        } else {*/
+        //input -> intro2
             $("#game").addClass("disappear");
             $("svg").addClass("disappear");
             setTimeout(function () {
-                window.location.href = "squareoption.html";
+                window.location.href = "squareintro2.html";
             }, 1000);
     });
 

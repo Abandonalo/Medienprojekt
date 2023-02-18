@@ -48,7 +48,7 @@ $(document).ready(function () {
             $('#game').css('pointer-events', 'none');
             setTimeout(function () {
                 $('#game').addClass('disappear');
-                window.location.href = 'squareoutputinfo.html'
+                window.location.href = 'squareintro3.html'
             }, 1000);
         }
     });
@@ -64,7 +64,7 @@ $(document).ready(function () {
         $('svg').addClass('disappear');
         setTimeout(function () {
             $('#game').addClass('disappear');
-            window.location.href = 'squareinput.html';
+            window.location.href = 'squareintro2.html';
         }, 1000);
     });
 
