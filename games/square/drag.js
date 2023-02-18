@@ -9,7 +9,7 @@ function addDrag(vec) {
 
 function drawDrag() {
   for (let i = 0; i < dragabble.length; i++) {
-    fill(selectedIndex == i ? color("#0092B1") : 255);
+    //fill(selectedIndex == i ? color("#0092B1") : 255);
     circle(dragabble[i].x, dragabble[i].y, DRAG_SIZE);
   }
 }
@@ -24,7 +24,12 @@ function dragTouchEnded() {
 
 function dragTouchMoved() {
   if (selectedIndex == -1) return;
-  dragabble[selectedIndex].add(mouseX - pmouseX, mouseY - pmouseY);
+  let cmx = constrain(mouseX, 0, width);
+  let cmy = constrain(mouseY, 0, height);
+  dragabble[selectedIndex].add(
+    cmx - dragabble[selectedIndex].x,
+    cmy - dragabble[selectedIndex].y
+  );
   console.log(
     "Vertex %d changed to (%d, %d)",
     selectedIndex,
