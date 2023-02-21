@@ -67,8 +67,50 @@ canvas {
     position: absolute;
      left: 50%;
      top: 50%;
-  transform: translate(146%,438%);
+  transform: translate(167%,438%);
   z-index: 9999;
+}
+
+#text-button{
+  font-size: 1em;
+  font-family: NeueHaasUnica-Medium;
+  color: #616060c3;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+   transform: translate(267%,675%);
+   z-index: 9999;
+}
+#text-button2{
+  font-size: 1em;
+  font-family: NeueHaasUnica-Medium;
+  color: #616060c3;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+   transform: translate(35%,675%);
+   z-index: 9999;
+}
+#text-button3{
+  font-size: 1em;
+  font-family: NeueHaasUnica-Medium;
+  color: #616060c3;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+   transform: translate(-102%,675%);
+   z-index: 9999;
+}
+
+#text-button4{
+  font-size: 1em;
+  font-family: NeueHaasUnica-Medium;
+  color: #616060c3;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+   transform: translate(-285%,675%);
+   z-index: 9999;
 }
 
 
@@ -95,7 +137,7 @@ canvas {
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-226%,438%);
+  transform: translate(-253%,438%);
   z-index: 9999;
 }
 
@@ -120,7 +162,7 @@ canvas {
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-102%,438%);
+  transform: translate(-113%,438%);
   z-index: 9999;
 }
 
@@ -144,7 +186,7 @@ canvas {
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(22%,438%);
+  transform: translate(27%,438%);
   z-index: 9999;
 }
 

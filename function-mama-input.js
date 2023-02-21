@@ -6,7 +6,7 @@ $(document).ready(function (){
     document.documentElement.style.setProperty('--vh', `${vh}px`);
     
 // Slider    
-    
+
     $('.slider').slick({
         dots: true,
         infinite: true,
@@ -29,7 +29,7 @@ $(document).ready(function (){
         $('#game').addClass('disappear');
         $('svg').addClass('disappear');
         setTimeout(function(){  
-            window.location.href = 'mamaoutputinfo.html';
+            window.location.href = 'mamaintro3.html';
         }, 1000); 
     });    
 

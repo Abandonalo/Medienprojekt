@@ -7,14 +7,34 @@ $(document).ready(function (){
     
 // Slider    
     
-    $('.slider').slick({
-        dots: true,
-        infinite: true,
-        speed: 300,
-        slidesToShow: 1,
-        adaptiveHeight: true
-    });
-    
+   // $('.slider').slick({
+   //     dots: true,
+   //     infinite: true,
+    //    speed: 300,
+    //    slidesToShow: 1,
+  //      adaptiveHeight: true
+  //  });
+  let touchstartX = 0
+  let touchendX = 0
+  
+  function ChangeDirection() {
+    if (touchendX < touchstartX) {                     //weiter
+     window.location.href = 'squareoption.html';
+    }
+    else if (touchendX > touchstartX) {                     //zurueck
+     window.location.href = 'squareinput.html';
+    }
+   }
+   
+   document.addEventListener('touchstart', e => {
+   touchstartX = e.changedTouches[0].screenX
+   })
+   
+   document.addEventListener('touchend', e => {
+   touchendX = e.changedTouches[0].screenX
+   ChangeDirection()
+   })
+
     $('#introduction').removeClass('disappear');
     $('#introduction').removeClass('hide');
 
@@ -30,7 +50,7 @@ $(document).ready(function (){
     });    
 
     $('#button-zurueck').click(function (){
-        $('#introduction').addClass('disappear');
+       $('#introduction').addClass('disappear');
         $('svg').addClass('disappear');
         setTimeout(function(){
             window.location.href = 'squareinput.html';

@@ -5,6 +5,27 @@ $(document).ready(function () {
     let vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
 
+    let touchstartX = 0
+    let touchendX = 0
+    
+   function ChangeDirection() {
+   if (touchendX < touchstartX) {                     //weiter
+    window.location.href = 'mamaintro2.html';
+   }
+   else if (touchendX > touchstartX) {                     //zurueck
+    window.location.href = 'mamaintro3.html';
+   }
+  }
+
+  document.addEventListener('touchstart', e => {
+  touchstartX = e.changedTouches[0].screenX
+  })
+
+  document.addEventListener('touchend', e => {
+  touchendX = e.changedTouches[0].screenX
+  ChangeDirection()
+  })
+
     // Slider    
 
     $('.slider').slick({
@@ -34,7 +55,10 @@ $(document).ready(function () {
                 window.location.href = 'mamaintro2.html';
             }, 400);
         }
+  
     });  
+
+          
 
 
     //click event zurueck
@@ -42,7 +66,7 @@ $(document).ready(function () {
         if (!$('#game').hasClass('disappear')) {   //output -> input
             $('#game').addClass('disappear');
             setTimeout(function () {
-                window.location.href = 'mamainput.html';
+                window.location.href = 'mamaintro3.html';
             }, 1000);
         }
 

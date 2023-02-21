@@ -157,9 +157,23 @@ body{
 
 
     .intro-svg-wrapper{
-        fill:#00758f;
+        fill:#ffffff;
         stroke:none;
+        position: relative;
+        top: .145em;
+        height: 1.25em;
+        width: 1.25em;
+        opacity: 0.4;
+        
     }
+
+    .button-middle{
+        fill: #ffffff;
+        top: .25em;
+    }
+ 
+
+ 
 
 
 
@@ -212,24 +226,25 @@ body{
     }
 
     .text-optionpage{
-        font-size: 1.3em;
+        font-size: 1.4em;
         font-family: NeueHaasUnica-Bold;
-        padding: 20px;
+        padding: 22px;
         color: inherit;
-        line-height: 2;
+        line-height: 2.5;
     }
 
     .text-option{
-        font-size: 0.8em;
+        font-size: 1em;
         font-family: NeueHaasUnica-Regular;
         padding: 20px;
         color: inherit;
     }
 
     .text-app-big{
-        font-size: 1.3em;
+        font-size: 1.6em;
         font-family: NeueHaasUnica-Regular;
-        padding: 20px;
+        line-height: 1.4em;
+        padding: 10px;
         color: inherit;
     }
 
@@ -241,7 +256,7 @@ body{
     }
 
     .text-app-small{
-        font-size: 1em;
+        font-size: 1.4em;
         font-family: NeueHaasUnica-Regular;
     }
 
@@ -250,6 +265,19 @@ body{
         font-family: NeueHaasUnica-Medium;
         text-align: left;
     }
+
+    .text-button{
+        font-size: 1em;
+        font-family: NeueHaasUnica-Medium;
+        margin-bottom: 1.5em;
+
+
+
+    }
+
+    
+
+      
 
     figcaption{
         text-align: left;
