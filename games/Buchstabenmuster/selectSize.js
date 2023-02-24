@@ -1,33 +1,31 @@
-let myFont = 'Montserrat';
+let placeHolderLetter;
 
-var placeHolderLetter;
+let xPositions;
+const squares = [2, 1, 2, 2, 4, 4];
+let matrices;
 
-var xPositions;
-let squares = [2, 1, 2, 2, 4, 4];
-var matrices;
+let selectedSize = [2, 2];
 
-var selectedSize = [2, 2];
+let snLeft = false;
+let snRight = false;
 
-var snLeft = false;
-var snRight = false;
+let clientWidth;
+let clientHeight;
 
-var clientWidth;
-var clientHeight;
-
-var touchStartX;
+let touchStartX;
 
 
 function abcSize_restart() {
   selectedSize[0] = 2;
   selectedSize[1] = 2;
-  repositionMatrices();
+  repositionMatrices(xPositions, clientHeight / 2);
 }
 
 function preload() {
   placeHolderLetter = loadImage('games/Buchstabenmuster/SVGs/M.svg');
   matrices = new Array(squares.length / 2);
   xPositions = new Array(squares.length / 2);
-  for(var position of xPositions) {
+  for(let position of xPositions) {
     position = 0;
   }
 }
@@ -47,7 +45,7 @@ function setup() {
 //calls draw method from the matrix class for every matrix
 function draw() {
   background(255);
-  for(var matrix of matrices) {
+  for(let matrix of matrices) {
     matrix.draw();
   }
 }
@@ -64,26 +62,25 @@ windowResized = function () {
 
 //computes centerpoints of the matrices and stores them in xPositions[]
 function fillXPositions(widthPerMatrix) {
-  for (i = 0; i < xPositions.length; i++) {
+  for (let i = 0; i < squares.length / 2; i++) {
     xPositions[i] = widthPerMatrix / 2 + ((i - 1) * widthPerMatrix);
   }
-  //return xPositions;
 }
 
 //creates matrices and stores them in matrices[]
 function createMatrices(positions, yPosition, numSquares) {
-  for(i = 0; i < xPositions.length * 2; i += 2) {
+  for(let i = 0; i < xPositions.length * 2; i += 2) {
     matrices[i / 2] = new PlaceHolderMatrix(positions[i / 2], yPosition, numSquares[i], numSquares[i + 1]);
   }
 }
 
 //repositions matrices by updating their x position stored in xCenter
 function repositionMatrices(positions, yPosition) {
-  for(i = 0; i < xPositions.length * 2; i += 2) {
-    matrices[i / 2].xCenter = positions[i / 2];
-    matrices[i / 2].tempX = positions[i / 2];
-    matrices[i / 2].yCenter = yPosition;
-    matrices[i / 2].tempY = yPosition;
+  for(let i = 0; i < positions.length; i ++) {
+    matrices[i].xCenter = positions[i];
+    matrices[i].tempX = positions[i];
+    matrices[i].yCenter = yPosition;
+    matrices[i].tempY = yPosition;
     //to restore last selection
     /*
     if(! (selectedSize[0] == 2 && selectedSize[1] == 2)) {
@@ -120,9 +117,9 @@ function storeAbcSizeChoice() {
 
 //calls drag method of class matrix for every matrix when a drag in x direction is detected
 function touchMoved() {
-  var xDifference = mouseX - touchStartX;
+  let xDifference = mouseX - touchStartX;
   if (xDifference < -5 || xDifference > 5) {
-    for(var matrix of matrices) {
+    for(let matrix of matrices) {
       //print(xDifference);
       matrix.drag(xDifference);
     }
@@ -132,7 +129,7 @@ function touchMoved() {
 //calls snapToSelection method for every matrix
 function snapToSelection() {
   //print("snapToSelection");
-  for(var matrix of matrices) {
+  for(let matrix of matrices) {
       matrix.snapToSelection(clientWidth);
     }
     checkSelection();
@@ -140,7 +137,7 @@ function snapToSelection() {
 
 //calls snapLeft method for every matrix
 function snapLeftAll() {
-  for(var matrix of matrices) {
+  for(let matrix of matrices) {
       matrix.snapLeft(clientWidth);
     }
     checkSelection();
@@ -148,14 +145,14 @@ function snapLeftAll() {
 
 //calls snapRight method for every matrix
 function snapRightAll() {
-  for(var matrix of matrices) {
+  for(let matrix of matrices) {
       matrix.snapRight(clientWidth);
     }
     checkSelection();
 }
 
 function checkSelection() {
-  for(var matrix of matrices) {
+  for(let matrix of matrices) {
     matrix.checkSelected(xPositions[1]);
   }
 }
@@ -171,22 +168,21 @@ class PlaceHolderMatrix {
     this.tempX = xCenter;
     this.tempY = yCenter;
     this.label = this.createLabel(squaresX, squaresY);
-    console.log("new matrix: " + squaresX + " by " + squaresY);
   }
   
   //draws the matrix on the canvas centered around tempX and tempY
   draw() {
-    var matrixSize = min(clientWidth - 50, clientHeight - 225);
-    var maxSquares = max(this.squaresX, this.squaresY);
-    var squareSize = matrixSize / maxSquares;
-    var x = this.tempX - (this.squaresX * squareSize / 2);
-    var y = this.tempY - (this.squaresY * squareSize / 2);
+    let matrixSize = min(clientWidth - 50, clientHeight - 225);
+    let maxSquares = max(this.squaresX, this.squaresY);
+    let squareSize = matrixSize / maxSquares;
+    let x = this.tempX - (this.squaresX * squareSize / 2);
+    let y = this.tempY - (this.squaresY * squareSize / 2);
     imageMode(CENTER);
-    for (var i = 0; i < this.squaresY; i++) {
+    for (let i = 0; i < this.squaresY; i++) {
       x = this.tempX - (this.squaresX * squareSize / 2);
-      for (var j = 0; j < this.squaresX; j++) {
+      for (let j = 0; j < this.squaresX; j++) {
         image(placeHolderLetter, x + (squareSize / 2), y + (squareSize / 2), squareSize, squareSize);
-        strokeWeight(squareSize / 60);
+        strokeWeight(squareSize / 100);
         stroke(150);
         noFill();
         rect(x, y, squareSize, squareSize);
@@ -196,9 +192,9 @@ class PlaceHolderMatrix {
     }
     textAlign(CENTER, CENTER);
     textSize(matrixSize / 8);
-    fill(235);
+    fill(225);
     noStroke();
-    var textY = this.tempY + 0.5 * matrixSize + matrixSize / 8;
+    let textY = this.tempY + 0.5 * matrixSize + matrixSize / 8;
     text(this.label, this.tempX, textY);
   }
   
@@ -218,7 +214,7 @@ class PlaceHolderMatrix {
     }
     this.tempX = this.xCenter;
     
-    var buffer = widthPerMatrix / 100;
+    let buffer = widthPerMatrix / 100;
     
     if(this.xCenter > widthPerMatrix / 2 + widthPerMatrix * (squares.length / 2 - 1) + buffer) {
       snLeft = true;
@@ -245,9 +241,9 @@ class PlaceHolderMatrix {
     if(this.xCenter == xSelection) {
       selectedSize[0] = this.squaresX;
       selectedSize[1] = this.squaresY;
-      return true;
+      //return true;
     }
-    return false;
+    //return false;
   }
 
   createLabel(x, y) {

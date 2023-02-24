@@ -1,32 +1,25 @@
-var myFont = 'Montserrat';
-
-//let letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-
-let lettersToUse = ['C', 'E', 'F', 'H', 'I', 'K', 'L', 'M', 'N', 'O', 'S', 'T', 'U', 'V', 'Y', 'Z'];
-var selectedLetters;
-var unselectedLetters;
+const lettersToUse = ['C', 'E', 'F', 'H', 'I', 'K', 'L', 'M', 'N', 'O', 'S', 'T', 'U', 'V', 'Y', 'Z'];
+let selectedLetters;
+let unselectedLetters;
 
 //M and L
-let defaultSelection = [7, 6];
-let useDefaultSelection = false;
-let maxLetterChoice = 4;
+const defaultSelection = [7, 6];
+const useDefaultSelection = false;
+const maxLetterChoice = 4;
 
-//var choiceCount = 0;
-//var isSelected;
 let abc_choiceManager;
 
-var clientWidth, clientHeight;
+let clientWidth, clientHeight;
 
-var lettersXPositions;
-var lettersYPositions;
+let lettersXPositions;
+let lettersYPositions;
 
-var lettersPerRow, letterSize;
+let lettersPerRow, letterSize;
 let lo = {"clicked" : false};
 
 
 function abcLetters_restart() {
-  choiceCount = 0;
-  //fillIsSelected();
+  abc_choiceManager.emptySelection(maxLetterChoice);
   if (useDefaultSelection) {
     setDefault();
   }
@@ -35,7 +28,7 @@ function abcLetters_restart() {
 function preload() {
   abc_choiceManager = new choiceManager(maxLetterChoice);
 
-  var lettersInTotal = lettersToUse.length;
+  let lettersInTotal = lettersToUse.length;
   isSelected = new Array(lettersInTotal);
   lettersXPositions = new Array(lettersInTotal);
   lettersYPositions = new Array(lettersInTotal);
@@ -43,19 +36,6 @@ function preload() {
   unselectedLetters = new Array(lettersInTotal);
   
   loadSVGs();
-  /* //geht leider nicht :(
-  var img_name1 = 'games/Buchstabenmuster/SVGs/selected/';
-  var img_name3 = '.svg';
-  for (var i = 0; i < lettersInTotal; i++) {
-    var imgName = img_name1 + lettersToUse[i] + img_name3;
-    print(imgName);
-    selectedLetters[i] = loadImage(imgName.toString());
-    //unselectedLetters[i] = loadImage(imgName);
-    //selectedLetters[i] = loadImage('SVGs/selected/C.svg');
-    //selectedLetters[i] = loadImage("SVGs/selected/" + lettersToUse[i].toString() + ".svg");
-    
-    unselectedLetters[i] = loadImage('SVGs/selected/C.svg');
-  }*/  
 }
 
 function setup() {
@@ -89,63 +69,25 @@ function draw() {
 
 //returns the current choice of letters as an array by using the isSelected array to determine said letters. Stores choice locally in 'abc_letterChoice'
 function storeChoice() {
-  /*if(choiceCount <= 0) {
-    console.log("ERROR: impossible case - choice should not be empty");
-    //throw Error("impossible case - choice should not be empty");
-  }*/
-  /*if (choiceCount <= 0) {
-    console.log("choice is empty !!!");
-    return;
-  }
-  var choice = new Array(choiceCount);
-  var alreadyFound = 0;
-  for (var i = 0; i < lettersToUse.length; i++) {
-    if (isSelected[i]) {
-      choice[alreadyFound] = i;
-      alreadyFound++;
-    }
-  }
-  console.log("choice: " + choice);
-  storeItem('abc_letterChoiceIndeces', choice);*/
   abc_choiceManager.storeSelection(true);
 }
 
-//fills the array with the (default) value --> false at every position
-/*function fillIsSelected() {
-  for (var i = 0; i <= lettersToUse.length; i++) {
-    isSelected[i] = false;
-  }
-}*/
 
 //updates the value for the L and the M in selection to true --> default selection
 function setDefault() {
   if(defaultSelection == null || defaultSelection.length <= 0) {
     return;
   }
-  /*for (var i = 0; i < defaultSelection.length; i++) {
-    setDefaultLetter(defaultSelection[i]);
-  }*/
-  //return isSelected;
   abc_choiceManager.setDefaultSelection(defaultSelection);
 }
 
-/*function setDefaultLetter(letter) {
-  for (var i = 0; i < lettersToUse.length; i++) {
-    if(letter == lettersToUse[i]) {
-      isSelected[i] = true;
-      choiceCount++;
-    }
-  }
-  
-}*/
-
 //computes optimal layout and stores size, number of rows and letters per row
 function getOptimalLayout() {
-  var bestI = 1;
-  var bestSize = 0;
-  var size;
-  var rows;
-  for (var i = 1; i <= lettersToUse.length; i ++) {
+  let bestI = 1;
+  let bestSize = 0;
+  let size;
+  let rows;
+  for (let i = 1; i <= lettersToUse.length; i ++) {
     rows = ceil(lettersToUse.length / i);
     size = min (clientWidth / i, clientHeight / rows);
     if(size > bestSize) {
@@ -160,8 +102,8 @@ function getOptimalLayout() {
 //computes the coordinates of the letters and stores them in an array for x or y positions
 function fillPositions() {
   letterRows = ceil(lettersToUse.length / lettersPerRow);
-  for (var i = 0; i < letterRows; i++) {
-    for (var j = 0; j < lettersPerRow; j++) {
+  for (let i = 0; i < letterRows; i++) {
+    for (let j = 0; j < lettersPerRow; j++) {
       if((i * lettersPerRow + j) >= 26) {
         break;
       }
@@ -174,14 +116,7 @@ function fillPositions() {
 //draws the letters
 function drawLetters() {
   imageMode(CENTER);
-  /*for (var i = 0; i < lettersToUse.length; i++) {
-    if(isSelected[i]) {
-      image(selectedLetters[i], lettersXPositions[i], lettersYPositions[i], letterSize / 1.5, letterSize / 1.5);
-    } else {
-      image(unselectedLetters[i], lettersXPositions[i], lettersYPositions[i], letterSize / 1.5, letterSize / 1.5);
-    }
-  }*/
-  for (var i = 0; i < lettersToUse.length; i++) {
+  for (let i = 0; i < lettersToUse.length; i++) {
     if(abc_choiceManager.isSelected(i)) {
       image(selectedLetters[i], lettersXPositions[i], lettersYPositions[i], letterSize / 1.5, letterSize / 1.5);
     } else {
@@ -192,7 +127,7 @@ function drawLetters() {
 
 //checks if a letter is clicked
 function touchStarted(){
-  for(var i = 0; i < lettersToUse.length; i++) {
+  for(let i = 0; i < lettersToUse.length; i++) {
     if (dist(mouseX, mouseY, lettersXPositions[i], lettersYPositions[i]) <= letterSize * 0.45 
           && !lo.clicked) {
       updateSelection(i);
@@ -208,15 +143,6 @@ function touchStarted(){
 //only selects letter when selection is not already full
 //    index: position (index) of the letter that should be updated in the letter- and isSelected-array
 function updateSelection(index) {
-  /*if(choiceCount >= maxLetterChoice && !isSelected[index]) { // || choiceCount <= 1 && isSelected[index] //TODO decide whether it is ok to deselect everything or not!!!
-    return;
-  }
-  isSelected[index] = !isSelected[index];
-  if (isSelected[index]) {
-    choiceCount++;
-  } else {
-    choiceCount--;
-  }*/
   abc_choiceManager.updateSelection(index);
 }
 
@@ -296,6 +222,10 @@ class ChoiceQueue {
     return false;
   }
 
+  removeAll() {
+    this.items = [];
+  }
+
   size() {
     return this.items.length;
   }
@@ -320,7 +250,7 @@ class choiceManager{
 
   //please note that if defaultSelection.length is larger than maxChoiceCount the first default-elements will not be selected!!!
   setDefaultSelection(defaultSelection) {
-    for (var defaultIndex of defaultSelection) {
+    for (let defaultIndex of defaultSelection) {
       updateSelection(defaultIndex);
     }
   }
@@ -342,7 +272,7 @@ class choiceManager{
   }
 
   emptySelection() {
-    this.choice = new ChoiceQueue(maxElements);
+    this.choice.removeAll();
   }
 
   isSelected(index) {

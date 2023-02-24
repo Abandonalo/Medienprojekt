@@ -1,7 +1,7 @@
 //creates the lettercards
 function createLetterCards() {
   letterCards = new Array(matrixSize[0] * matrixSize[1]);
-  for(var i = 0; i < matrixSize[0] * matrixSize[1]; i++) {
+  for(let i = 0; i < matrixSize[0] * matrixSize[1]; i++) {
     letterCards[i] = new LetterCard(letterImages[choiceIndeces[0]], i);
   }
 }
@@ -9,7 +9,7 @@ function createLetterCards() {
 
 //draws lettercards
 function drawLetterCards() {
-  for(var letterCard of letterCards) {
+  for(let letterCard of letterCards) {
     letterCard.draw();
   }
 }
@@ -90,10 +90,10 @@ class LetterCard {
   //then calls function in letterMatrix that computes if it is in an OK position
   //(then the lettercard there is changed to hold the new letter)
   snapTo() {
-    var saveLetter = this.letter;
-    var saveX = this.tempX;
-    var saveY = this.tempY;
-    var saveRotation = this.angle;
+    let saveLetter = this.letter;
+    let saveX = this.tempX;
+    let saveY = this.tempY;
+    let saveRotation = this.angle;
     this.setLetter(letterImages[choiceIndeces[0]]);
     letterMatrix.checkForChangeLetterCard(saveLetter, saveX, saveY, saveRotation, this);
   }

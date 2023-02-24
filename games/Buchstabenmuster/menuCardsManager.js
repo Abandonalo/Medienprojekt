@@ -6,9 +6,9 @@ function createMenuCards() {
     return;
   }
   menuCards = new Array(menuCardsXPositions.length);
-  var x;
+  let x;
   menuCardsY = clientHeight - (clientHeight * menuHeightRelative) / 2;
-  for(var i = 0; i < menuCardsXPositions.length; i++) {
+  for(let i = 0; i < menuCardsXPositions.length; i++) {
     x = menuCardsXPositions[i];
     menuCards[i] = new MenuCard(letterImages[choiceIndeces[i]], i);
   }
@@ -16,7 +16,7 @@ function createMenuCards() {
 
 //resizes the menucards
 function resizeMenuCards() {
-  for(var menuCard of menuCards) {
+  for(let menuCard of menuCards) {
     menuCard.resize();
   }
 }
@@ -24,22 +24,22 @@ function resizeMenuCards() {
 //draws menucards
 function drawMenuCards() {
   //console.log("drawing menuCard");
-  for(var menuCard of menuCards) {
+  for(let menuCard of menuCards) {
     menuCard.draw();
   }
 }
 
 //computes the x positions of the menucards and stores them in menuCardsXPositions[]
 function computeMenuCardsXPositions() {
-  var numCards = choiceIndeces.length;
+  let numCards = choiceIndeces.length;
   menuCardsXPositions = new Array(numCards);
-  var maxHeight = min(clientHeight * menuHeightRelative, squareSize);
-  //var maxHeight = clientHeight * menuHeightRelative;
-  var outerBuffer = 60;
-  var minInnerBuffer = (numCards - 1) * 20;
-  var maxWidth = (clientWidth - outerBuffer - minInnerBuffer) / numCards;
+  let maxHeight = min(clientHeight * menuHeightRelative, squareSize);
+  // maxHeight = clientHeight * menuHeightRelative;
+  let outerBuffer = 60;
+  let minInnerBuffer = (numCards - 1) * 20;
+  let maxWidth = (clientWidth - outerBuffer - minInnerBuffer) / numCards;
   menuCardSize = min(maxWidth, maxHeight);
-  var innerBuffer = 0;
+  let innerBuffer = 0;
   if (numCards > 1) {
     innerBuffer = clientWidth - (numCards * menuCardSize) - outerBuffer;
     innerBuffer = innerBuffer / (numCards - 1);
@@ -47,7 +47,7 @@ function computeMenuCardsXPositions() {
     outerBuffer = (clientWidth - menuCardSize);
   }
   
-  for (var i = 0; i < numCards; i++) {
+  for (let i = 0; i < numCards; i++) {
     menuCardsXPositions[i] = 0.5 * outerBuffer + i * innerBuffer + i * menuCardSize + menuCardSize / 2;
   }
 }
@@ -78,13 +78,6 @@ class MenuCard {
     rectMode(CENTER);
     rect(this.tempX, this.tempY, this.size, this.size);
     noStroke();
-    /*textAlign(CENTER);
-    textFont(myFont);
-    textStyle(BOLD);
-    textSize(this.size * 1.4275);
-    fill(0);
-    text(this.letter, this.tempX, this.tempY + (this.size / 2));*/
-    //TODO!!!
     imageMode(CENTER);
     image(this.letter, this.tempX, this.tempY, this.size, this.size);
     noFill();

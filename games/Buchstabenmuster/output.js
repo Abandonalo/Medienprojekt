@@ -1,38 +1,36 @@
-let myFont = 'Montserrat';
-var canvas;
-var clientWidth;
-var clientHeight;
-let matrixHeightRelative = 0.7;
-let menuHeightRelative = 0.25;
+let clientWidth;
+let clientHeight;
+const matrixHeightRelative = 0.7;
+const menuHeightRelative = 0.25;
 
 let choiceIndeces;
 let matrixSize;
 
-var touchStartX;
-var touchStartY;
+let touchStartX;
+let touchStartY;
 
-var menuCards;
-var letterCards;
-var letterMatrix;
+let menuCards;
+let letterCards;
+let letterMatrix;
 
-var menuCardsXPositions;
-var menuCardsY;
-var menuCardSize;
-var squareSize;
+let menuCardsXPositions;
+let menuCardsY;
+let menuCardSize;
+let squareSize;
 
-var selectedCardIndex;
-var selectedIsLetterCard;
-var somethingWasTouched = false;
+let selectedCardIndex;
+let selectedIsLetterCard;
+let somethingWasTouched = false;
 
-var letterImages;
+let letterImages;
 
-let defaultChoice = [7, 6];
-let defaultSize = [2, 2];
+const defaultChoice = [7, 6];
+const defaultSize = [2, 2];
 
 let lo = {"clicked" : false};
 
 function abcOutput_restart() {
-  for (var letterCard of letterCards) {
+  for (let letterCard of letterCards) {
     letterCard.setLetter(letterImages[choiceIndeces[0]]);
     letterCard.setRotation(0);
   }
@@ -100,7 +98,6 @@ function saveArtWork() {
 
 //calls draw function of every element
 function draw() {
-  //console.log("drawing");
   background(255);
   drawLetterCards(squareSize);
   drawLetterMatrix();
@@ -109,14 +106,13 @@ function draw() {
 
 //draws the lettermatrix
 function drawLetterMatrix() {
-  //console.log("drawing matrix");
   letterMatrix.draw();
 }
 
 //checks if the given coordinates are within a selectable item (card), if so returns true
 //also sets the cards isSelected value to true and selectedIsLetterCard
 function objectTouched(x, y) {
-  for (var menuCard of menuCards) {
+  for (let menuCard of menuCards) {
     if (dist(x, y, menuCard.xCenter, menuCard.yCenter) <= menuCardSize / 2) {
       menuCard.isSelected = true;
       selectedCardIndex = menuCard.index;
@@ -125,7 +121,7 @@ function objectTouched(x, y) {
     }
   }
   
-  for (var letterCard of letterCards) {
+  for (let letterCard of letterCards) {
     if (dist(x, y, letterCard.xCenter, letterCard.yCenter) <= squareSize / 2) {
       letterCard.isSelected = true;
       selectedCardIndex = letterCard.index;
@@ -214,19 +210,19 @@ class LetterMatrix {
   }
   
   draw () {
-    var matrixSpace = min(clientWidth - 60, (clientHeight - 120) * matrixHeightRelative);
+    let matrixSpace = min(clientWidth - 60, (clientHeight - 120) * matrixHeightRelative);
     //console.log(typeof(matrixSpace));
-    var x = this.xCenter - 0.5 * matrixSpace + 0.5 * squareSize;
+    let x = this.xCenter - 0.5 * matrixSpace + 0.5 * squareSize;
     //console.log("x should be: " + this.xCenter - 0.5 * matrixSpace + 0.5 * squareSize);
-    var y = this.yCenter - 0.5 * matrixSpace + 0.5 * squareSize;
+    let y = this.yCenter - 0.5 * matrixSpace + 0.5 * squareSize;
     //console.log("xCenter: " + this.xCenter);
     //console.log("matrixSpace: " + matrixSpace);
     //console.log("squareSize: " + squareSize);
     //console.log("x: " + x + "    y: " + y);
     
-    for (var i = 0; i < this.squaresY; i++) {
+    for (let i = 0; i < this.squaresY; i++) {
       x = this.xCenter - 0.5 * matrixSpace + 0.5 * squareSize;
-      for (var j = 0; j < this.squaresX; j++) {
+      for (let j = 0; j < this.squaresX; j++) {
         strokeWeight(squareSize / 60);
         stroke(150);
         //console.log("really drawing matrix");
@@ -245,16 +241,16 @@ class LetterMatrix {
   resize(newX, newY) {
     this.xCenter = newX;
     this.yCenter = newY;
-    var matrixSpace = min(clientWidth - 60, (clientHeight - 120) * matrixHeightRelative);
-    var maxSquares = max(this.squaresX, this.squaresY);
+    let matrixSpace = min(clientWidth - 60, (clientHeight - 120) * matrixHeightRelative);
+    let maxSquares = max(this.squaresX, this.squaresY);
     squareSize = matrixSpace / maxSquares;
     
-    var x = this.xCenter - 0.5 * matrixSpace + 0.5 * squareSize;
-    var y = this.yCenter - 0.5 * matrixSpace + 0.5 * squareSize;
-    for (var i = 0; i < this.squaresY; i++) {
+    let x = this.xCenter - 0.5 * matrixSpace + 0.5 * squareSize;
+    let y = this.yCenter - 0.5 * matrixSpace + 0.5 * squareSize;
+    for (let i = 0; i < this.squaresY; i++) {
       x = this.xCenter - 0.5 * matrixSpace + 0.5 * squareSize;
-      for (var j = 0; j < this.squaresX; j++) {
-        var index = i * this.squaresX + j;
+      for (let j = 0; j < this.squaresX; j++) {
+        let index = i * this.squaresX + j;
         letterCards[index].xCenter = x;
         letterCards[index].yCenter = y;
         letterCards[index].tempX = x;
@@ -267,7 +263,7 @@ class LetterMatrix {
   
   //sets the letterCard at (x, y) to the letter in letter and the given rotation
   checkForChange(letter, x, y, rotation) {
-    for(var i = 0; i < letterCards.length; i++) {
+    for(let i = 0; i < letterCards.length; i++) {
       if (dist(x, y, letterCards[i].xCenter, letterCards[i].yCenter) <= squareSize / 2) {
         letterCards[i].setLetter(letter);
         letterCards[i].setRotation(rotation);
@@ -277,7 +273,7 @@ class LetterMatrix {
   }
   
   checkForChangeLetterCard(letter, x, y, rotation, originalCard) {
-    for(var i = 0; i < letterCards.length; i++) {
+    for(let i = 0; i < letterCards.length; i++) {
       if (dist(x, y, letterCards[i].xCenter, letterCards[i].yCenter) <= squareSize / 2) {
         originalCard.setLetter(letterCards[i].letter);
         originalCard.setRotation(letterCards[i].angle);
