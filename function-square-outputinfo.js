@@ -16,30 +16,36 @@ $(document).ready(function () {
 
   $("#game").removeClass("disappear");
   setTimeout(function () {
+    lo.canClick = true;
     $("#game").removeClass("disappear");
     $("#gamebar").removeClass("disappear");
     $(
       "#button-zurueck, #button-weiter, #button-download, #button-plus, #button-intro"
     ).removeClass("disappear");
   }, 1000);
+  
   // click event weiter
   $("#button-weiter").click(function () {
     if (!$("#game").hasClass("disappear")) {
       //output -> info
-      $("#game").addClass("disappear");
-      $("#information").removeClass("disappear");
-      $("#button-intro, #button-download, #button-plus, #gamebar").addClass(
-        "disappear"
-      );
-      $("#information").css("pointer-events", "");
-      $("#game").css("pointer-events", "none");
-      setTimeout(function () {
-        $("#gameinput").removeClass("down");
-        $("#gamebar").addClass("hide");
-        $("#button-intro, #button-download, #button-plus").addClass(
+      if (lo.canClick) {
+        lo.canClick = false;
+        $("#game").addClass("disappear");
+        $("#information").removeClass("disappear");
+        $("#button-intro, #button-download, #button-plus, #gamebar").addClass(
           "disappear"
         );
-      }, 1000);
+        $("#information").css("pointer-events", "");
+        $("#game").css("pointer-events", "none");
+        setTimeout(function () {
+          $("#gameinput").removeClass("down");
+          $("#gamebar").addClass("hide");
+          $("#button-intro, #button-download, #button-plus").addClass(
+            "disappear"
+          );
+          lo.canClick = true;
+        }, 1000);
+      }
     } else if (!$("#information").hasClass("disappear")) {
       //info -> menu
       window.localStorage.clear();

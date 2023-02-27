@@ -15,22 +15,26 @@ $(document).ready(function (){
         adaptiveHeight: true
     });
 
+    let lo = { canClick: false };
 
     $('#game').removeClass('disappear');
     $('#gameinput').addClass('down');
     $('#game').css('pointer-events','none');
-    setTimeout(function(){
+    setTimeout(function () {
+        lo.canClick = true;
         $('#gamebar').removeClass('disappear');
         $('#button-zurueck, #button-weiter, #button-refresh, #button-intro').removeClass('disappear');
     }, 1000);
 
     //click event weiter
-    $('#button-weiter').click(function (){
-        $('#game').addClass('disappear');
-        $('svg').addClass('disappear');
-        setTimeout(function(){  
-            window.location.href = 'mamaintro3.html';
-        }, 1000); 
+    $('#button-weiter').click(function () {
+        if (lo.canClick) {
+            $('#game').addClass('disappear');
+            $('svg').addClass('disappear');
+            setTimeout(function () {
+                window.location.href = 'mamaintro3.html';
+            }, 1000);
+        }
     });    
 
     //click event zurueck

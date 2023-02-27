@@ -15,6 +15,7 @@ $(document).ready(function () {
         adaptiveHeight: true
     });
 
+
     window.localStorage.removeItem("form");
     window.localStorage.removeItem("shape");
     window.localStorage.removeItem("color");

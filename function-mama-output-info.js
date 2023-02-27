@@ -7,24 +7,24 @@ $(document).ready(function () {
 
     let touchstartX = 0
     let touchendX = 0
-    
-   function ChangeDirection() {
-   if (touchendX < touchstartX) {                     //weiter
-    window.location.href = 'mamaintro2.html';
-   }
-   else if (touchendX > touchstartX) {                     //zurueck
-    window.location.href = 'mamaintro3.html';
-   }
-  }
 
-  document.addEventListener('touchstart', e => {
-  touchstartX = e.changedTouches[0].screenX
-  })
+    function ChangeDirection() {
+        if (touchendX < touchstartX) {                     //weiter
+            window.location.href = 'mamaintro2.html';
+        }
+        else if (touchendX > touchstartX) {                     //zurueck
+            window.location.href = 'mamaintro3.html';
+        }
+    }
 
-  document.addEventListener('touchend', e => {
-  touchendX = e.changedTouches[0].screenX
-  ChangeDirection()
-  })
+    document.addEventListener('touchstart', e => {
+        touchstartX = e.changedTouches[0].screenX
+    })
+
+    document.addEventListener('touchend', e => {
+        touchendX = e.changedTouches[0].screenX
+        ChangeDirection()
+    })
 
     // Slider    
 
@@ -36,30 +36,35 @@ $(document).ready(function () {
         adaptiveHeight: true
     });
 
+    let lo = { canClick: false };
+
     $('#game').css('pointer-events', 'none');
     setTimeout(function () {
         $('#game').removeClass('disappear');
     }, 500);
     setTimeout(function () {
+        lo.canClick = true;
         $('#gamebar').removeClass('disappear');
         $('#button-zurueck, #button-weiter, #button-refresh, #button-intro, #button-download').removeClass('disappear');
     }, 1000);
 
     //click event weiter
-    $('#button-weiter').click(function (){
-        $('#buttons_1,#buttons_2,#buttons_3,#buttons_4').addClass('disappear');
-        if (!$('#game').hasClass('disappear')) {   //output -> input
-            $('#game').addClass('disappear');
-    
-            setTimeout(function(){
-                window.location.href = 'mamaintro2.html';
-            }, 400);
+    $('#button-weiter').click(function () {
+        if (lo.canClick) {
+            lo.canClick = false;
+            $('#buttons_1,#buttons_2,#buttons_3,#buttons_4').addClass('disappear');
+            if (!$('#game').hasClass('disappear')) {   //output -> input
+                $('#game').addClass('disappear');
+
+                setTimeout(function () {
+                    window.location.href = 'mamaintro2.html';
+                }, 400);
+                setTimeout(function () {
+                    lo.canClick = true;
+                }, 1000);
+            }
         }
-  
-    });  
-
-          
-
+    });
 
     //click event zurueck
     $('#button-zurueck').click(function () {
@@ -126,6 +131,4 @@ $(document).ready(function () {
             }, 1000);
         }
     });
-
-
 });

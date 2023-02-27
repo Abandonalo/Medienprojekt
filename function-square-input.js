@@ -14,10 +14,13 @@ $(document).ready(function () {
         adaptiveHeight: true,
     });
 
+    let lo = { canClick: false };
+
     window.localStorage.clear();
     $("#gameinput").addClass("down");
     $("#game").css("pointer-events", "none");
     setTimeout(function () {
+        lo.canClick = true;
         $("#game").removeClass("disappear");
         $("#gamebar").removeClass("disappear");
         $(
@@ -27,12 +30,14 @@ $(document).ready(function () {
 
     //click event weiter
     $("#button-weiter").click(function () {
-        //input -> intro2
+        if (lo.canClick) {
+            //input -> intro2
             $("#game").addClass("disappear");
             $("svg").addClass("disappear");
             setTimeout(function () {
                 window.location.href = "squareintro2.html";
             }, 1000);
+        }
     });
 
     $("#button-refresh").click(function () {

@@ -1,67 +1,74 @@
-$(document).ready(function (){
-    
-/* Get innerHeight für vh  */   
-  
+$(document).ready(function () {
+    /* Get innerHeight für vh  */
+
     let vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty('--vh', `${vh}px`);
-    
-    
-    let touchstartX = 0
-let touchendX = 0
+    document.documentElement.style.setProperty("--vh", `${vh}px`);
 
-function ChangeDirection() {
-if (touchendX < touchstartX) {                     //weiter
-window.location.href = 'buchstabenletter.html';
-}
-else if (touchendX > touchstartX) {                     //zurueck
-window.location.href = 'menu.html';
-}
-}
+    let touchstartX = 0;
+    let touchendX = 0;
 
-document.addEventListener('touchstart', e => {
-touchstartX = e.changedTouches[0].screenX
-})
+    function ChangeDirection() {
+        if (touchendX < touchstartX) {
+            //weiter
+            window.location.href = "buchstabenletter.html";
+        } else if (touchendX > touchstartX) {
+            //zurueck
+            window.location.href = "menu.html";
+        }
+    }
 
-document.addEventListener('touchend', e => {
-touchendX = e.changedTouches[0].screenX
-ChangeDirection()
-})
+    document.addEventListener("touchstart", (e) => {
+        touchstartX = e.changedTouches[0].screenX;
+    });
 
-// Slider    
-    
-    $('.slider').slick({
+    document.addEventListener("touchend", (e) => {
+        touchendX = e.changedTouches[0].screenX;
+        ChangeDirection();
+    });
+
+    // Slider
+
+    $(".slider").slick({
         dots: true,
         infinite: true,
         speed: 300,
         slidesToShow: 1,
-        adaptiveHeight: true
+        adaptiveHeight: true,
     });
-    
-    $('#introduction').removeClass('disappear');
-    $('#introduction').removeClass('hide');
 
-    $('#button-zurueck, #button-weiter').removeClass('disappear');
-    $('#button-intro, #button-refresh').addClass('disapper');
+    let lo = { canClick: false };
 
-    $('#button-weiter').click(function (){
-        $('#introduction').addClass('disappear');
-        $('svg').addClass('disappear');
-            setTimeout(function(){
-                $('#gameinput').removeClass('down');
+    setTimeout(() => {
+        lo.canClick = true;
+    }, 1000);
+
+    $("#introduction").removeClass("disappear");
+    $("#introduction").removeClass("hide");
+
+    $("#button-zurueck, #button-weiter").removeClass("disappear");
+    $("#button-intro, #button-refresh").addClass("disapper");
+
+    $("#button-weiter").click(function () {
+        if (lo.canClick) {
+            $("#introduction").addClass("disappear");
+            $("svg").addClass("disappear");
+            setTimeout(function () {
+                $("#gameinput").removeClass("down");
             }, 500);
-            setTimeout(function(){
-                window.location.href = 'buchstabenletter.html';
+            setTimeout(function () {
+                window.location.href = "buchstabenletter.html";
             }, 2000);
-    });    
+        }
+    });
 
-    $('#button-zurueck').click(function (){
-        $('#introduction').addClass('disappear');
-        $('svg').addClass('disappear');
-        setTimeout(function(){
-            $('#body-wrapper').css('top','-100vh');
+    $("#button-zurueck").click(function () {
+        $("#introduction").addClass("disappear");
+        $("svg").addClass("disappear");
+        setTimeout(function () {
+            $("#body-wrapper").css("top", "-100vh");
         }, 1000);
-        setTimeout(function(){
-            window.location.href = 'menu.html';
+        setTimeout(function () {
+            window.location.href = "menu.html";
         }, 2000);
     });
 });
