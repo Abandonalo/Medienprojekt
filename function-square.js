@@ -3,10 +3,15 @@ $(document).ready(function (){
 /* Get innerHeight für vh  */   
   
     let vh = window.innerHeight * 0.01;
+    let lo = { clicked: false };
     document.documentElement.style.setProperty('--vh', `${vh}px`);
     
-// Slider    
+// Slider
     
+    setTimeout(() => {
+        lo.clicked = false
+    }, 1000)
+
     $('.slider').slick({
         dots: true,
         infinite: true,
@@ -23,62 +28,64 @@ $(document).ready(function (){
     $('#button-intro, #button-refresh').addClass('disapper');
 
 // click event weiter
-    $('#button-weiter').click(function (){
-        if (!$('#introduction').hasClass('disappear')){ // intro -> input
-            $('#gameinput').addClass('down');
-            $('#introduction').addClass('disappear');
-            setTimeout(function(){
-                $('#game-input').removeClass('disappear');
-                $('#introduction').addClass('hide');
+    if (!lo.clicked) {
+        $('#button-weiter').click(function () {
+            if (!$('#introduction').hasClass('disappear')) { // intro -> input
                 $('#gameinput').addClass('down');
-            }, 500);
-            setTimeout(function(){
-                $('#gamebar').removeClass('disappear');
-                $('#button-refresh, #button-intro').removeClass('disappear');
-            }, 1000);
-        }
-        else if (!$('#game-input').hasClass('disappear')){ //input -> option
-            $('#game-input').addClass('disappear');
-            $('#game-option').removeClass('disappear');
-            $('#game-input').css('pointer-events','none');
-            setTimeout(function(){ 
-                $('#game-input').addClass('disappear');    
+                $('#introduction').addClass('disappear');
+                setTimeout(function () {
+                    $('#game-input').removeClass('disappear');
+                    $('#introduction').addClass('hide');
+                    $('#gameinput').addClass('down');
+                }, 500);
+                setTimeout(function () {
+                    $('#gamebar').removeClass('disappear');
+                    $('#button-refresh, #button-intro').removeClass('disappear');
+                }, 1000);
+            }
+            else if (!$('#game-input').hasClass('disappear')) { //input -> option
+                $('#game-input').addClass('disappear');
                 $('#game-option').removeClass('disappear');
-            }, 1000); 
-        }
-        else if (!$('#game-option').hasClass('disappear')){ //option -> output
-            $('#game-option').addClass('disappear');
-            $('#game-output').removeClass('disappear');
-            $('#game-option').css('pointer-events','none');
-            setTimeout(function(){  
-                $('#game-option').addClass('disappear');    
+                $('#game-input').css('pointer-events', 'none');
+                setTimeout(function () {
+                    $('#game-input').addClass('disappear');
+                    $('#game-option').removeClass('disappear');
+                }, 1000);
+            }
+            else if (!$('#game-option').hasClass('disappear')) { //option -> output
+                $('#game-option').addClass('disappear');
                 $('#game-output').removeClass('disappear');
-            }, 1000); 
-        }
-        else if (!$('#game-output').hasClass('disappear')){  //output -> info
-            $('#game-output').addClass('disappear');
-            $('#information').removeClass('disappear');
-            $('#button-intro, #button-refresh, #gamebar').addClass('disappear');
-            $('#information').css('pointer-events','');
-            $('#game-output').css('pointer-events','none');
-            setTimeout(function(){    
-                $('#gameinput').removeClass('down');   
-                $('#gamebar').addClass('hide');
-                $('#button-intro').addClass('disappear');
-                $('#button-refresh').addClass('disappear');
-            }, 1000);
-        }
-        else if (!$('#information').hasClass('disappear')){  //info -> menu
-            $('#information').addClass('disappear');
-            $('svg').addClass('disappear');
-            setTimeout(function(){
-                $('#gameinput').removeClass('down');
-            }, 1000);
-            setTimeout(function(){
-                window.location.href = 'menu.html';
-            }, 2000);
-        }
-    });    
+                $('#game-option').css('pointer-events', 'none');
+                setTimeout(function () {
+                    $('#game-option').addClass('disappear');
+                    $('#game-output').removeClass('disappear');
+                }, 1000);
+            }
+            else if (!$('#game-output').hasClass('disappear')) {  //output -> info
+                $('#game-output').addClass('disappear');
+                $('#information').removeClass('disappear');
+                $('#button-intro, #button-refresh, #gamebar').addClass('disappear');
+                $('#information').css('pointer-events', '');
+                $('#game-output').css('pointer-events', 'none');
+                setTimeout(function () {
+                    $('#gameinput').removeClass('down');
+                    $('#gamebar').addClass('hide');
+                    $('#button-intro').addClass('disappear');
+                    $('#button-refresh').addClass('disappear');
+                }, 1000);
+            }
+            else if (!$('#information').hasClass('disappear')) {  //info -> menu
+                $('#information').addClass('disappear');
+                $('svg').addClass('disappear');
+                setTimeout(function () {
+                    $('#gameinput').removeClass('down');
+                }, 1000);
+                setTimeout(function () {
+                    window.location.href = 'menu.html';
+                }, 2000);
+            }
+        });
+    }    
     
     //click event zurueck
     $('#button-zurueck').click(function (){
