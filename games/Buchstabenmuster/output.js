@@ -24,8 +24,8 @@ let somethingWasTouched = false;
 
 let letterImages;
 
-const defaultChoice = [7, 6];
-const defaultSize = [2, 2];
+const defaultChoice = [7, 6]; //in case local storage malfunctions
+const defaultSize = [2, 2]; //in case local storage malfunctions
 
 let lo = {"clicked" : false};
 
@@ -34,7 +34,6 @@ function abcOutput_restart() {
     letterCard.setLetter(letterImages[choiceIndeces[0]]);
     letterCard.setRotation(0);
   }
-  
 }
 
 function storeMatrix() {
@@ -45,18 +44,13 @@ function restoreMatrix() {
   getItem('abc_matrix-result', letterMatrix);
 }
 
-//retrieves locally stored variable values
 function preload() {
-  console.log("preloading");
   letterImages = new Array(16);
   loadSVGs();
   choiceIndeces = getItem('abc_letterChoiceIndeces');
   matrixSize = getItem('abc_matrixSize');
-  console.log(choiceIndeces);
-  console.log(matrixSize);
 }
 
-//fills all card-arrays and the matrix, if locally stored values not availailable uses default values
 function setup() {
   if(choiceIndeces == null || choiceIndeces.length == 0) {
     choiceIndeces = defaultChoice;
@@ -64,39 +58,31 @@ function setup() {
   if (matrixSize == null || matrixSize.length == 0) {
     matrixSize = defaultSize;
   }
-  console.log("setting up");
   clientWidth = window.innerWidth - 60;
   clientHeight = window.innerHeight - 100;
   canvas = createCanvas(clientWidth, clientHeight);
   canvas.parent("game");
-  
   createLetterCards();
   createMatrix();
   computeMenuCardsXPositions();
   createMenuCards(squareSize);
-  console.log("menuCards: " + menuCards);
-  console.log(menuCards);
 }
 
-//resizes canvas and every element on it
 windowResized = function () {
   clientWidth = window.innerWidth - 60;
   clientHeight = window.innerHeight - 100;
   resizeCanvas(clientWidth, clientHeight);
-  
   computeMenuCardsXPositions();
   resizeMenuCards();
   letterMatrix.resize(clientWidth / 2, (clientHeight / 2) * matrixHeightRelative);
 }
 
-//downloads the artwork as jpg
 function saveArtWork() {
   resizeCanvas(clientWidth, clientHeight * matrixHeightRelative);
   saveCanvas('how to: Vera Molnar - ABC', 'jpg');
   resizeCanvas(clientWidth, clientHeight);
 }
 
-//calls draw function of every element
 function draw() {
   background(255);
   drawLetterCards(squareSize);
@@ -104,13 +90,10 @@ function draw() {
   drawMenuCards();
 }
 
-//draws the lettermatrix
 function drawLetterMatrix() {
   letterMatrix.draw();
 }
 
-//checks if the given coordinates are within a selectable item (card), if so returns true
-//also sets the cards isSelected value to true and selectedIsLetterCard
 function objectTouched(x, y) {
   for (let menuCard of menuCards) {
     if (dist(x, y, menuCard.xCenter, menuCard.yCenter) <= menuCardSize / 2) {
@@ -132,7 +115,6 @@ function objectTouched(x, y) {
   return false;
 }
 
-//stores coordinates of touch start position and checks if something was touched
 function touchStarted(){
   if (!lo.clicked) {
     touchStartX = mouseX;
@@ -145,7 +127,6 @@ function touchStarted(){
     }, 500);
 }
 
-//calls touchEnded of selected card and deselects it
 function touchEnded(){
   if(!somethingWasTouched) {
     return;
@@ -160,18 +141,15 @@ function touchEnded(){
   }
 }
 
-//checks if a card is dragged, if so calls the drag function
 function touchMoved(){
   if (selectedIsLetterCard && dist(touchStartX, touchStartY, mouseX, mouseY) >= 10) {
     letterCards[selectedCardIndex].drag();
   }
 }
 
-//creates the matrix
 function createMatrix() {
   letterMatrix = new LetterMatrix(clientWidth / 2, (clientHeight / 2) * matrixHeightRelative, matrixSize[0], matrixSize[1]);
 }
-
 
 
 function loadSVGs() {
@@ -191,17 +169,13 @@ function loadSVGs() {
   letterImages[13] = loadImage('games/Buchstabenmuster/SVGs/V.svg');
   letterImages[14] = loadImage('games/Buchstabenmuster/SVGs/Y.svg');
   letterImages[15] = loadImage('games/Buchstabenmuster/SVGs/Z.svg');
-  //console.log(letterImages);
 }
-
 
 
 class LetterMatrix {
   constructor(xCenter, yCenter, squaresX, squaresY) {
-    //console.log("new letterMatrix: xCenter " + xCenter + ", yCenter: " + yCenter + ", squaresX: " + squaresX + ", squaresY: " + squaresY);
     this.squaresX = squaresX;
     this.squaresY = squaresY;
-
     this.xCenter = xCenter;
     this.yCenter = yCenter;
     
@@ -211,40 +185,28 @@ class LetterMatrix {
   
   draw () {
     let matrixSpace = min(clientWidth - 60, (clientHeight - 120) * matrixHeightRelative);
-    //console.log(typeof(matrixSpace));
     let x = this.xCenter - 0.5 * matrixSpace + 0.5 * squareSize;
-    //console.log("x should be: " + this.xCenter - 0.5 * matrixSpace + 0.5 * squareSize);
     let y = this.yCenter - 0.5 * matrixSpace + 0.5 * squareSize;
-    //console.log("xCenter: " + this.xCenter);
-    //console.log("matrixSpace: " + matrixSpace);
-    //console.log("squareSize: " + squareSize);
-    //console.log("x: " + x + "    y: " + y);
     
     for (let i = 0; i < this.squaresY; i++) {
       x = this.xCenter - 0.5 * matrixSpace + 0.5 * squareSize;
       for (let j = 0; j < this.squaresX; j++) {
         strokeWeight(squareSize / 60);
         stroke(150);
-        //console.log("really drawing matrix");
         noFill();
         rect(x, y, squareSize, squareSize);
         x += squareSize;
-        //console.log(x);
-        //console.log(rect(x, y, squareSize, squareSize));
       }
       y += squareSize;
     }
   }
   
-  //newX and newY define the new centerpoint of the matrix
-  //also resizes the lettercars
   resize(newX, newY) {
     this.xCenter = newX;
     this.yCenter = newY;
     let matrixSpace = min(clientWidth - 60, (clientHeight - 120) * matrixHeightRelative);
     let maxSquares = max(this.squaresX, this.squaresY);
     squareSize = matrixSpace / maxSquares;
-    
     let x = this.xCenter - 0.5 * matrixSpace + 0.5 * squareSize;
     let y = this.yCenter - 0.5 * matrixSpace + 0.5 * squareSize;
     for (let i = 0; i < this.squaresY; i++) {
@@ -261,7 +223,6 @@ class LetterMatrix {
     }
   }
   
-  //sets the letterCard at (x, y) to the letter in letter and the given rotation
   checkForChange(letter, x, y, rotation) {
     for(let i = 0; i < letterCards.length; i++) {
       if (dist(x, y, letterCards[i].xCenter, letterCards[i].yCenter) <= squareSize / 2) {

@@ -1,8 +1,7 @@
-//creates the menucards
 function createMenuCards() {
   if (menuCardsXPositions.length <= 1) {
     menuCards = [];
-    console.log("no menuCards!!!");
+    console.log("no menuCards");
     return;
   }
   menuCards = new Array(menuCardsXPositions.length);
@@ -14,27 +13,22 @@ function createMenuCards() {
   }
 }
 
-//resizes the menucards
 function resizeMenuCards() {
   for(let menuCard of menuCards) {
     menuCard.resize();
   }
 }
 
-//draws menucards
 function drawMenuCards() {
-  //console.log("drawing menuCard");
   for(let menuCard of menuCards) {
     menuCard.draw();
   }
 }
 
-//computes the x positions of the menucards and stores them in menuCardsXPositions[]
 function computeMenuCardsXPositions() {
   let numCards = choiceIndeces.length;
   menuCardsXPositions = new Array(numCards);
   let maxHeight = min(clientHeight * menuHeightRelative, squareSize);
-  // maxHeight = clientHeight * menuHeightRelative;
   let outerBuffer = 60;
   let minInnerBuffer = (numCards - 1) * 20;
   let maxWidth = (clientWidth - outerBuffer - minInnerBuffer) / numCards;

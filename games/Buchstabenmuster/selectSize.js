@@ -1,13 +1,14 @@
 let placeHolderLetter;
 
 let xPositions;
-const squares = [2, 1, 2, 2, 4, 4];
 let matrices;
 
-let selectedSize = [2, 2];
+const squares = [2, 1, 2, 2, 4, 4]; //change here to use other sizes or add/ remove sizes
+const defaultScreenIndex = 1; //change here if you want to use a different default choice (Index of screen --> x position of SelectedSize in squares / 2)
+let selectedSize = new Array(2);
 
-let snLeft = false;
-let snRight = false;
+let hasToSnapLeft = false;
+let hasToSnapRight = false;
 
 let clientWidth;
 let clientHeight;
@@ -16,13 +17,15 @@ let touchStartX;
 
 
 function abcSize_restart() {
-  selectedSize[0] = 2;
-  selectedSize[1] = 2;
+  selectedSize[0] = squares[defaultScreenIndex * 2];
+  selectedSize[1] = squares[defaultScreenIndex * 2 + 1];
   repositionMatrices(xPositions, clientHeight / 2);
 }
 
 function preload() {
-  placeHolderLetter = loadImage('games/Buchstabenmuster/SVGs/M.svg');
+  placeHolderLetter = loadImage('games/Buchstabenmuster/SVGs/M.svg'); //change here to use different letter as placeholder
+  selectedSize[0] = squares[defaultScreenIndex * 2];
+  selectedSize[1] = squares[defaultScreenIndex * 2 + 1];
   matrices = new Array(squares.length / 2);
   xPositions = new Array(squares.length / 2);
   for(let position of xPositions) {
@@ -30,19 +33,17 @@ function preload() {
   }
 }
 
-//sets up width, height of canvas and canvas, fills positions array and creates all matrices
 function setup() {
   clientWidth =  window.innerWidth - 60;
   clientHeight = window.innerHeight - 60;
   canvas = createCanvas(clientWidth, clientHeight);
   canvas.parent("game");
 
-  fillXPositions(clientWidth);
+  fillXPositions(clientWidth, defaultScreenIndex);
   createMatrices(xPositions, clientHeight / 2, squares);
 }
 
 
-//calls draw method from the matrix class for every matrix
 function draw() {
   background(255);
   for(let matrix of matrices) {
@@ -50,92 +51,73 @@ function draw() {
   }
 }
 
-//updates width and height and resizes canvas accordingly, also updates the positions of the matrices
-//snaps them (back) into default position!!
 windowResized = function () {
     clientWidth =  window.innerWidth - 60;
     clientHeight = window.innerHeight - 60;
     resizeCanvas(clientWidth, clientHeight);
-    fillXPositions(clientWidth);
+    fillXPositions(clientWidth, defaultScreenIndex);
     repositionMatrices(xPositions, clientHeight / 2);
 }
 
-//computes centerpoints of the matrices and stores them in xPositions[]
-function fillXPositions(widthPerMatrix) {
+function fillXPositions(widthPerMatrix, defaultIndex) {
   for (let i = 0; i < squares.length / 2; i++) {
-    xPositions[i] = widthPerMatrix / 2 + ((i - 1) * widthPerMatrix);
+    xPositions[i] = widthPerMatrix / 2 + ((i - defaultIndex) * widthPerMatrix);
   }
 }
 
-//creates matrices and stores them in matrices[]
 function createMatrices(positions, yPosition, numSquares) {
-  for(let i = 0; i < xPositions.length * 2; i += 2) {
+  for(let i = 0; i < positions.length * 2; i += 2) {
     matrices[i / 2] = new PlaceHolderMatrix(positions[i / 2], yPosition, numSquares[i], numSquares[i + 1]);
   }
 }
 
-//repositions matrices by updating their x position stored in xCenter
 function repositionMatrices(positions, yPosition) {
+  if (matrices == null) {
+    return;
+  }
   for(let i = 0; i < positions.length; i ++) {
     matrices[i].xCenter = positions[i];
     matrices[i].tempX = positions[i];
     matrices[i].yCenter = yPosition;
     matrices[i].tempY = yPosition;
-    //to restore last selection
-    /*
-    if(! (selectedSize[0] == 2 && selectedSize[1] == 2)) {
-      if(selectedSize[0] == 2 && selectedSize[0] == 1) {
-        snapRightAll();
-      } else {
-        snapLeftAll();
-      }
-    }
-    */
   }
 }
 
-//saves x value of touch Start point to touchStartX
 function touchStarted() {
   touchStartX = mouseX;
 }
 
-//snap into position and snapLeft or right to avoid snapping to "empty screens"
 function touchEnded() {
   snapToSelection();
-  if(snLeft) {
+  if(hasToSnapLeft) {
     snapLeftAll();
-  } else if (snRight) {
+  } else if (hasToSnapRight) {
     snapRightAll();
   }
-  snLeft = false;
-  snRight = false;
+  hasToSnapLeft = false;
+  hasToSnapRight = false;
 }
 
 function storeAbcSizeChoice() {
   storeItem('abc_matrixSize', selectedSize);
 }
 
-//calls drag method of class matrix for every matrix when a drag in x direction is detected
 function touchMoved() {
   let xDifference = mouseX - touchStartX;
   if (xDifference < -5 || xDifference > 5) {
     for(let matrix of matrices) {
-      //print(xDifference);
       matrix.drag(xDifference);
     }
   }
 }
 
-//calls snapToSelection method for every matrix
 function snapToSelection() {
-  //print("snapToSelection");
   for(let matrix of matrices) {
       matrix.snapToSelection(clientWidth);
     }
     checkSelection();
 }
 
-//calls snapLeft method for every matrix
 function snapLeftAll() {
   for(let matrix of matrices) {
       matrix.snapLeft(clientWidth);
@@ -143,7 +125,6 @@ function snapLeftAll() {
     checkSelection();
 }
 
-//calls snapRight method for every matrix
 function snapRightAll() {
   for(let matrix of matrices) {
       matrix.snapRight(clientWidth);
@@ -153,7 +134,7 @@ function snapRightAll() {
 
 function checkSelection() {
   for(let matrix of matrices) {
-    matrix.checkSelected(xPositions[1]);
+    matrix.checkSelected(xPositions[defaultScreenIndex]);
   }
 }
 
@@ -170,7 +151,6 @@ class PlaceHolderMatrix {
     this.label = this.createLabel(squaresX, squaresY);
   }
   
-  //draws the matrix on the canvas centered around tempX and tempY
   draw() {
     let matrixSize = min(clientWidth - 50, clientHeight - 225);
     let maxSquares = max(this.squaresX, this.squaresY);
@@ -198,13 +178,10 @@ class PlaceHolderMatrix {
     text(this.label, this.tempX, textY);
   }
   
-  //drags the matrix by updating the centerpoint --> update shows with next draw
   drag(xDifference) {
     this.tempX = this.xCenter + xDifference;
   }
   
-  //snaps to the selected screen by computing the distance to the screen centerpoints
-  //also sets snapLeft or right if snapping results at an empty screen baaing visible
   snapToSelection(widthPerMatrix) {
     if (this.tempX <= this.xCenter - 0.35 * widthPerMatrix) {
       this.xCenter = this.xCenter - widthPerMatrix;
@@ -217,33 +194,28 @@ class PlaceHolderMatrix {
     let buffer = widthPerMatrix / 100;
     
     if(this.xCenter > widthPerMatrix / 2 + widthPerMatrix * (squares.length / 2 - 1) + buffer) {
-      snLeft = true;
+      hasToSnapLeft = true;
     }
     if(this.xCenter < widthPerMatrix / 2 - widthPerMatrix * (squares.length / 2 - 1) - buffer) {
-      snRight = true;
+      hasToSnapRight = true;
     }
   }
   
-  //moves matrix one screen to the right
   snapRight(widthPerMatrix) {
     this.xCenter = this.xCenter + widthPerMatrix;
     this.tempX = this.xCenter;
   }
   
-  //moves matrix one screen to the left
   snapLeft(widthPerMatrix) {
     this.xCenter = this.xCenter - widthPerMatrix;
     this.tempX = this.xCenter;
   }
   
-  //if this matrix is the one beeing displayed selectedSize gets updated to the x and y squares of this matrix
   checkSelected(xSelection) {
     if(this.xCenter == xSelection) {
       selectedSize[0] = this.squaresX;
       selectedSize[1] = this.squaresY;
-      //return true;
     }
-    //return false;
   }
 
   createLabel(x, y) {

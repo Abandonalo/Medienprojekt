@@ -2,8 +2,7 @@ const lettersToUse = ['C', 'E', 'F', 'H', 'I', 'K', 'L', 'M', 'N', 'O', 'S', 'T'
 let selectedLetters;
 let unselectedLetters;
 
-//M and L
-const defaultSelection = [7, 6];
+const defaultSelection = [7, 6]; //M and L
 const useDefaultSelection = false;
 const maxLetterChoice = 4;
 
@@ -15,7 +14,7 @@ let lettersXPositions;
 let lettersYPositions;
 
 let lettersPerRow, letterSize;
-let lo = {"clicked" : false};
+let touchIsInProcess = false;
 
 
 function abcLetters_restart() {
@@ -43,17 +42,13 @@ function setup() {
   clientHeight = window.innerHeight - 60;
   canvas = createCanvas(clientWidth, clientHeight);
   canvas.parent("game");
-  
-  /*fillIsSelected();*/
   if (useDefaultSelection) {
     setDefault();
   }
-  
   getOptimalLayout();
   fillPositions();
 }
 
-//updates canvas size and positions of the letters on the canvas when the window gets resized
 windowResized = function () {
     clientWidth =  window.innerWidth - 60;
     clientHeight = window.innerHeight - 60;
@@ -67,13 +62,10 @@ function draw() {
   drawLetters();
 }
 
-//returns the current choice of letters as an array by using the isSelected array to determine said letters. Stores choice locally in 'abc_letterChoice'
 function storeChoice() {
   abc_choiceManager.storeSelection(true);
 }
 
-
-//updates the value for the L and the M in selection to true --> default selection
 function setDefault() {
   if(defaultSelection == null || defaultSelection.length <= 0) {
     return;
@@ -81,7 +73,6 @@ function setDefault() {
   abc_choiceManager.setDefaultSelection(defaultSelection);
 }
 
-//computes optimal layout and stores size, number of rows and letters per row
 function getOptimalLayout() {
   let bestI = 1;
   let bestSize = 0;
@@ -99,7 +90,6 @@ function getOptimalLayout() {
   letterSize = bestSize;
 }
 
-//computes the coordinates of the letters and stores them in an array for x or y positions
 function fillPositions() {
   letterRows = ceil(lettersToUse.length / lettersPerRow);
   for (let i = 0; i < letterRows; i++) {
@@ -113,7 +103,6 @@ function fillPositions() {
   }
 }
 
-//draws the letters
 function drawLetters() {
   imageMode(CENTER);
   for (let i = 0; i < lettersToUse.length; i++) {
@@ -125,23 +114,19 @@ function drawLetters() {
   }
 }
 
-//checks if a letter is clicked
 function touchStarted(){
   for(let i = 0; i < lettersToUse.length; i++) {
     if (dist(mouseX, mouseY, lettersXPositions[i], lettersYPositions[i]) <= letterSize * 0.45 
-          && !lo.clicked) {
+          && !touchIsInProcess) {
       updateSelection(i);
-      lo.clicked = true;
+      touchIsInProcess = true;
     }
     setTimeout(() => {
-      lo.clicked = false
-    }, 500)
+      touchIsInProcess = false
+    }, 500);
   }
 }
 
-//updates the selection for a given letter (by index) called when letter is clicked
-//only selects letter when selection is not already full
-//    index: position (index) of the letter that should be updated in the letter- and isSelected-array
 function updateSelection(index) {
   abc_choiceManager.updateSelection(index);
 }
@@ -209,7 +194,6 @@ class ChoiceQueue {
     return true;
   }
 
-  //we are only working with integers here !!!
   includes(element) {
     return this.items.includes(element);
   }
@@ -248,7 +232,7 @@ class choiceManager{
     }
   }
 
-  //please note that if defaultSelection.length is larger than maxChoiceCount the first default-elements will not be selected!!!
+  //please note that if defaultSelection.length is larger than maxChoiceCount the first default-elements will not be selected
   setDefaultSelection(defaultSelection) {
     for (let defaultIndex of defaultSelection) {
       updateSelection(defaultIndex);
@@ -256,11 +240,10 @@ class choiceManager{
   }
 
   storeSelection(checkForEmpty) {
-    
     if(checkForEmpty && this.choice.isEmpty()) {
       console.log("choice should not be stored!!!");
       if(getItem('abc_letterChoiceIndeces') != null) {
-        removeItem('abc_letterChoiceIndeces')
+        removeItem('abc_letterChoiceIndeces');
       }
       return;
     }

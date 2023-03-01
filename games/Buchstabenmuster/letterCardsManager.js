@@ -1,4 +1,3 @@
-//creates the lettercards
 function createLetterCards() {
   letterCards = new Array(matrixSize[0] * matrixSize[1]);
   for(let i = 0; i < matrixSize[0] * matrixSize[1]; i++) {
@@ -6,15 +5,13 @@ function createLetterCards() {
   }
 }
 
-
-//draws lettercards
 function drawLetterCards() {
   for(let letterCard of letterCards) {
     letterCard.draw();
   }
 }
 
-//cards that are positioned within the matrix, can be empty, can be rotated and moved
+//cards that are positioned within the matrix
 class LetterCard {
   constructor (letter, index) {
     this.xCenter = 0;
@@ -34,7 +31,6 @@ class LetterCard {
   }
   
   draw() {
-    //console.log("drawing letterCard: "+ this.xCenter + this.yCenter + squareSize + squareSize);
     fill(252, 252, 247);
     rectMode(CENTER);
     rect(this.xCenter, this.yCenter, squareSize, squareSize);
@@ -85,10 +81,6 @@ class LetterCard {
     this.angle = degree;
   }
   
-  //when dragging of this card stopped:
-  //resets itsself
-  //then calls function in letterMatrix that computes if it is in an OK position
-  //(then the lettercard there is changed to hold the new letter)
   snapTo() {
     let saveLetter = this.letter;
     let saveX = this.tempX;
