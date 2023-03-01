@@ -14,6 +14,9 @@ $(document).ready(function () {
     adaptiveHeight: true,
   });
 
+  
+    let lo = { canClick: false };
+
   $("#game").removeClass("disappear");
   setTimeout(function () {
     lo.canClick = true;
