@@ -53,8 +53,10 @@ function plusLayer() {
   b += 10;
 
   if (form == "stark") {
+    //if strong distortion
     off = 20;
   } else {
+    //if weak distortion
     off = 10;
   }
   drawGrid(off, h, s, b);
@@ -68,11 +70,11 @@ function drawGrid(off, h, s, b) {
       h += x * y;
       b += x * y;
       if (farb == "colorful") {
-        //console.log("color");
+        //if colorful output
         stroke(h, s, b);
       }
       if (layer == "square") {
-        //console.log("square");
+        //if first layer is square
         quad(
           //x1, y1
           xpos + random(-off, off),
@@ -88,6 +90,7 @@ function drawGrid(off, h, s, b) {
           ypos + gridSpacey / 1.3 + random(-off, off)
         );
       } else {
+        //if first layer is handdrawn
         var x1 = getItem("1x") == null ? xpos : getItem("1x");
         var y1 = getItem("1y") == null ? ypos : getItem("1y");
         var x2 =
@@ -103,76 +106,12 @@ function drawGrid(off, h, s, b) {
         var x4 = getItem("4x") == null ? x1 : getItem("4x");
         var y4 = getItem("4y") == null ? y3 : getItem("4y");
 
-        /*console.log(
-          "from storage: (x1, y1: " +
-            x1 +
-            ", " +
-            y1 +
-            "), (x2, y2: " +
-            x2 +
-            ", " +
-            y2 +
-            "), (x3, y3:" +
-            x3 +
-            ", " +
-            y3 +
-            "), (x4, y4:" +
-            x4 +
-            ", " +
-            y4 +
-            ")"
-        );*/
-
         var upperx = (x2 - x1) / 3.5;
         var uppery = (y2 - y1) / 3.5;
         var leftx = (x4 - x1) / 3.5;
         var lefty = (y4 - y1) / 3.5;
         var rightx = (x3 - x2) / 3.5;
         var righty = (y3 - y2) / 3.5;
-        
-        
-        /*console.log(
-          "upperx: " +
-          upperx +
-          ", uppery: " +
-          uppery +
-          ", leftx: " +
-          leftx +
-          ", lefty: " +
-          lefty +
-          ", rightx: " +
-          rightx +
-          ", righty: " +
-          righty
-        );
-
-        console.log(
-          "(x1, y1: " +
-            xpos +
-            ", " +
-            ypos +
-            "), (x2, y2: " +
-            xpos +
-            upperx +
-            ", " +
-            ypos +
-            uppery +
-            "), (x3, y3:" +
-            xpos +
-            upperx +
-            rightx +
-            ", " +
-            ypos +
-            uppery +
-            righty +
-            "), (x4, y4:" +
-            xpos +
-            leftx +
-            ", " +
-            ypos +
-            lefty +
-            ")"
-        );*/
 
         quad(
           //x1, y1

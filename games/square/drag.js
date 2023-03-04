@@ -24,18 +24,14 @@ function dragTouchEnded() {
 
 function dragTouchMoved() {
   if (selectedIndex == -1) return;
+  //restrict the dragging inside the canvas
   let cmx = constrain(mouseX, 0, width);
   let cmy = constrain(mouseY, 0, height);
   dragabble[selectedIndex].add(
     cmx - dragabble[selectedIndex].x,
     cmy - dragabble[selectedIndex].y
   );
-  console.log(
-    "Vertex %d changed to (%d, %d)",
-    selectedIndex,
-    dragabble[selectedIndex].x,
-    dragabble[selectedIndex].y
-  );
+
   if (selectedIndex == 0) {
     storeItem("1x", dragabble[selectedIndex].x);
     storeItem("1y", dragabble[selectedIndex].y);
@@ -55,6 +51,7 @@ function dragTouchMoved() {
 }
 
 function findSelected() {
+  //check if the vertex is selected
   selectedIndex = -1;
   let closest = 99999;
   const MIN_DIST = pow(DRAG_SIZE, 2);
