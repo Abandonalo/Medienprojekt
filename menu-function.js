@@ -29,7 +29,7 @@ $(document).ready(function (){
             $(this).addClass('li-activated');
             setTimeout(function() {
                 $(this).removeClass('li-activated');
-                window.location.href = "squareintro.html";
+                window.location.href = "squareintro1.html";
             }, 2000);
           });
         
@@ -37,7 +37,7 @@ $(document).ready(function (){
             $(this).addClass('li-activated');
             setTimeout(function() {
                 $(this).removeClass('li-activated');
-                window.location.href = "mamaintro.html";
+                window.location.href = "mamaintro1.html";
             }, 2000);
           });
         

@@ -52,7 +52,7 @@ $(document).ready(function () {
         $("#game").addClass("disappear");
         $("svg").addClass("disappear");
         setTimeout(function () {
-            window.location.href = "squareintro.html";
+            window.location.href = "squareintro1.html";
         }, 1000);
     });
 

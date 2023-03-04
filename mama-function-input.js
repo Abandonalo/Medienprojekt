@@ -43,7 +43,7 @@ $(document).ready(function (){
             $('#gameinput').removeClass('down');
             $('#game').addClass('disappear');
             setTimeout(function(){
-                window.location.href = 'mamaintro.html';
+                window.location.href = 'mamaintro1.html';
             }, 1000);
     });        
 
