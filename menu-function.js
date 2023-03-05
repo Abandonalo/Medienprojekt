@@ -21,7 +21,7 @@ $(document).ready(function (){
             $(this).addClass('li-activated');
             setTimeout(function() {
                 $(this).removeClass('li-activated');
-                window.location.href = "buchstabenintro1.html";
+                window.location.href = "buchstaben/buchstabenintro1.html";
             }, 2000);
           });
         
@@ -29,7 +29,7 @@ $(document).ready(function (){
             $(this).addClass('li-activated');
             setTimeout(function() {
                 $(this).removeClass('li-activated');
-                window.location.href = "squareintro1.html";
+                window.location.href = "squares/squareintro1.html";
             }, 2000);
           });
         
@@ -37,7 +37,7 @@ $(document).ready(function (){
             $(this).addClass('li-activated');
             setTimeout(function() {
                 $(this).removeClass('li-activated');
-                window.location.href = "mamaintro1.html";
+                window.location.href = "mama/mamaintro1.html";
             }, 2000);
           });
         

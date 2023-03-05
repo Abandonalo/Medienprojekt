@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <title>How to: Spiele zur Kunst</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="cache-control" content="no-cache" />
+
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../style-spiele.css" />
+    <link rel="stylesheet" type="text/css" href="../slick/slick.css" />
+    <!-- New slick-theme.css for default styling -->
+    <link rel="stylesheet" type="text/css" href="../slick/slick-theme.css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="square-function-outputinfo.js"></script>
+    <script type="text/javascript" src="../slick/slick.min.js"></script>
+
+    <script src="../p5/p5.min.js"></script>
+    <script src="game/squareOutput.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta name="description" content="How to – Spiele zur Kunst" />
+    <meta name="keywords" content="Vera Molnar, Institut für Aktuelle Kunst Saarbrücken, Uni des Saarlandes" />
+    <meta name="author" content="Luojinxuan Wang, Zoi Giagtzoglou, Qingzhi Zhang" />
+</head>
+
+<body>
+    <div id="body-wrapper">
+        <!-- intro output -->
+        <div id="intro-wrapper" class="alertbox-wrapper hide">
+            <div id="intro" class="alertbox turn" style="text-align: center">
+                <p class="text-app-small" style="color: #0092b1">
+                    Drücke den "+" Button, um eine neue Ebene zu drucken.
+                </p>
+                <div class="alertbox-button-wrapper">
+                    <div class="svg-wrapper">
+                        <svg id="button-okay" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+                            <path
+                                d="M25,1A24,24,0,1,0,49,25,24,24,0,0,0,25,1ZM21.21,37.93l-1.07-.07.66.34L7.26,24.67l2.86-2.86L20.86,32.56,38.71,14.71l2.86,2.86Z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="game" class="content-wrapper">
+            <script src="game/squareOutput.js"></script>
+        </div>
+
+        <div id="gamebar" class="disappear">
+            <div class="svg-wrapper">
+                <svg></svg>
+            </div>
+            <div class="svg-wrapper-plus"><svg fill="#0092b1" version="1.1" id="button-plus" onclick ="plusLayer()" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 316.513 316.513" xml:space="preserve">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <g>
+                            <path
+                                d="M158.253,0C71,0,0.012,71.001,0.012,158.263c0,87.256,70.989,158.25,158.241,158.25 c87.259,0,158.248-70.994,158.248-158.25C316.501,71.001,245.518,0,158.253,0z M230.891,177.982h-57.748v52.914 c0,7.428-4.864,13.438-12.301,13.438c-7.422,0-12.298-6.017-12.298-13.438v-52.914H85.634c-7.44,0-13.454-4.864-13.454-12.298 s6.014-12.301,13.454-12.301h62.909V85.616c0-7.434,4.876-13.453,12.298-13.453c7.437,0,12.301,6.02,12.301,13.453v67.768h57.748 c7.439,0,13.456,4.867,13.456,12.301S238.33,177.982,230.891,177.982z">
+                            </path>
+                        </g>
+                    </g>
+                </svg></div>
+            <div class="svg-wrapper">
+                <svg></svg>
+            </div>
+        </div>
+
+        <section id="information" class="disappear hide">
+            <div class="content-wrapper">
+                <h2>Quadrate</h2>
+                <p class="text-info-small">Vera Molnár hat für viele ihrer Werke Algorithmen geschrieben. Diese
+                    beinhalten
+                    alle ein Element des Zufalls. So sieht jedes Werk etwas anders aus. Molnár arbeitet gerne mit
+                    simplen Formen wie den Vierecken in diesem Werk. Es gibt mehrere Serien in denen Sie sich mit dieser
+                    einfachen Form auseinander setzt. Innerhalb einer Serie variiert sie meist nur eine oder wenige
+                    Eigenschaften, sodass die entstandenen Werke als zusammengehörig erscheinen.
+                    <br>
+                    In einem
+                    <a href="https://vimeo.com/372579247">Interview</a>
+                    sagt Molnár, das bei der Arbeit mit dem Computerder Zufall die Intuition ersetzt.
+                    <br><br>
+                    Die Serie "36 carrés, 8928 quadrilatères: géométries du plaisir" beinhaltet eine Reihe von Drucken,
+                    in denen in unterschiedlicher Anzahl an Ebenen und mit unterschiedlich starker Verzerrung jeweils
+                    9x9 Vierecke dargestellt sind.
+                    <br><br>
+                    Einige Werke aus der Serie kannst du dir
+                    <a href="https://institut-aktuelle-kunst.de/artothek/5294">hier</a>
+                    anschauen
+                    <br><br>
+                    Wenn du möchtest kannst du das Spiel noch einmal spielen und deine eigene Serie erstellen.
+                </p>
+                <div class="placeholder">&nbsp;</div>
+            </div>
+        </section>
+
+        <div id="navbar">
+            <div class="svg-wrapper"><svg id="button-zurueck" class="disappear" xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 50 50">
+                    <path
+                        d="M10,43.51h17.4c18.36,0,17.07-13.85,17.07-13.85s1.29-14.77-17.07-14.77c-10.83,0-20.3.27-20.3.27v-.32L21.94,5.17,7.12,15l15.47,9.82" />
+                </svg></div>
+            <div class="svg-wrapper"><svg id="button-intro" class="disappear" xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 50 50">
+                    <circle cx="25" cy="25" r="22" />
+                    <line x1="25" y1="23" x2="25" y2="39" />
+                    <circle cx="25" cy="14.5" r="0.5" />
+                </svg></div>
+            <div class="svg-wrapper"><svg id="button-download" onclick="saveArtwork()" class="disappear"
+                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+                    <path d="M25.15,6.07c0,11,.26,34.45.26,34.45h-.32l-14.8-15,15,15,15-15.67" />
+                    <line x1="5.72" y1="45.09" x2="45.23" y2="45.09" />
+                </svg></div>
+            <div class="svg-wrapper"><svg id="button-weiter" class="disappear" xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 50 50">
+                    <path d="M5.14,25.5c11,0,39.83-.26,39.83-.26v.32L28,41.36l17-16-17.67-15" />
+                </svg></div>
+        </div>
+    </div>
+</body>
+
+</html>
